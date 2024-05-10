@@ -16,7 +16,9 @@ function HomeScreen() {
         margin: "auto",
       }}
     >
-      <ThemedText style={{ fontFamily: "Inter-Black", fontSize: 30 }}>
+      <ThemedText
+        style={{ fontFamily: "Inter-Black", fontSize: 30, paddingTop: "3%" }}
+      >
         Content is in safe area.
       </ThemedText>
       <ThemedText style={{ fontFamily: "Inter-Regular", fontSize: 25 }}>
