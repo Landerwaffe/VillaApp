@@ -7,13 +7,13 @@ import {
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   return (
-    <View
-      style={{ flex: 1, paddingTop: insets.top, margin: "auto", width: "50%" }}
-    >
+    <View style={{ flex: 1, paddingTop: insets.top, margin: "auto" }}>
       <Text style={{ fontFamily: "Inter-Black", fontSize: 30 }}>
         Content is in safe area.
       </Text>
-      <Text>Text</Text>
+      <Text style={{ fontFamily: "Inter-Regular", fontSize: 25 }}>
+        Regular Text
+      </Text>
     </View>
   );
 }

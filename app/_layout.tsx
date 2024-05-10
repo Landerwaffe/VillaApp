@@ -18,6 +18,7 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     "Inter-Black": require("../assets/fonts/Inter-Black.otf"),
+    "Inter-Regular": require("../assets/fonts/Inter-Regular.otf"),
   });
 
   useEffect(() => {
