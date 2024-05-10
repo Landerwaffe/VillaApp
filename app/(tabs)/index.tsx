@@ -3,17 +3,25 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
 
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   return (
-    <View style={{ flex: 1, paddingTop: insets.top, margin: "auto" }}>
-      <Text style={{ fontFamily: "Inter-Black", fontSize: 30 }}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: insets.top,
+        margin: "auto",
+      }}
+    >
+      <ThemedText style={{ fontFamily: "Inter-Black", fontSize: 30 }}>
         Content is in safe area.
-      </Text>
-      <Text style={{ fontFamily: "Inter-Regular", fontSize: 25 }}>
+      </ThemedText>
+      <ThemedText style={{ fontFamily: "Inter-Regular", fontSize: 25 }}>
         Regular Text
-      </Text>
+      </ThemedText>
     </View>
   );
 }
