@@ -5,6 +5,7 @@ import {
 } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+// import Animated from "react-native-reanimated";
 
 function HomeScreen() {
   const insets = useSafeAreaInsets();
@@ -22,7 +23,7 @@ function HomeScreen() {
         Content is in safe area.
       </ThemedText>
       <ThemedText style={{ fontFamily: "Inter-Regular", fontSize: 25 }}>
-        Regular Text
+        Regular Text TETTT
       </ThemedText>
     </View>
   );
