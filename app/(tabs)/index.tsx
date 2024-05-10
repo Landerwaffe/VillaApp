@@ -5,7 +5,9 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <View>
-        <Text>My App</Text>
+        <Text style={{ fontFamily: "Inter-Black", fontSize: 30 }}>
+          Inter Black Font
+        </Text>
       </View>
     </SafeAreaProvider>
   );
