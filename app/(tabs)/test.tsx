@@ -6,28 +6,18 @@ import {
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { AppRegistry } from "react-native";
-import {
-  MD3LightTheme as DefaultTheme,
-  PaperProvider,
-} from "react-native-paper";
-
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "tomato",
-    secondary: "yellow",
-  },
-};
+import { PaperProvider, useTheme } from "react-native-paper";
 
 function TabThreeScreen() {
   const insets = useSafeAreaInsets();
+  const theme = useTheme();
   return (
     <View
       style={{
         flex: 1,
         paddingTop: insets.top,
         margin: "auto",
+        backgroundColor: theme.colors.error,
       }}
     >
       <ThemedText
@@ -45,7 +35,7 @@ function TabThreeScreen() {
 export default function App() {
   return (
     <SafeAreaProvider>
-      <PaperProvider theme={theme}>
+      <PaperProvider>
         <TabThreeScreen />
       </PaperProvider>
     </SafeAreaProvider>
