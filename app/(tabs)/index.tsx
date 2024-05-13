@@ -199,7 +199,6 @@ function HomeScreen() {
         />
       </View>
     );
-  console.log(darktheme);
 
   return lightordark;
 }
