@@ -31,12 +31,10 @@ export default function RootLayout() {
   });
 
   const colorScheme = useColorScheme();
-  const { theme } = useMaterial3Theme();
-
-  const paperTheme =
-    colorScheme === "dark"
-      ? { ...MD3DarkTheme, colors: theme.dark }
-      : { ...MD3LightTheme, colors: theme.light };
+  // const paperTheme =
+  //   colorScheme === "dark"
+  //     ? { MD3DarkTheme, colors: theme.dark }
+  //     : { MD3LightTheme, colors: theme.light };
 
   useEffect(() => {
     if (loaded) {
@@ -49,11 +47,9 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </PaperProvider>
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="+not-found" />
+    </Stack>
   );
 }

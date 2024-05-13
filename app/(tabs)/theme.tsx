@@ -4,25 +4,20 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
-import {
-  PaperProvider,
-  useTheme,
-  MD3LightTheme as DefaultTheme,
-} from "react-native-paper";
-import { useColorScheme } from "react-native";
+import { ThemedView } from "@/components/ThemedView";
+import { PaperProvider, useTheme } from "react-native-paper";
 
-function TabThreeScreen() {
+function HomeScreen() {
   const insets = useSafeAreaInsets();
-  const colorScheme = useColorScheme();
   const theme = useTheme();
-
+  console.log(theme);
   return (
     <View
       style={{
         flex: 1,
         paddingTop: insets.top,
         margin: "auto",
-        backgroundColor: "tomato",
+        backgroundColor: theme.colors.primary,
         width: "100%",
       }}
     >
@@ -43,40 +38,17 @@ function TabThreeScreen() {
           paddingLeft: "8.4%",
         }}
       >
-        Regular Text Tab Three
+        Regular Text
       </ThemedText>
     </View>
   );
 }
 
 export default function App() {
-  const colorScheme = useColorScheme();
-  console.log(colorScheme);
-
-  const theme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      primary: "tomato",
-      secondary: "yellow",
-    },
-  };
-
-  const usingTheme = useTheme();
-
-  const paperTheme =
-    colorScheme === "dark"
-      ? { ...DefaultTheme, backgroundColor: "red" }
-      : { ...DefaultTheme, backgroundColor: "blue" };
-
-  //const string = "String";
-
-  console.log("The theme is: " + theme.colors.primary);
-  console.log(theme);
-
+  const theme = useTheme();
   return (
     <SafeAreaProvider>
-      <TabThreeScreen />
+      <HomeScreen />
     </SafeAreaProvider>
   );
 }
