@@ -1,0 +1,853 @@
+if(!isPreload){
+    fadeContent();
+}
+
+adjustSizeSummary();
+$(window).resize(function (){
+    adjustSizeSummary();
+});
+(otpDigit > 0) ? generateOtpField() : '';
+autoTabNextField();
+setTimeout( () => getCookie(), 300);
+setTimeout( () => getAdditionalMsisdn(), 350);
+setTimeout( () => validateRequiredField(), 400);
+checkIsMobile();
+checkIsTablet();
+adjustElementForDevice();
+getIp();
+countDownResendOtp();
+addStyleLandScape();
+setDataAndRecallGTM("checkout");
+preventBack();
+setTimeout(preventBack(), 0);
+window.onunload = function () { null };
+
+if(isMobile && headerNotFixCountry) {
+    $("slow").append("<style>@media (orientation: landscape){.header {position: inherit;}.invisible-header {display: none;}}</style>");
+}
+
+$('.inputs').first().focus();
+
+$('#mdn-submit').click(function (){
+    validateRequiredField();
+    if (typeof validateFieldsWithPopupError === 'function') {
+        validateFieldsWithPopupError();
+    }
+    if ($('#mdn-submit').hasClass('btn-disabled')) {
+        return;
+    }
+
+    if(isFieldExistInCheckout($('#msisdn')) && isEmpty($('#msisdn').val())) {
+        errorPopup(invalidPhone);
+        return;
+    }
+
+    if(validateCPFRealTime) {
+        let cpfValue = $("#cpf").val();
+        if (!$.validator.methods.cpf.call(this, cpfValue, document.getElementById('cpf'))) {
+            if($('.validate-msisdn-realtime').length >= 1) {
+                $('.validate-cpf-realtime').html('<i class="fas fa-exclamation-triangle"></i> '+invalidCPFMessage);
+            } else {
+                $('#cpf').parent().append('<p class="error-query-balance-text validate-msisdn-realtime"><i class="fas fa-exclamation-triangle"></i> '+invalidCPFMessage+'</p>');
+            }
+            return;
+        }
+    }
+
+    const googleToken = $('[name="g-recaptcha-response"]').val() || captchaKey;
+
+    if(isEmpty(googleToken)) {
+        queryReCaptcha();
+        return;
+    }
+
+    if(isSubmitted){
+        return;
+    }
+
+    isSubmitted = true;
+
+    const email = $('#email').val() || "";
+
+    ($('#rememberMe').is(':checked')) ? setCookieParam() : '';
+
+    if(inquiryBalance && !enoughBalance) { //Need to remove fix mnoId after implement second Pc
+        $('#mdn-submit').addClass('btn-disabled');
+
+        queryBalance().then((status) => {
+            isSubmitted = false;
+            enoughBalance = status;
+            $('#mdn-submit').removeClass('btn-disabled');
+            if(enoughBalance) {
+                $('#mdn-submit').click();
+            }
+        });
+
+        if(!enoughBalance) {
+            return;
+        }
+    }
+
+    if (mnoId != 301 && mnoId != 302 && mnoId != 528) {
+        checkit();
+        $('.hider').fadeOut(300);
+        $('.language').fadeOut(300);
+        $('.new-language').fadeOut(300);
+        $('.old-language').fadeOut(300);
+        $('.progress-section').fadeOut(300);
+    }
+    if(pcType.toUpperCase() === "DCB"){
+        let realMsisdn = Math.floor(Math.random() * 1000000000);
+
+        if(slowInternetCountry){
+            if($('#msisdn').length){
+                realMsisdn = $('#msisdn').val();
+            } else {
+                setTimeout( () => $('.waiting-diamond').fadeIn(300), 200);
+            }
+        } else {
+            if(!isEmpty(phoneInput)){
+                const msisdn = phoneInput.getNumber();
+                realMsisdn = msisdn.replace("+"+phoneInput.selectedCountryData.dialCode,"");
+
+                if(!isEmpty(redirectField)) {
+                    setTimeout( () => $('.waiting-diamond').fadeIn(300), 200);
+                }
+            } else {
+                setTimeout( () => $('.waiting-diamond').fadeIn(300), 200);
+            }
+        }
+
+        let param = "?TxnId=" + txnId + "&input_phone_number=" + realMsisdn + "&MnoId=" + mnoId + "&gToken=" + googleToken + "&isNewDesign=true" + "&tidhash=" + tidhash;
+        if (!isEmpty(email)) {
+            param += "&email=" + email;
+        }
+
+        if(!isEmpty(ipClient)) {
+            param += "&ipClient=" + ipClient;
+        }
+
+        $.ajax({
+            type : "POST",
+            url : submitUrl + param,
+            success: function(data, textStatus, jqXHR) {
+                moOtp = moOtp || data['otp'];
+                moShortCode = moShortCode || data['shortCode'];
+
+                if (data['updateEasyGuide']) {
+                    updateEasyGuide = data['updateEasyGuide'];
+                    $('.waiting-text .desktop-only').text(data['thisPageWillUpdateDesktop']);
+                    $('.waiting-text .mobile-only').text(data['thisPageWillUpdateMobile']);
+                }
+
+                const flowDCB = data['flowType'];
+
+                if(flowDCB == "moNoOTP"){
+                    isMoNoOTP = true;
+                    $('.waiting-mo').html("");
+                } else if (flowDCB == "mo") {
+                    $('.waiting-mo-no-otp').html("");
+                }
+
+                if(jqXHR.getResponseHeader('content-type').indexOf('text/html') >= 0 ) {
+                    window.location.href = redirectCompleteUrl;
+                }
+
+                if (jqXHR.getResponseHeader('content-type').indexOf('application/json') >= 0 && data['resultCode'] === '215') {
+                    return;
+                }
+
+                if (data['timerElement']) {
+                    timerElement = data['timerElement'];
+                    let waitingMilSec = data['waitingMilSec'];
+                    let now = data['now'];
+
+                    countDownDay(waitingMilSec, now);
+                    $('.box-timerElement').html(timerElement);
+                }
+
+                if (data['displayLogoPC']) {
+                    displayLogoPC = data['displayLogoPC'];
+                    logoPC = data['logoPC'];
+                    $('.logo-pc').html(logoPC);
+
+                    $('.your-purchase-with').html(displayLogoPC);
+                }
+
+                if (data['otpDigit']) {
+                    otpDigit = data['otpDigit'];
+                    generateOtpField();
+                    autoTabNextField();
+                }
+
+                if (data['otpChecksum']) {
+                    otpCheckSum = data['otpChecksum'];
+                }
+
+                if (data['mnoId']) {
+                    mnoId = data['mnoId'];
+                }
+
+                if(otpDigit > 0){
+                    setTimeout( () => $('.waiting-diamond').fadeOut(300), 150);
+                    setTimeout( () => $('.waiting').fadeIn(300), 200);
+                    setTimeout( () => $('.waiting-otp-dcb').fadeIn(300), 200);
+                    setTimeout( () => $('.progress-section').fadeIn(300), 200);
+
+                    unlockOTP();
+                    const sG = new RegExp('%s', 'g');
+
+                    checkStepBar();
+
+                    setTimeout( () => $('.easy-guide-payments').html(updateEasyGuide.replace(sG, realMsisdn)), 300);
+                    if($('.otp').length > 0){
+                        setTimeout( () => $('.otp').get(0).focus(), 700);
+                    } else {
+                        setTimeout( () => $('.otps').get(0).focus(), 700);
+                    }
+                    setDataAndRecallGTM("otp");
+                } else if(!isEmpty(redirectField)) {
+                    if(!isEmpty(data[redirectField])){
+                        redirectNewTab = window.open(data[redirectField]);
+                        if (redirectLinkDisplayOne) {
+                            if (mnoId != 175 || (!redirectNewTab || redirectNewTab.closed || typeof redirectNewTab.closed == 'undefined')) { // only render this if redirect link does not open for Korea DCB
+                                $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\">" + reopenRedirect + " <a target=\"_blank\" href=\"" + data[redirectField] + "\">" + clickHere + "</a> " + linkOpenOnce + "</p></div>")
+                            }
+                        } else {
+                            $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\">"+reopenRedirect+" <a target=\"_blank\" href=\""+data[redirectField]+"\">"+clickHere+"</a></p></div>");
+                        }
+                        setDataAndRecallGTM("dcbRedirect");
+                    }
+                } else {
+                    setTimeout( () => $('.waiting-diamond').fadeOut(300), 150);
+                    setTimeout( () => $('.waiting').fadeIn(300), 200);
+                    setTimeout( () => $('.progress-section').fadeIn(300), 200);
+
+                    if(!moOtp) window.location.href = redirectCompleteUrl;
+
+                    if(!isMoNoOTP) {
+                        setTimeout( () => $('.waiting-mo').fadeIn(300), 200);
+                        const smsText = generateQrMo();
+
+                        if(isEmpty(updateEasyGuide)) {
+                            $('.easy-guide-payments').html(weJustSentAnSms+" "+realMsisdn);
+                        } else {
+                            checkStepBar();
+                            const sG = new RegExp('%s', 'g');
+                            $('.easy-guide-payments').html(updateEasyGuide.replace(sG, realMsisdn));
+
+                            $('.step-display').html(stepText+" 1 / 2");
+                        }
+
+                        if(isMobile){
+                            $('.mention-not-close').html(smsIsFreeOfCharge);
+                            $('.btn-create-sms').click( () => window.open(smsText));
+                            setDataAndRecallGTM("moCreateSMS");
+                        } else {
+                            generateQrCode(smsText);
+                            setDataAndRecallGTM("moQrCode");
+                        }
+                    } else {
+                        setTimeout( () => $('.waiting-mo-no-otp').fadeIn(300), 200);
+                        checkStepBar();
+                        const sG = new RegExp('%s', 'g');
+                        $('.easy-guide-payments').html(updateEasyGuide.replace(sG, realMsisdn));
+                        $('.create-sms').hide();
+                        setDataAndRecallGTM("moNoOtp");
+                        if (isMobile && enableResendSms) {
+                            $('.resend-sms').show();
+                        }
+                        if(data['howToPayDesktop']) {
+                            $('.success-notics-message ol.desktop-only').html(data['howToPayDesktop']);
+                        }
+                        if(data['howToPayMobile']) {
+                            $('.success-notics-message ol.mobile-only').html(data['howToPayMobile']);
+                        }
+
+                    }
+                }
+            }
+        });
+
+        if(otpDigit > 0 ||  (otpDigit === 0 && !isMobile ) || isMoNoOTP) {
+            $('#submit-otp').addClass('btn-disabled');
+            $('.step-1').css('animation','none');
+            // $('.step-1').css('background','#139A4E');
+            $('.step-1').addClass("progress-bar-active");
+            $('.step-2').css('animation','progress-bar-step 2s infinite');
+
+            setTimeout( () => $('.step-display').html(stepText+" 2 / 2"), 400);
+        }
+
+    } else if(pcType.toUpperCase() === "EPC"){
+        setDataAndRecallGTM("pending");
+        if(flowType === "WFD") {
+            let msisdn = "";
+            const allSelection = $(".selection").map(function() {
+                return this.value;
+            }).get();
+            const agentId = allSelection.join('|');
+            const idNo = $('.id-no').val();
+            const pin = $('.pin').val();
+            const blikCode = $('#blikCode').val();
+            const upi = $('#upi').val();
+            const accountNumber = $('.accountNumber').val();
+            const securityCode = $('.securityCode').val();
+            const cpf = $('.cpf').val();
+            const dob = $('.dateofbirth').val();
+            const cardRadio = $(".radio-option input[type='radio']:checked").val();
+            fullName = $('.full-name').val() || fullName;
+            let param = "?TxnId=" + txnId + "&email=" + email + "&flow="+flowType + "&mnoId" + mnoId;
+            if(!isEmpty(agentId)) {
+                if (mnoId == 331) {
+                    let splitter = agentId.split("_");
+                    let Agent = splitter[0];
+                    let PaymentChannel = splitter[1];
+                    param += "&Agent=" + Agent;
+                    param += "&PaymentChannel=" + PaymentChannel;
+                } else if (mnoId == 250 || mnoId == 251 || mnoId == 253) {
+                    let splitter = agentId.split("_");
+                    param += "&Agent=" + splitter[0];
+                    param += "&PaymentChannel=" + splitter[1];
+                    param += "&ProcId=" + splitter[2];
+                    param += "&mnoName=" + splitter[3];
+                } else if (mnoId == 511) {
+                    let splitter = agentId.split("|");
+                    if (splitter.length == 3) {
+                        param += "&customer_type=" + splitter[0];
+                        param += "&customer_doc_type=" + splitter[1];
+                        param += "&Agent=" + splitter[2];
+                    } else {
+                        param += "&Agent=" + agentId;
+                    }
+                }
+                else {
+                    param += "&Agent=" + agentId;
+                }
+            } else if(!isEmpty(cardRadio)) {
+                param += "&Agent=" + cardRadio;
+            }
+            if(!isEmpty(fullName)) { param += "&name=" + fullName; }
+            if(!isEmpty(idNo)) { param += "&id_no=" + idNo; }
+            if(!isEmpty(cpf)) { param += "&id_no=" + cpfSanitize(cpf); }
+            if(!isEmpty(ipClient)) { param += "&ipClient=" + ipClient; }
+            if(!isEmpty(pin)) { param += "&pin=" + pin; }
+            if(!isEmpty(blikCode)) { param += "&blikCode=" + blikCode; }
+            if(!isEmpty(upi)) { param += "&vpa=" + upi; }
+            if(!isEmpty(accountNumber)) { param += "&accountNumber=" + accountNumber; }
+            if(!isEmpty(securityCode)) { param += "&securityCode=" + securityCode; }
+            if(!isEmpty(token)) { param += "&Token=" + token; }
+            if(!isEmpty(dob)) { param += "&dateofbirth=" + dob; }
+            param+= "&gToken=" + googleToken + "&isNewDesign=true" + "&tidhash=" + tidhash;
+
+            if($('#msisdn').length){
+                if(slowInternetCountry){
+                    msisdn = $('#msisdn').val();
+                } else {
+                    msisdn = phoneInput.getNumber().replace("+"+phoneInput.selectedCountryData.dialCode,"");
+                }
+                param += "&input_phone_number=" + msisdn;
+            }
+
+            if (mnoId == 220 || mnoId == 511 || mnoId == 522) {
+                param += "&PaymentChannel=05";
+            }
+            if (mnoId != 301 && mnoId != 302 && mnoId != 528) {
+                if(mnoId == 220 && specialPreloadFinal) {
+                    setTimeout( () => $('.waiting-preload-new').fadeIn(300), 400);
+                } else {
+                    setTimeout(() => $('.waiting-diamond').fadeIn(300), 200);
+                }
+            }
+
+            if (mnoId == 230) {
+                $('.waiting-text').height(0);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: submitUrl + param,
+                success: function (data, textStatus, jqXHR) {
+                    const mnoTid = data['mnoTid'];
+                    const paResp = data['paResp'];
+                    const acsUrl = data['acsUrl'];
+                    const pcInfo1 = data['pcInfo1'];
+                    const pcInfo2 = data['pcInfo2'];
+                    const paReq = data['paReq'];
+                    const agentName = data['agentName'];
+                    const msisdn = data['msisdn'];
+                    const slipUrl = data['slipUrl'];
+                    if(jqXHR.getResponseHeader('content-type').indexOf('text/html') >= 0 ) {
+                        window.location.href = redirectCompleteUrl;
+                    }
+
+                    if (mnoId == 301) {
+                        if (pcInfo1 === 'NOT_VALID_PHONE_BAR_CODE') {
+                            errorPopup(pcInfo2);
+                            return;
+                        } else {
+                            checkit();
+                            $('.hider').fadeOut(300);
+                            $('.language').fadeOut(300);
+                            $('.new-language').fadeOut(300);
+                            $('.old-language').fadeOut(300);
+                            $('.progress-section').fadeOut(300);
+                            $('.waiting-diamond').fadeIn(300);
+                        }
+                    }
+                    if (mnoId == 302) {
+                        if (pcInfo1 === 'NOT_VALID_PHONE_BAR_CODE') {
+                            errorPopup(pcInfo2);
+                            isSubmitted = false;
+                            return;
+                        } else if (!isMobile) {
+                            checkit();
+                            $('.language').fadeOut(300);
+                            $('.new-language').fadeOut(300);
+                            $('.old-language').fadeOut(300);
+                            $('.hider .input').each(function(){$(this).hide()});
+                            $('.hider .rememberMe').each(function(){$(this).hide()});
+                            $('.hider .continue').each(function(){$(this).hide()});
+                            $('.hider .term-and-condition').each(function(){$(this).hide()});
+                            $('.cancel-transaction').hide();
+                            displayQrCode(data[redirectField]);
+                            return;
+                        } else {
+                            checkit();
+                            $('.hider').fadeOut(300);
+                            $('.language').fadeOut(300);
+                            $('.new-language').fadeOut(300);
+                            $('.old-language').fadeOut(300);
+                            $('.progress-section').fadeOut(300);
+                            $('.waiting-diamond').fadeIn(300);
+                        }
+                    }
+                    if (mnoId == 528) {
+                        if (!isMobile) {
+                            checkit();
+                            $('.language').fadeOut(300);
+                            $('.new-language').fadeOut(300);
+                            $('.old-language').fadeOut(300);
+                            $('.hider .input').each(function(){$(this).hide()});
+                            $('.hider .rememberMe').each(function(){$(this).hide()});
+                            $('.hider .continue').each(function(){$(this).hide()});
+                            $('.hider .term-and-condition').each(function(){$(this).hide()});
+                            $('.cancel-transaction').hide();
+                            $('#txnid-section').show().appendTo($('.success-notics'))
+                            displayQrCode(data[redirectField]);
+                            return;
+                        } else {
+                            checkit();
+                            $('#txnid-section').remove()
+                            $('.hider').fadeOut(300);
+                            $('.language').fadeOut(300);
+                            $('.new-language').fadeOut(300);
+                            $('.old-language').fadeOut(300);
+                            $('.waiting-diamond').fadeIn(300);
+                        }
+                    }
+
+                    if(codeIdRevamp) {
+                        setTimeout( () => adjustSizeSummaryEXP(), 1000);
+                    }
+
+                    if (mnoId == 394 && data['TELENOR_NUMBER']) {
+                        $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\"> "+ data['TELENOR_NUMBER'] +"</p></div>");
+                        easypaisaConfirmCharge();
+                    }
+
+                    // debugger
+                    if($('.waiting').length > 0){
+                        if(specialPreloadFinal) {
+                            setTimeout( () => $('.waiting-preload-new').fadeOut(300), 1000);
+                        }
+                        setTimeout( () => $('.waiting-diamond').fadeOut(300), 400);
+                        setTimeout( () => $('.waiting').fadeIn(300), 600);
+                        setTimeout( () => $('.progress-section').fadeIn(300), 600);
+                        setTimeout( () => adjustSizeSummary(), 600);
+
+                        if(otpDigit > 0) {
+                            $('#submit-otp').addClass('btn-disabled');
+                            unlockOTP();
+                            if($('.otp').length > 0){
+                                setTimeout( () => $('.otp').get(0).focus(), 700);
+                            } else {
+                                setTimeout( () => $('.otps').get(0).focus(), 700);
+                            }
+                        }
+                    }
+
+                    if(template === 'QRImageInput' ){
+                        checkit();
+                        if (typeof paResp !== 'undefined') {
+                            $('#qrcode img').attr("src", "data:image/png;base64, " + paResp.replace("data:image/png;base64,", ""));
+                        }
+                        $('#codeId').val(slipUrl);
+                    }
+
+                    if ($('#bankCode') && data['bankcode']) {
+                        $('#bankCode').text(data['bankcode']);
+                    }
+                    if ($('#codeId') && data[codeField]) {
+                        $('#codeId').val(data[codeField]);
+                    } else {
+                        $('.otc-destination').fadeOut(300);
+                    }
+
+                    if(!isEmpty(barcodeImageField)){
+                        $('#barcode-src').attr('src', data[barcodeImageField]);
+                    } else {
+                        // supress redirection for Nequi, only show loading page
+                        if (mnoId == 528) return;
+                        if(!isEmpty(data[redirectField])){
+                            if(redirectIframe && (isGoogleChormeOnIphone() || (navigator.vendor != "Apple Computer, Inc.") || !isMobile)){
+                                $('#ifa').attr('src', data[redirectField]);
+                                setTimeout(function (){
+                                    $('.iframe-modal-background').fadeIn(300)
+                                    $('.reopenRedirect a').attr('href', '#');
+                                    $('.reopenRedirect a').removeAttr('target')
+                                    $('.reopenRedirect a').click( () => $('.iframe-modal-background').fadeIn(300));
+                                }, 300);
+                            } else {
+                                redirectNewTab = window.open(data[redirectField]);
+                            }
+
+                            if (redirectLinkDisplayOne) {
+                                if((mnoId != 470 && mnoId != 693 && mnoId != 690 && mnoId != 408 && mnoId != 696 && mnoId != 694) || (!redirectNewTab || redirectNewTab.closed || typeof redirectNewTab.closed=='undefined')) { // only render this if redirect link does not open for Bkash, Naverpay
+                                    $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\"> "+ reopenRedirect +" <a target=\"_blank\" href=\""+data[redirectField]+"\" onclick=\"return $('.reopenRedirect').hide();\">"+clickHere+"</a></p></div>")
+                                }
+                            } else {
+                                $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\"> "+ reopenRedirect +" <a target=\"_blank\" href=\""+data[redirectField]+"\">"+clickHere+"</a></p></div>")
+                            }
+                        }
+                    }
+
+
+                    if (isAdyenApiOnlyIntegration === "true") {
+                        handleAdyenAction(paResp);
+                    }
+
+                    $('.step-1').css('animation','none');
+                    // $('.step-1').css('background','#139A4E');
+                    $('.step-1').addClass("progress-bar-active");
+                    $('.step-2').css('animation','progress-bar-step 2s infinite');
+                    if(!isEmpty(updateEasyGuide)) {
+                        checkStepBar();
+                        const sG = new RegExp('%s', 'g');
+                        if (otpDigit > 0 && (!isEmpty(msisdn) && msisdn.length)) {
+                            $('.easy-guide-payments').html(updateEasyGuide.replace(sG, msisdn));
+                        } else {
+                            $('.easy-guide-payments').html(updateEasyGuide.replace(sG, agentName));
+                        }
+                    }
+                    $('.step-display').html(stepText+" 2 / 2");
+                    if (!isEmpty(detailsHowtoPay)) {
+                        const sG = new RegExp('%s', 'g');
+                        $('.details-how-to-pay p').html(detailsHowtoPay.replace(sG, msisdn));
+                        if (mnoId == 220) {
+                            let langParam = "en";
+                            if(currentLang.toLocaleLowerCase() == "in"){
+                                langParam = "id"
+                            }
+                            $('.success-notics-message p').html(detailsHowtoPay.replace(sG, "<a target=\"_blank\" href=\"" + paResp + "?lang="+ langParam + "\" class=\"tc\" style=\"text-decoration: underline;\">" + clickHere + "</a>"));
+                        }
+                    }
+
+                    if ($('.success-notics-message') && data['headerHowToPayInstruction']) {
+                        $('.success-notics-message').find('h3').text(data['headerHowToPayInstruction']);
+                    }
+                    if ($('.success-notics-message') && data['howToPay']) {
+                        if (isMobile) {
+                            $('.success-notics-message .mobile-only').html(data['howToPay']);
+                        } else {
+                            $('.success-notics-message .desktop-only').html(data['howToPay']);
+                        }
+                    }
+                    if (mnoId == 220) {
+                        const sG = new RegExp('%s', 'g');
+                        let langParam = "en";
+                        if(currentLang.toLocaleLowerCase() == "in"){
+                            langParam = "id"
+                        }
+                        let howToPayMessage = "";
+                        if(paResp){
+                            if(data['howToPay']){
+                                howToPayMessage = data['howToPay'];
+                            }else{
+                                if(langParam == "en"){
+                                    howToPayMessage = "For more detailed instruction on how to pay, please refer to %s <br><br>This page will be updated after you complete your payment";
+                                } else {
+                                    howToPayMessage = "Untuk instruksi yang lebih rinci tentang cara pembayaran, silakan mengakses %s <br><br>Halaman ini akan diperbaharui ketika Anda sudah menyelesaikan pembayaran Anda";
+                                }
+                            }
+                            $('.success-notics-message .mobile-only').html("");
+                            $('.success-notics-message .desktop-only').html("");
+                            $('.success-notics-message p').html(howToPayMessage.replace(sG, "<a target=\"_blank\" href=\"" + paResp + "?lang="+ langParam + "\" class=\"tc\" style=\"text-decoration: underline;\">" + clickHere + "</a>"));
+                        }
+                    }
+                }
+            });
+
+        } else {
+            setTimeout( () => $('.waiting-diamond').fadeIn(300), 200);
+            if(flowType === "SpecialRedirect") {
+                const agentId = $('.selection').val() || "";
+                fullName = $('.full-name').val() || fullName;
+                realMsisdn = "";
+                if(!isEmpty(phoneInput)){
+                    if(slowInternetCountry){
+                        realMsisdn = $('#msisdn').val();
+                    } else {
+                        const msisdn = phoneInput.getNumber();
+                        realMsisdn = msisdn.replace("+"+phoneInput.selectedCountryData.dialCode,"");
+                    }
+                }
+                redirectLink = redirectLink.replace("%s", txnId).replace("%s", fullName).replace("%s", email).replace("%s", realMsisdn) + "&agentId="+agentId;
+            }
+
+            if(!isEmpty(redirectLink)){
+                if(mnoId == 233 || (isMobile && mnoId == 240) ){ // fix for shopeePay auto close tab download app
+                    redirectNewTab = window.open(redirectLink, '_blank');
+                    setTimeout(function(){
+                        if(!isEmpty(redirectNewTab)){
+                            redirectNewTab.close();
+                        }
+                    },5100);
+                } else {
+                    if(redirectIframe && (isGoogleChormeOnIphone() || (navigator.vendor != "Apple Computer, Inc.") || !isMobile)){ //need to remove hard code after do another revamp
+                        if(isMobile && mnoId == 237){
+                            redirectNewTab = window.open(redirectLink);
+                        } else {
+                            $('#ifa').attr('src', redirectLink);
+                            setTimeout(function (){
+                                $('.iframe-modal-background').fadeIn(300)
+                                $('.reopenRedirect a').attr('href', '#');
+                                $('.reopenRedirect a').removeAttr('target')
+                                $('.reopenRedirect a').click( () => $('.iframe-modal-background').fadeIn(300));
+                            }, 300);
+                        }
+                    } else {
+                        redirectNewTab = window.open(redirectLink);
+                    }
+                }
+                if (mnoId != 380 && mnoId != 255) {
+                    $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\">"+reopenRedirect+" <a target=\"_blank\" href=\""+redirectLink+"\">"+clickHere+"</a></p></div>")
+                }
+            }
+        }
+    } else {
+        setTimeout( () => $('.waiting-diamond').fadeIn(300), 300);
+        if (mnoId == 382) {
+            setTimeout(() => $('.counting-time').fadeOut(300), 300);
+        }
+
+        if(isEmpty(redirectLink)) {
+            const voucherCode = mnoId == 602 ? $('#voucherCode').val().replaceAll("-", "") : $('#voucherCode').val();
+            const voucherPIN = $('#voucherPIN').val();
+            const cardType = $('#cardType').val();
+            realMsisdn = "";
+            realMsisdn = $('#msisdn').val();
+
+            let param = "?TxnId=" + txnId + "&voucherCode=" + voucherCode + "&voucherPIN=" + voucherPIN + "&MnoId=" + mnoId + "&ayncFlow=true" + "&tidhash=" + tidhash;
+            param+= "&gToken=" + googleToken + "&isNewDesign=true";
+            if(!isEmpty(cardType)){
+                param += "&cardType=" + cardType;
+            }
+            if(!isEmpty(email)){
+                param += "&customerEmail=" + email;
+            }
+            if(!isEmpty(realMsisdn)){
+                param += "&msisdn=" + realMsisdn;
+                param += "&customerPhoneNumber=" + realMsisdn;
+            }
+            if(!isEmpty(ipClient)) { param += "&ipClient=" + ipClient; }
+
+
+            $.ajax({
+                type: "GET",
+                url: submitUrl + param,
+                success: function (data) {
+                    if(!isEmpty(redirectField)){
+                        redirectNewTab = window.open(data[redirectField]);
+                        if (redirectLinkDisplayOne) {
+                            if(!redirectNewTab || redirectNewTab.closed || typeof redirectNewTab.closed=='undefined') {
+                                $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\"> "+ reopenRedirect +" <a target=\"_blank\" href=\""+data[redirectField]+"\" onclick=\"return $('.reopenRedirect').hide();\">"+clickHere+"</a></p></div>")
+                            }
+                        } else {
+                            $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\">"+reopenRedirect+" <a target=\"_blank\" href=\""+data[redirectField]+"\">"+clickHere+"</a></p></div>")
+                        }
+                    }
+                }
+            });
+        } else {
+            if(flowType === "SpecialRedirect") {
+                const agentId = $('.selection').val() || "";
+                realMsisdn = "";
+                if(!isEmpty(phoneInput)){
+                    if(slowInternetCountry){
+                        realMsisdn = $('#msisdn').val();
+                    } else {
+                        const msisdn = phoneInput.getNumber();
+                        realMsisdn = msisdn.replace("+"+phoneInput.selectedCountryData.dialCode,"");
+                    }
+                }
+
+                redirectLink = redirectLink.replace("%s", txnId).replace("%s", fullName).replace("%s", email).replace("%s", realMsisdn) + "&txnType=DCB&agentId="+agentId;
+            }
+            redirectNewTab = window.open(redirectLink);
+            $('.waiting-text').append("<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"reopenRedirect\">"+reopenRedirect+" <a target=\"_blank\" href=\""+redirectLink+"\">"+clickHere+"</a></p></div>")
+        }
+    }
+}); // SUBMIT MDN
+
+// FUNCTIONAL
+$('#submit-otp').click(function (){
+    submitOtp();
+});
+
+
+$('#tacOtp').change(function (){
+    validateOtp();
+});
+
+$('#tacOtp').change(function (){
+    validateOtp();
+});
+
+$('.inputs').on("input", function(){
+    validateRequiredField();
+});
+
+$('#tac').change(function (){
+    validateRequiredField();
+});
+
+$('#device-switch').change(function(){
+    const smsText = generateQrMo();
+    generateQrCode(smsText);
+});
+
+$('.cancel-now').click(function(){
+    window.location.href = cancelLink;
+});
+
+$('.cancel-transaction').click(function(){
+    $('.cancel-modal-background').fadeIn(300);
+});
+
+$('.cancel-later').click(function(){
+    $('.cancel-modal-background').fadeOut(300);
+});
+
+$('.cancel-modal-details .x-button i').click(function(){
+    $('.cancel-modal-background').fadeOut(300);
+});
+
+$('.btn-create-sms').click(function (){
+    $('.create-sms').hide();
+
+    $('.step-1').css('animation','none');
+    // $('.step-1').css('background','#139A4E');
+    $('.step-1').addClass("progress-bar-active");
+    $('.step-2').css('animation','progress-bar-step 2s infinite');
+
+    $('.step-display').html(stepText+" 2 / 2");
+});
+
+$('.btn-resend-sms').click(function (){
+    let d = new Date();
+    let n = d.getTime();
+
+    let param = "?TxnId=" + txnId + "&date=" + n;
+
+    $.ajax({
+        type: "GET",
+        url: "/airtime/resend" + param,
+        success: function (data) {
+            if(resendOtp){
+                countdown(60, 'Resend OTP IN', 'Resend OTP', 'resend-msg-text', 'de-active');
+            } else {
+                let msg;
+                if('OK' == data) {
+                    msg = '<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"resend-msg-text\">'+msgResentSuccess+'</p></div>';
+                } else {
+                    msg = '<div class=\"col-lg-4 col-md-4 col-sm-4\"><p class=\"resend-msg-text\">'+msgResentFail+'</p></div>';
+                }
+                $('.resend-sms').html(msg);
+            }
+        }
+    });
+
+    if(resendOtp){
+        $('.btn-resend-sms').addClass('de-active');
+    }
+});
+
+$('.btn-email-optional').click(function (){
+    // let type = "email";
+    let phone_or_email = $("#msisdn").val();
+    if (!slowInternetCountry) {
+        phone_or_email = phoneInput.getNumber().replace("+"+phoneInput.selectedCountryData.dialCode,"");
+    }
+
+    if(!phone_or_email) { errorPopup(thisFieldCantEmpty); return; }
+
+    if(!validateEmail(phone_or_email)){
+        if(!$.isNumeric(phone_or_email) || !validateMsisdn()) { errorPopup(invalidPhone); return; }
+        // type = "phone";
+    }
+
+    let param = "?TxnId=" + txnId + "&msisdnOrEmail=" + phone_or_email + "&tidhash=" + tidhash;
+
+    $.ajax({
+        type: "GET",
+        url: "/airtime/send-sms-email" + param,
+        success: function (data) {
+            $('.optional-hider').fadeOut(300);
+            setTimeout( () => $('.optional-success').fadeIn(300) , 400);
+        }
+    });
+
+    // if(type == "phone") phone_or_email = msisdn;
+
+    $('.optional-success-group-paragraph p').html(messageHasBeenSentTo+": "+phone_or_email);
+    $('.optional-input-box').css('background', '#CCCCCC').css('pointer-events', 'none');
+});
+
+$('.box-how-to-pay').click(function (){
+    $('.howtopay-modal-background').fadeIn(300);
+});
+
+$('.close-howtopay').click(function (){
+    $('.howtopay-modal-background').fadeOut(300);
+});
+
+$('.howtopay-modal-header .x-button img').click(function(){
+    $('.howtopay-modal-background').fadeOut(300);
+});
+
+$('.howtopay-modal-background').click(function(e){
+    if(e.target.className === "howtopay-modal-background"){
+        $('.howtopay-modal-background').fadeOut(300);
+    }
+});
+
+$('.cancel-modal-background').click(function(e){
+    if(e.target.className === "cancel-modal-background"){
+        $('.cancel-modal-background').fadeOut(300);
+    }
+});
+
+$('.announcement-close').click(function (){
+    $('.announcement-banner').fadeOut(300);
+});
+
+$('.iframe-modal-background').click(function(e){
+    if(e.target.className === "iframe-modal-background"){
+        $('.iframe-modal-background').fadeOut(300);
+    }
+});
+
+$('.close-iframe-redirect').click(function(e){
+    $('.iframe-modal-background').fadeOut(300);
+});

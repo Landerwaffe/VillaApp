@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native";
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -15,6 +15,25 @@ import { useColorScheme } from "react-native";
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const colorScheme = useColorScheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      paddingTop: 50,
+    },
+    tinyLogo: {
+      width: 50,
+      height: 50,
+    },
+    logo: {
+      width: 66,
+      height: 58,
+    },
+    planet: {
+      width: "90%",
+      height: "50%",
+      margin: "auto",
+    },
+  });
 
   const darktheme = {
     ...DefaultTheme,
@@ -67,7 +86,7 @@ function HomeScreen() {
     ...DefaultTheme,
     dark: false,
     colors: {
-      primary: "rgb(0, 104, 116)",
+      primary: "tomato",
       onPrimary: "rgb(255, 255, 255)",
       primaryContainer: "rgb(151, 240, 255)",
       onPrimaryContainer: "rgb(0, 31, 36)",
@@ -110,10 +129,6 @@ function HomeScreen() {
     },
   };
 
-  const theme = useTheme(darktheme);
-  const paperTheme =
-    colorScheme === "dark" ? useTheme(darktheme) : useTheme(lighttheme);
-
   const lightordark =
     colorScheme === "dark" ? (
       <View
@@ -142,8 +157,12 @@ function HomeScreen() {
             paddingLeft: "8.4%",
           }}
         >
-          White Text
+          The moon waxes.
         </ThemedText>
+        <Image
+          source={require("@/assets/images/moon.jpg")}
+          style={styles.planet}
+        />
       </View>
     ) : (
       <View
@@ -172,8 +191,12 @@ function HomeScreen() {
             paddingLeft: "8.4%",
           }}
         >
-          Black Text
+          Day Breaks.
         </ThemedText>
+        <Image
+          source={require("@/assets/images/sun.jpg")}
+          style={styles.planet}
+        />
       </View>
     );
   console.log(darktheme);

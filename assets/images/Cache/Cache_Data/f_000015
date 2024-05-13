@@ -1,0 +1,1028 @@
+
+
+
+
+<html>
+<head>
+    <title>Codapay</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<meta name="googlebot" content="noindex">
+<meta http-equiv="REFRESH" content="89999;url=/airtime/cancelConfirm?PAGE_FROM=WAITING&TxnId=7146957229591135358&type=timeout&tidhash=48be4ba1bddef461ed5e6495b6c4cf9b9bf15103c4fe80f59756cc70e8d0535c0465c2aecfe31a072bdc515ca47b6307e9fa7226c576aa20ee74a9a0031bca69" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/common/new-design/css/codashopRootColor.css?v=476289"/>
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/common/new-design/css/common.css?v=476289"/>
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/common/new-design/css/phone.css?v=476289"/>
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/common/new-design/css/bootstrap-datepicker.css?v=476289"/>
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/font-awesome/css/all.css?v=476289"/>
+<link rel="shortcut icon" href="https://cdn1.codapayments.com/W/pub/common/img/favicon.ico"/>
+
+
+
+
+    <style>
+        .waiting-preload,
+        .waiting-preload-new {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="container">
+        <div class="rows">
+            <div class="col-lg-2 col-md-2 col-sm-2 coda-logo">
+                <p class="logoText">CODA PAYMENTS</p>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 old-lang">
+                <a href="/airtime/epc-switchlanguage?language=en_ID&t=1714695723946&txnId=7146957229591135358&tidhash=48be4ba1bddef461ed5e6495b6c4cf9b9bf15103c4fe80f59756cc70e8d0535c0465c2aecfe31a072bdc515ca47b6307e9fa7226c576aa20ee74a9a0031bca69" class="old-language"><i class="fas fa-exchange-alt"></i>English</a>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1">
+                <div class="col-lg-4 col-md-4 col-sm-4 secureTxn">
+                    <i class="fas fa-lock"></i>
+                    <p>Secure<br/> Transaction</p>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 new-lang">
+                <style>
+    .display-lang {
+        width: 198px;
+        background: #FFFFFF;
+        height: auto;
+        display: table;
+        box-sizing: border-box;
+        position: absolute;
+        top: 50px;
+        border-radius: 8px;
+        padding: 4px;
+        margin-left: -10px;
+        display: none;
+    }
+    .display-lang a {
+        color: #3F3C4D !important;
+        display: block;
+        padding: 12px;
+    }
+    .display-lang i {
+        float: right;
+        padding-top: 5px;
+        display: none;
+    }
+    .display-lang a:hover {
+        background: #E8E3FF;
+        border-radius: 8px;
+    }
+    .new-language i {
+        float: right;
+        line-height: 26px;
+    }
+    .new-language {
+        padding-right: 8px;
+    }
+    @media (max-width: 460px){
+        .display-lang {
+            width: auto;
+        }
+    }
+    .fac-1 { display: block !important; }
+</style>
+<div class="border-lang"></div>
+<div class="box-new-lang">
+    <img src="https://cdn1.codapayments.com/W/pub/common/new-design/img/translate.png"/>
+    <p class="new-language"> Indonesian <i class="fas fa-chevron-down"></i></p>
+    <div class="display-lang">
+        <a href="#">Indonesian<i class="fas fa-check fac-1"></i></a>
+        <a href="/airtime/epc-switchlanguage?language=en_ID&t=1714695723946&txnId=7146957229591135358&tidhash=48be4ba1bddef461ed5e6495b6c4cf9b9bf15103c4fe80f59756cc70e8d0535c0465c2aecfe31a072bdc515ca47b6307e9fa7226c576aa20ee74a9a0031bca69">English<i class="fas fa-check fac-2"></i></a>
+    </div>
+</div>
+<script>
+    // Get the container or document
+    const container = document; // Change this to your specific container if needed
+
+    // Add a click event listener to the container or document
+    container.addEventListener('click', function(event) {
+        // Check if the clicked element is not within '.new-language' or '.display-lang'
+        if (!event.target.closest('.new-language') && !event.target.closest('.display-lang')) {
+            // Hide '.display-lang'
+            document.querySelectorAll('.display-lang').forEach(function(displayLangElement) {
+                displayLangElement.style.display = 'none';
+            });
+
+            // Reset rotation for '.fa-chevron-down'
+            document.querySelectorAll('.fa-chevron-down').forEach(function(element) {
+                element.style.transform = 'rotate(0deg)';
+            });
+        }
+    });
+
+    // Add a click event listener to '.new-language'
+    document.querySelectorAll('.new-language').forEach(function(element) {
+        element.addEventListener('click', function() {
+            // Toggle the display of '.display-lang'
+            document.querySelectorAll('.display-lang').forEach(function(displayLangElement) {
+                displayLangElement.style.display = (displayLangElement.style.display === 'block') ? 'none' : 'block';
+            });
+
+            // Toggle the rotation for '.fa-chevron-down'
+            document.querySelectorAll('.fa-chevron-down').forEach(function(element) {
+                const currentRotation = parseInt(element.style.transform.replace('rotate(', '').replace('deg)', '')) || 0;
+                const newRotation = currentRotation === 0 ? 180 : 0;
+                element.style.transform = 'rotate(' + newRotation + 'deg)';
+            });
+
+            // Prevent the click event from propagating to the container/document
+            event.stopPropagation();
+        });
+    });
+</script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="invisible-header"></div>
+
+
+
+
+
+
+
+
+
+<div class="waiting-preload" ;>
+    <div class="container">
+        <div class="rows diamond-spinner">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <style>
+    @keyframes rotate {
+       0% {transform: rotateY(0deg);}
+       50% {transform: rotateY(180deg);}
+       100% {transform: rotateY(360deg);}
+    }
+    .img-rotate-pending {
+        width: 80px;
+        height: 80px;
+        display: block;
+        margin: auto;
+        animation: rotate 5s infinite;
+    }
+</style>
+<img class="img-rotate-pending" src='https://cdn1.codapayments.com/W/pub/common/new-design/img/coda-diamond-white.png' alt="loading-animation"/>
+
+            </div>
+        </div>
+        <div class="rows waiting-text">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p></p>
+            </div>
+        </div>
+        <div class="rows waiting-footer">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="need-help">Butuh bantuan? Kunjungi <a href="https://codapaymentsid.zendesk.com" target="_blank" class="tc">pusat bantuan</a> kami!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="waiting-preload-new" ;>
+    <div class="container">
+        <div class="rows diamond-spinner">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <style>
+    @keyframes rotate {
+       0% {transform: rotateY(0deg);}
+       50% {transform: rotateY(180deg);}
+       100% {transform: rotateY(360deg);}
+    }
+    .img-rotate-pending {
+        width: 80px;
+        height: 80px;
+        display: block;
+        margin: auto;
+        animation: rotate 5s infinite;
+    }
+</style>
+<img class="img-rotate-pending" src='https://cdn1.codapayments.com/W/pub/common/new-design/img/coda-diamond-white.png' alt="loading-animation"/>
+
+            </div>
+        </div>
+        <div class="rows waiting-text">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p>Getting it ready ...</p>
+            </div>
+        </div>
+        <div class="rows waiting-bar">
+            <div class="loading-bar">
+                <div class="progress-bar-preload"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="body hider" ;>
+    <div class="container">
+        <div class="rows summary summary-revamp">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <p class="your-purchase">Pembelian Anda</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <p class="summary-item-name">Nameless Glory</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 summary-details">
+        <div class="col-lg-4 col-md-4 col-sm-4 accountInfo" style="display:none;">
+            <div class="summary-box-label">
+                <h5>Info akun</h5>
+            </div>
+            <div class="summary-box-value">
+                <p></p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="summary-box-label">
+                <h5>Pedagang</h5>
+            </div>
+            <div class="summary-box-value">
+                <p>Star Rail</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 summary-details col-payment-method-total">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="summary-box-label">
+                <h5>Metode Pembayaran</h5>
+            </div>
+            <div class="summary-box-value">
+                <img class="logoPC" src="https://cdn1.codapayments.com/W/pub/logo/production/IDN/Bank+transfers+Indonesia/Bank+Transfers+ID%4080px_1658726753.png"/>
+                <p class="pure-pc-name">Bank transfers (Indonesia)</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-summary">
+            <div class="summary-box-label total-amount-summary-box-label">
+                <h5>Jumlah Total</h5>
+            </div>
+            <div class="summary-box-value">
+                <h2 class="total">Rp. 159.000</h2>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="rows summary summary-original">
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <p class="your-purchase">Pembelian Anda</p>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <p class="your-purchase your-purchase-with">Dengan</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <h2 class="total">Rp. 159.000</h2>
+        <p class="exIn-tax">()</p>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 logo-pc">
+        <img class="logoPC" src="https://cdn1.codapayments.com/W/pub/logo/production/IDN/Bank+transfers+Indonesia/Bank+Transfers+ID%4080px_1658726753.png"/>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="summary-details" style="margin-top: 20px">
+            <div class="col-lg-2 col-md-2 col-sm-2"><p><i class="fas fa-shopping-bag"></i> Nameless Glory</p></div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><p><i class="fas fa-store-alt"></i> Star Rail</p></div>
+        </div>
+    </div>
+    
+</div>
+        <div class="rows input">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="custom-select">
+                    <select class="selection inputs">
+                        <option value="">Pilih bank</option>
+                        <option value="1">ATM BCA</option><option value="9">m-BCA</option><option value="6">ATM Mandiri</option><option value="16">Mandiri Online</option><option value="2">ATM BRI</option><option value="12">BRI Mobile</option><option value="4">ATM BNI</option><option value="14">BNI SMS Banking App</option><option value="7">ATM Permata</option><option value="17">Permata Mobile</option><option value="3">ATM BII</option><option value="13">BII Mobile</option><option value="5">ATM CIMB</option><option value="15">CIMB Mobile</option><option value="8">Other</option><option value="18">Other Mobile</option><option value="-67">BSI</option><option value="-73">Danamon</option><option value="-68">DOKU</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="rows details-guide mobile-only">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p></p>
+            </div>
+        </div>
+        
+        <div class="progress-section">
+            <div class="container">
+                <div class="rows guide-payment">
+                    <div class="col-lg-4 col-md-4 col-sm-4 desktop-only">
+                        <b class="easy-guide-payments"> <p class="step-display">Langkah 1 / 2</p> SIlakan pilih bank Anda. Kami akan mengirimkan instruksi lengkap untuk menyelesaikan transaksi di ATM atau di apilkasi mobile banking Anda</b>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 mobile-only">
+                        <b class="easy-guide-payments"> <p class="step-display">Langkah 1 / 2</p>SIlakan pilih bank Anda. Kami akan mengirimkan instruksi lengkap untuk menyelesaikan transaksi di ATM atau di apilkasi mobile banking Anda</b>
+                    </div>
+                </div>
+                <div class="rows step-progress">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="progress-bar step-1"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="progress-bar step-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rows input hider">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input id="full-name" class="full-name inputs" type="hidden" name="full-name" value="Coda Payments" placeholder="Nama lengkap">
+    </div>
+</div>
+        <div class="rows rememberMe">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <input id="rememberMe" type="checkbox"><label for="rememberMe">Ingatlah kami</label>
+                <span class="checkmark"></span>
+            </div>
+        </div>
+        
+        <div class="rows continue">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <button class="btn btn-primary" id="mdn-submit">Lanjutkan</button>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <a class="cancel-transaction cancel-transaction-new btn btn-cancel">
+                    <p class='cancel-text'>
+                        <img src='https://cdn1.codapayments.com/W/pub/common/new-design/img/cancel-icon.png'/>
+                        Membatalkan transaksi ini
+                    </p>
+                </a>
+            </div>
+        </div>
+        <div class="rows term-and-condition">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="tac">Dengan melanjutkan, artinya Anda setuju dengan <a class="tc" href="https://www.codapayments.com/policy/terms-conditions" target="_blank">Syarat dan Ketentuan</a> dan juga <a class="needhelplink" href="https://www.codapayments.com/policy/privacy-policy" target="_blank">kebijakan privasi</a> kami.</p>
+            </div>
+        </div>
+        <div class="rows footer">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="need-help">Butuh bantuan? Kunjungi <a href="https://codapaymentsid.zendesk.com" target="_blank" class="tc">pusat bantuan</a> kami!</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <a class="cancel-transaction cancel-transaction-old">Membatalkan transaksi ini</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="waiting waiting-bank" ;>
+    <div class="container">
+        <div class="rows summary summary-revamp">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <p class="your-purchase">Pembelian Anda</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <p class="summary-item-name">Nameless Glory</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 summary-details">
+        <div class="col-lg-4 col-md-4 col-sm-4 accountInfo" style="display:none;">
+            <div class="summary-box-label">
+                <h5>Info akun</h5>
+            </div>
+            <div class="summary-box-value">
+                <p></p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="summary-box-label">
+                <h5>Pedagang</h5>
+            </div>
+            <div class="summary-box-value">
+                <p>Star Rail</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 summary-details col-payment-method-total">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="summary-box-label">
+                <h5>Metode Pembayaran</h5>
+            </div>
+            <div class="summary-box-value">
+                <img class="logoPC" src="https://cdn1.codapayments.com/W/pub/logo/production/IDN/Bank+transfers+Indonesia/Bank+Transfers+ID%4080px_1658726753.png"/>
+                <p class="pure-pc-name">Bank transfers (Indonesia)</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-summary">
+            <div class="summary-box-label total-amount-summary-box-label">
+                <h5>Jumlah Total</h5>
+            </div>
+            <div class="summary-box-value">
+                <h2 class="total">Rp. 159.000</h2>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="rows summary summary-original">
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <p class="your-purchase">Pembelian Anda</p>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <p class="your-purchase your-purchase-with">Dengan</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <h2 class="total">Rp. 159.000</h2>
+        <p class="exIn-tax">()</p>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 logo-pc">
+        <img class="logoPC" src="https://cdn1.codapayments.com/W/pub/logo/production/IDN/Bank+transfers+Indonesia/Bank+Transfers+ID%4080px_1658726753.png"/>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="summary-details" style="margin-top: 20px">
+            <div class="col-lg-2 col-md-2 col-sm-2"><p><i class="fas fa-shopping-bag"></i> Nameless Glory</p></div>
+            <div class="col-lg-2 col-md-2 col-sm-2"><p><i class="fas fa-store-alt"></i> Star Rail</p></div>
+        </div>
+    </div>
+    
+</div>
+        
+        
+        <div class="progress-section">
+            <div class="container">
+                <div class="rows guide-payment">
+                    <div class="col-lg-4 col-md-4 col-sm-4 desktop-only">
+                        <b class="easy-guide-payments"> <p class="step-display">Langkah 2 / 2</p> SIlakan pilih bank Anda. Kami akan mengirimkan instruksi lengkap untuk menyelesaikan transaksi di ATM atau di apilkasi mobile banking Anda</b>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 mobile-only">
+                        <b class="easy-guide-payments"> <p class="step-display">Langkah 2 / 2</p>SIlakan pilih bank Anda. Kami akan mengirimkan instruksi lengkap untuk menyelesaikan transaksi di ATM atau di apilkasi mobile banking Anda</b>
+                    </div>
+                </div>
+                <div class="rows step-progress">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="progress-bar step-1"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="progress-bar step-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rows otc-destination">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="bank-destination-header">Referensi pembayaran (Star Rail)</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="bank-destination-name"></p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <input id="codeId" type="text" readonly value="paymentCode" />
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 copyicon-code">
+                <button class="copyCodeIcon"><i class="fas fa-clone"></i></button>
+            </div>
+        </div>
+        <div class="rows instruction-notics">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="success-notics-message">
+                    <h3>Untuk menyelesaikan pembayaran</h3>
+                    <ol class="desktop-only">
+                        
+                    </ol>
+                    <ol class="mobile-only">
+                        
+                    </ol>
+                    <p>Untuk instruksi yang lebih rinci tentang cara pembayaran, silakan mengakses %s <br><br>Halaman ini akan diperbaharui ketika Anda sudah menyelesaikan pembayaran Anda</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="col-lg-3 col-md-3 col-sm-3 txnid-waiting">
+                    <p class="details-txnid">Transaction ID : <input id="txnid" type="text" readonly value="7146957229591135358" /></p>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 copyicon-waiting">
+                    <button class="copyIcon"><i class="fas fa-clone"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="rows email-optional">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <h5>Pilihan</h5>
+        <p>Anda juga dapat mengirimkan metode pembayaran ke nomor telepon atau alamat email</p>
+    </div>
+    <div class="secure-info optional-hider">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="optional-input-box">
+                <input type="text" class="optional-input" id="msisdn" placeholder="Masukkan nomor atau alamat email">
+            </div>
+            <button class="btn btn-primary btn-email-optional"><i class="fas fa-paper-plane"></i> Kirim</button>
+            <p><i class="fas fa-lock"></i> Informasi anda terjamin aman</p>
+        </div>
+    </div>
+    <div class="optional-success">
+        <div class="rows">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="optional-success-group">
+                    <div class="optional-success-group-img">
+                        <img class="success-icon" src="https://cdn1.codapayments.com/W/pub/common/new-design/img/success-icon-shadow.png"/>
+                    </div>
+                    <div class="optional-success-group-paragraph">
+                        <p>Pesan telah terkirim ke</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="rows footer">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="need-help">Butuh bantuan? Kunjungi <a href="https://codapaymentsid.zendesk.com" target="_blank" class="tc">pusat bantuan</a> kami!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="waiting-diamond">
+    <div class="container">
+        <div class="rows diamond-spinner">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <style>
+    @keyframes rotate {
+       0% {transform: rotateY(0deg);}
+       50% {transform: rotateY(180deg);}
+       100% {transform: rotateY(360deg);}
+    }
+    .img-rotate-pending {
+        width: 80px;
+        height: 80px;
+        display: block;
+        margin: auto;
+        animation: rotate 5s infinite;
+    }
+</style>
+<img class="img-rotate-pending" src='https://cdn1.codapayments.com/W/pub/common/new-design/img/coda-diamond-white.png' alt="loading-animation"/>
+
+            </div>
+        </div>
+        <div class="rows waiting-text">
+            <div class="col-lg-4 col-md-4 col-sm-4" ;>
+                <p class="mobile-only">Halaman ini akan diperbaharui setelah Anda menyelesaikan pembayaran Bank transfers Indonesia</p>
+                <p class="desktop-only">Halaman ini akan diperbaharui setelah Anda menyelesaikan pembayaran Bank transfers Indonesia</p>
+            </div>
+            
+        </div>
+        <div class="rows pre-expire">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p></p>
+            </div>
+        </div>
+        <div class="rows waiting-transaction-details">
+            <div class="col-lg-2 col-md-2 col-sm-2 img-instruction" style="display: contents">
+                
+                
+            </div>
+            
+            <div class="col-lg-3 col-md-3 col-sm-3 txnid-waiting">
+                <p class="details-txnid">Transaction ID : <input id="txnid" type="text" readonly value="7146957229591135358" /></p>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 copyicon-waiting">
+                <button class="copyIcon"><i class="fas fa-clone"></i></button>
+            </div>
+        </div>
+        <div class="rows waiting-footer">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p class="need-help">Butuh bantuan? Kunjungi <a href="https://codapaymentsid.zendesk.com" target="_blank" class="tc">pusat bantuan</a> kami!</p>
+            </div>
+        </div>
+    </div>
+    <div class="iframe-modal-background">
+        <div class="redirect-modal">
+            <div class="iframe-header">
+                <h3>Bank transfers (Indonesia) <a href="#" class="close-iframe-redirect"><img src="https://cdn1.codapayments.com/W/pub/common/new-design/img/x-icon.png"/></a></h3>
+                
+            </div>
+            <iframe id="ifa" src="" sandbox="allow-forms allow-popups allow-scripts allow-popups-to-escape-sandbox allow-same-origin"></iframe>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="cancel-modal-background">
+    <div class="container-for-cancel">
+        <div class="cancel-modal">
+            <div class="cancel-modal-details">
+                <div class="container-modal">
+                    <div class="rows x-button">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <div class="rows cancel-logo">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <img class="cancel-logo-img" src="https://cdn1.codapayments.com/W/pub/common/new-design/img/cancelLogo.png"/>
+                            <img class="cancel-logo-img-new" src="https://cdn1.codapayments.com/W/pub/common/new-design/img/alert-triangle.png"/>
+                        </div>
+                    </div>
+                    <div class="rows cancel-text-details">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <h2 class="cancel-text-header">Apakah Anda ingin membatalkan transaksi ini?</h2>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <p class="cancel-text-detail">Jika Anda membatalkan transaksi sekarang, Anda perlu mengulanginya lagi nanti</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cancel-modal-button-section">
+                <div class="container-modal">
+                    <div class="rows cancel-modal-button">
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-secondary cancel-later">Nanti</button>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-primary cancel-now">Batalkan sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="howtopay-modal-background">
+    <div class="container-for-cancel">
+        <div class="howtopay-modal">
+            <div class="howtopay-modal-header">
+                <div class="container-modal">
+                    <div class="rows">
+                        <h3 ;>Bagaimana cara membayar</h3>
+                        <div class="x-button">
+                            
+                            <img src="https://cdn1.codapayments.com/W/pub/common/new-design/img/x-icon.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="howtopay-modal-details desktop-only">
+                <div class="container-modal">
+                    <div class="rows details-howtopay">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <ol ;>
+                                
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="howtopay-modal-details mobile-only">
+                <div class="container-modal">
+                    <div class="rows details-howtopay">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <ol ;>
+                                
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="howtopay-modal-button-section">
+                <div class="container-modal">
+                    <div class="rows cancel-modal-button">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <button class="btn btn-close-how-to-pay close-howtopay">Tutup halaman</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style-landscape></style-landscape>
+
+<div class="error-popup-box"></div>
+
+<script type="text/javascript">
+    if(navigator.userAgent < 60) {
+        const iframe = document.getElementById("ifa");
+        const sandbox = iframe.getAttribute("sandbox").split(" ");
+        const index = sandbox.indexOf("allow-top-navigation-by-user-activation");
+        if (index !== -1) {
+            sandbox.splice(index, 1);
+        }
+        iframe.setAttribute("sandbox", sandbox.join(" "));
+    }
+
+
+    const googleCaptchaKey = '6LfFYx0UAAAAAONlA2zgOfDwTU0X1vxysPSLfYCo';
+    const mainJs = 'https://cdn1.codapayments.com/W/pub/common/new-design/js/mainJs.js?v=476289';
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/common/new-design/css/common.css?v=476289"/>
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/common/new-design/css/phone.css?v=476289"/>
+<link rel="stylesheet" type="text/css" href="https://cdn1.codapayments.com/W/pub/font-awesome/css/all.css?v=476289"/>
+<slow></slow>
+
+<style>
+    
+</style>
+
+<style>
+    
+.waiting-preload {
+    padding-top: 30vh !important;
+}
+</style>
+
+<script
+        src="https://browser.sentry-cdn.com/7.53.1/bundle.tracing.min.js"
+        integrity="sha384-bOr1dt2YT0sBkM2Dk1NBfQq82A4aw50q0GPTy4Rr5FE4P7wkAdcdl9q3FzWE1Vcv"
+        crossorigin="anonymous"
+></script>
+
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/jquery-3.6.0.min.js?v=476289"></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/jquery.validate.min.js?v=476289"></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/cookie.js?v=476289"></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/phone.js?v=476289"></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/common.js?v=476289"></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/coda.qrcode.min.js?v=476289"></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/dropdown.js?v=476289"></script>
+<script>
+    pageStatus = "checkout";
+</script>
+<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/bootstrap-datepicker.min.js?v=476289"></script>
+<script type="text/javascript" src="https://cdn1.codapayments.com/W/pub/common/new-design/js/exp.js?v=476289"></script>
+
+<script type="text/javascript">
+    const howToPayDisplay = "";
+    slowInternetCountry = Boolean("true");
+    if(navigator.userAgent < 60) {
+        slowInternetCountry = true;
+    }
+    headerNotFixCountry = Boolean("");
+
+    if(howToPayDisplay === "NO") {
+        $('.info-how-to-pay').removeClass("col-lg-3");
+        $('.info-how-to-pay').removeClass("col-md-3");
+        $('.info-how-to-pay').removeClass("col-sm-3");
+
+        $('.info-how-to-pay').addClass("col-lg-4");
+        $('.info-how-to-pay').addClass("col-md-4");
+        $('.info-how-to-pay').addClass("col-sm-4");
+
+        $('.info-icon-how-to-pay').css('display', 'none');
+    }
+
+    const logoDisplay = "";
+    expireTime = '89999';
+
+    if(logoDisplay === "NO") {
+        $('.your-purchase-with').css('display', 'none');
+        $('.logo-pc').css('display', 'none');
+    }
+
+    let phoneInputField;
+    let phoneInput;
+    now = Date.now();
+
+    if($('#msisdn').length && !slowInternetCountry){
+        phoneInputField = document.querySelector("#msisdn");
+        phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: "ID",
+            utilsScript: "https://cdn1.codapayments.com/W/pub/common/new-design/js/phoneUtils.js?v=476289",
+        });
+
+        setInterval( () => $('.msisdn').attr('placeholder',"Nomor handphone"), 100);
+    } else if ($('#msisdn').length && slowInternetCountry){
+        setInterval( () => $('.msisdn').attr('placeholder',"Nomor handphone"), 100);
+    }
+
+    
+    
+    
+    
+    
+
+    waitingMilSec = '';
+    waitingSec = (Number() - Number(now)) / 1000;
+    checkSum = 'DzS6rcXxGWxC_-uA3w1vZ1HRZ315R2-de3x7XSjFqNI';
+    token = '';
+    redirectLink = '';
+    txnId = '7146957229591135358';
+    checkitUrl = '/airtime/epc-isconfirm';
+    redirectCompleteUrl = '/airtime/epc-complete?TxnId=7146957229591135358&tidhash=48be4ba1bddef461ed5e6495b6c4cf9b9bf15103c4fe80f59756cc70e8d0535c0465c2aecfe31a072bdc515ca47b6307e9fa7226c576aa20ee74a9a0031bca69';
+    pcType = 'epc';
+    merchantCompleteUrl = 'https://sdk.hoyoverse.com/default/payment/global-platform/action/index.html?TxnId=7146957229591135358&OrderId=T1786189380805783552';
+    submitUrl = '/airtime/epc-msisdn';
+    mnoId = '220';
+    pcpId = '108';
+    otpCheckSum = '';
+    completeUrl = '/airtime/epc-complete?PAGE_FROM=WAITING&TxnId=7146957229591135358&tidhash=48be4ba1bddef461ed5e6495b6c4cf9b9bf15103c4fe80f59756cc70e8d0535c0465c2aecfe31a072bdc515ca47b6307e9fa7226c576aa20ee74a9a0031bca69';
+    codaLogo = 'https://cdn1.codapayments.com/W/pub/common/new-design/img/coda-diamond.png';
+    qrLogo = 'https://cdn1.codapayments.com/W/pub/common/new-design/img/coda-diamond.png';
+    qrColor = '#000000';
+    cancelLink = '/airtime/cancelConfirm?PAGE_FROM=WAITING&TxnId=7146957229591135358&tidhash=48be4ba1bddef461ed5e6495b6c4cf9b9bf15103c4fe80f59756cc70e8d0535c0465c2aecfe31a072bdc515ca47b6307e9fa7226c576aa20ee74a9a0031bca69';
+    tickCommand = '<lottie-player src="https://cdn1.codapayments.com/W/pub/common/new-design/js/animation/tick.json?v=476289" background="transparent" speed="1" autoplay></lottie-player>';
+    paymentCodePrefix = "";
+    identify = "";
+    updateEasyGuide = "Selesaikan pembayaran Anda di %s dalam kurun waktu 24 jam";
+    redirectField = "";
+    codeField = "paymentCode";
+    expiredText = "Kadaluarsa";
+    stepText = "Langkah"
+    ofText = "Dari"
+    messageHasBeenSentTo = "Pesan telah terkirim ke";
+    invalidOtp = "OTP salah";
+    invalidPhone = "Nomor telepon atau email tidak ditemukan";
+    thisFieldCantEmpty = "Bagian ini tidak boleh kosong";
+    thisWillUpdateWhenWeSms = '';
+    smsIsFreeOfCharge = "Gratis biaya SMS";
+    weJustSentAnSms = "Kami telah mengirimkan SMS dengan petunjuk ke ";
+    countryCode = "360";
+    dcbChannelQty = "";
+    reopenRedirect = "Pop up tidak otomatis terbuka?";
+    clickHere = "link ini";
+    linkOpenOnce = "Perhatian, anda hanya dapat membuka link ini satu kali";
+    barcodeImageField = "";
+    captchaKey = "N4HJPCGODhumXQBduuMaig==";
+    payNow = "Bayar sekarang";
+    codaWebEvent = new CodaWebEvent(3);
+    clientType = 3;
+    moOtp = "";
+    moShortCode = "";
+    moOtp2 = "";
+    moguide = '';
+    isAdyenApiOnlyIntegration = ""
+    midtransActions = ''
+    currentLang = "in";
+    detailsHowtoPay = "Untuk instruksi yang lebih rinci tentang cara pembayaran, silakan mengakses %s <br><br>Halaman ini akan diperbaharui ketika Anda sudah menyelesaikan pembayaran Anda";
+    tidhash = '48be4ba1bddef461ed5e6495b6c4cf9b9bf15103c4fe80f59756cc70e8d0535c0465c2aecfe31a072bdc515ca47b6307e9fa7226c576aa20ee74a9a0031bca69';
+    redirectLinkDisplayOne = Boolean("");
+    enableResendSms = Boolean("");
+    msgResentSuccess = 'SMS terkirim ulang';
+    msgResentFail = 'Gagal mengirim SMS.';
+    pcCreating = '';
+    template = 'SelectionWithInstruction';
+    merchantType = 'Codapay';
+    additionalMsisdn = '';
+    includeTaxText = '';
+    epicOrderId = '';
+
+    if (epicOrderId) {
+        $('.container-epic-order-id').css("display", "");
+    }
+    otpPrefil = '';
+    invalidCPFMessage = '';
+    addTaxManual = '';
+    redirectIframe = '';
+    resendOtp = '';
+    inquiryBalance = '';
+    inquiryBalanceText = '';
+    environment = 'production';
+    validateCPFRealTime = '' || false;
+    delayGoAnimation = '' || delayGoAnimation;
+    if(merchantType == "Codapay") {
+        delayGoAnimation = 0;
+    }
+
+    // Flagging Feature
+    autoContinue = (''.toLowerCase() === 'true');
+
+    $(document).ready(function() {
+        if (pageStatus === "complete") {
+            codaWebEvent.onComplete();
+        } else if (pageStatus === "error") {
+            codaWebEvent.onError();
+        }
+    });
+
+    setCookieLanguage("language", "in_ID");
+    if(!isEmpty('{"codaCookieId":"9b77fd15-8901-4dd9-b1d2-b007425ff9d3","country":360,"merchantId":11384,"pcId":220,"pcProviderId":108,"libraryVersion":"1.6.0","txnId":7146957229591135358}')) {
+        setCookieLanguage("userContext", '{"codaCookieId":"9b77fd15-8901-4dd9-b1d2-b007425ff9d3","country":360,"merchantId":11384,"pcId":220,"pcProviderId":108,"libraryVersion":"1.6.0","txnId":7146957229591135358}');
+    }
+    
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Google Tag Manager Script -->
+<script type="text/javascript">
+    dataLayer = [{
+      'totalPrice': '159000.0',
+      'currency': 'IDR',
+      'paymentChannel': 'Bank transfers (Indonesia)',
+      'country': 'Indonesia',
+      'language': 'in_ID',
+      'merchant': 'Star Rail',
+      'errorCode': '0',
+      'bank': 'ATM',
+      'paymentCode': '89650null',
+      'itemCount': '1',
+      'items': 'Nameless Glory',
+	  'txnStatus': 'Checkout',
+	  'isSlowPc': 'true',
+	  'pageName': 'checkout',
+	  'transactionID': '7146957229591135358',
+	  'template': 'SelectionWithInstruction',
+	  'environment': 'Codapay'
+    }];
+</script>
+<script type="text/javascript">
+dataLayer = dataLayer || [];
+dataLayer.push({
+  'ecommerce': {
+    'currencyCode': 'IDR',
+    'purchase': {
+      'actionField': {
+        'id': '7146957229591135358',
+        'affiliation': 'Bank transfers (Indonesia)',
+        'revenue': '159000.0',
+        'tax': '',
+        'shipping': '',
+        'coupon': ''
+      },
+      'products': [
+      
+      	{
+          'name': 'Nameless Glory',
+          'id': '1',
+          'price': '159000.0',
+          'brand': 'Star Rail (11384)',
+          'category': 'Nameless Glory/Indonesia',
+          'variant': '',
+          'quantity': 1,
+          'coupon': ''
+         },
+      
+		]
+    }
+  }
+});
+</script>
+<!-- End Google Tag Manager Script -->
+
+
+
+
+
+
+
+
+
+
+
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PF7TJ9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script type="text/javascript">
+	gtmContainerID = 'GTM-PF7TJ9';
+	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer', gtmContainerID);
+</script>
+<!-- End Google Tag Manager -->
+
+
+<script type="text/javascript">
+    flowType = "WFD";
+    specialPreload = true;
+</script>
+</body>
+</html>
