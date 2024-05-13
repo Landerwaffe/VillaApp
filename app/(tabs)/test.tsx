@@ -4,14 +4,7 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
-import { useMaterial3Theme } from "@pchmn/expo-material3-theme";
-import { useColorScheme } from "react-native";
-import {
-  MD3DarkTheme,
-  MD3LightTheme,
-  PaperProvider,
-  useTheme,
-} from "react-native-paper";
+import { PaperProvider, useTheme } from "react-native-paper";
 
 function TabThreeScreen() {
   const insets = useSafeAreaInsets();
@@ -50,17 +43,9 @@ function TabThreeScreen() {
 }
 
 export default function App() {
-  const colorScheme = useColorScheme();
-  const { theme } = useMaterial3Theme();
-
-  const paperTheme =
-    colorScheme === "dark"
-      ? { ...MD3DarkTheme, colors: theme.dark }
-      : { ...MD3LightTheme, colors: theme.light };
-
   return (
     <SafeAreaProvider>
-      <PaperProvider theme={paperTheme}>
+      <PaperProvider>
         <TabThreeScreen />
       </PaperProvider>
     </SafeAreaProvider>
