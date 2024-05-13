@@ -1,5 +1,8 @@
-import { useMaterial3Theme } from "@pchmn/expo-material3-theme";
-import { MD3DarkTheme, MD3LightTheme, PaperProvider } from "react-native-paper";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -20,13 +23,6 @@ export default function RootLayout() {
     "Inter-Regular": require("../assets/fonts/Inter-Regular.otf"),
   });
 
-  const { theme } = useMaterial3Theme();
-
-  const paperTheme =
-    colorScheme === "dark"
-      ? { ...MD3DarkTheme, colors: theme.dark }
-      : { ...MD3LightTheme, colors: theme.light };
-
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
@@ -38,11 +34,11 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider theme={paperTheme}>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-    </PaperProvider>
+    </ThemeProvider>
   );
 }
