@@ -12,131 +12,24 @@ import {
 } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
 import { useTheme } from "react-native-paper";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-import { ReactElement, JSXElementConstructor, ReactNode, JSX } from "react";
+import { Card, Title, Paragraph } from "react-native-paper";
+import { JSX } from "react";
 
-const DATA = [
-  {
-    id: "1",
-    title: "First Item",
-  },
-  {
-    id: "2",
-    title: "Second Item",
-  },
-  {
-    id: "3",
-    title: "Third Item",
-  },
-  {
-    id: "4",
-    title: "First Item",
-  },
-  {
-    id: "5",
-    title: "Second Item",
-  },
-  {
-    id: "6",
-    title: "Third Item",
-  },
-  {
-    id: "7",
-    title: "First Item",
-  },
-  {
-    id: "8",
-    title: "Second Item",
-  },
-  {
-    id: "9",
-    title: "Third Item",
-  },
-  {
-    id: "10",
-    title: "First Item",
-  },
-  {
-    id: "11",
-    title: "Second Item",
-  },
-  {
-    id: "12",
-    title: "Third Item",
-  },
-  {
-    id: "13",
-    title: "First Item",
-  },
-  {
-    id: "14",
-    title: "Second Item",
-  },
-  {
-    id: "15",
-    title: "Third Item",
-  },
-  {
-    id: "16",
-    title: "First Item",
-  },
-  {
-    id: "17",
-    title: "Second Item",
-  },
-  {
-    id: "18",
-    title: "Third Item",
-  },
-  {
-    id: "19",
-    title: "First Item",
-  },
-  {
-    id: "20",
-    title: "Second Item",
-  },
-  {
-    id: "21",
-    title: "Third Item",
-  },
-  {
-    id: "22",
-    title: "First Item",
-  },
-  {
-    id: "23",
-    title: "Second Item",
-  },
-  {
-    id: "24",
-    title: "Twenty Fourth Item",
-  },
-  {
-    id: "25",
-    title: "First Item",
-  },
-  {
-    id: "26",
-    title: "Second Item",
-  },
-  {
-    id: "27",
-    title: "Third Item",
-  },
-  {
-    id: "28",
-    title: "First Item",
-  },
-  {
-    id: "29",
-    title: "Second Item",
-  },
-  {
-    id: "30",
-    title: "Third Item",
-  },
-];
+// const { Client } = require("pg");
+// const client = new Client({
+//   user: "postgres",
+//   host: "localhost",
+//   database: "Villas",
+//   password: "admin",
+//   port: 5432,
+// });
+// client.connect();
+
+var pg = require("pg");
+var conString = "postgres://postgres:admin@localhost:5432/Villas";
+
+var client = new pg.Client(conString);
+client.connect();
 
 let CARDS: JSX.Element[] = [];
 
