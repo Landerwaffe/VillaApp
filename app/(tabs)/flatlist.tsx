@@ -15,15 +15,15 @@ import { useTheme } from "react-native-paper";
 import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 
-const { Client } = require("pg");
-const client = new Client({
-  user: "postgres",
-  host: "localhost",
-  database: "Villas",
-  password: "admin",
-  port: 5432,
-});
-client.connect();
+// const { Client } = require("pg");
+// const client = new Client({
+//   user: "postgres",
+//   host: "localhost",
+//   database: "Villas",
+//   password: "admin",
+//   port: 5432,
+// });
+// client.connect();
 
 // const mysql = require("mysql");
 
