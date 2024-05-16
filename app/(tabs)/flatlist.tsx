@@ -141,7 +141,7 @@ const DATA = [
 let CARDS: JSX.Element[] = [];
 
 CARDS.push(
-  <Card id="1" style={{ width: "90%", margin: "auto" }}>
+  <Card id="1" style={{ margin: "auto" }}>
     <Card.Title
       title="Villa"
       subtitle="Bahamas"
@@ -149,7 +149,7 @@ CARDS.push(
     />
     <Card.Cover
       source={{ uri: "https://picsum.photos/700" }}
-      style={{ height: "100%", width: "98%", margin: "auto" }}
+      style={{ margin: "auto", width: "80%" }}
     />
     <Card.Content>
       <Title>Details</Title>
@@ -163,12 +163,39 @@ CARDS.push(
         idea and function of a villa has evolved considerably.
       </Paragraph>
     </Card.Content>
-    <Card.Actions>
-      <Button>Cancel</Button>
-      <Button>Ok</Button>
-    </Card.Actions>
   </Card>
 );
+
+CARDS.push(
+  <Card id="2" style={{ margin: "auto" }}>
+    <Card.Title
+      title="Villa"
+      subtitle="Bahamas"
+      //left={LeftContent}
+    />
+    <Card.Cover
+      source={{ uri: "https://picsum.photos/700" }}
+      style={{ margin: "auto", width: "80%" }}
+    />
+    <Card.Content>
+      <Title>Details</Title>
+      <Paragraph>
+        A villa was originally a style of house built for the upper classes in
+        ancient Rome. This style of architecture has been kept and adapted upon.
+        The villas in Italy have gradually evolved into luxurious houses. Today,
+        the word villa can refer to many types and sizes of houses around the
+        world. A villa is a type of house that was originally an ancient Roman
+        upper-class country house. Since its origins in the Roman villa, the
+        idea and function of a villa has evolved considerably.
+      </Paragraph>
+    </Card.Content>
+  </Card>
+);
+
+let HEADER: JSX.Element[] = [];
+
+HEADER.push(<h1>A</h1>);
+HEADER.push(<h1>B</h1>);
 
 type ItemProps = { title: string };
 
@@ -228,9 +255,9 @@ function HomeScreen() {
         Regular Text
       </ThemedText>
       <FlatList
-        data={DATA}
-        renderItem={({ item }) => <Item title={item.title} />}
-        keyExtractor={(item) => item.id}
+        data={CARDS}
+        renderItem={({ item }) => <Card>{item}</Card>}
+        //keyExtractor={(item) => item}
       />
     </View>
   );
