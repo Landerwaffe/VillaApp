@@ -15,25 +15,35 @@ import { useTheme } from "react-native-paper";
 import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 
-const mysql = require("mysql");
-
-const con = mysql.createConnection({
+const { Client } = require("pg");
+const client = new Client({
+  user: "postgres",
   host: "localhost",
-  user: "root",
-  password: "root",
-  database: "villas",
+  database: "Villas",
+  password: "admin",
+  port: 5432,
 });
+client.connect();
 
-con.connect(function (err: any) {
-  if (err) throw err;
-  con.query(
-    "SELECT * FROM properties",
-    function (err: any, result: any, fields: any) {
-      if (err) throw err;
-      console.log(result);
-    }
-  );
-});
+// const mysql = require("mysql");
+
+// const con = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "villas",
+// });
+
+// con.connect(function (err: any) {
+//   if (err) throw err;
+//   con.query(
+//     "SELECT * FROM properties",
+//     function (err: any, result: any, fields: any) {
+//       if (err) throw err;
+//       console.log(result);
+//     }
+//   );
+// });
 
 let CARDS: JSX.Element[] = [];
 
