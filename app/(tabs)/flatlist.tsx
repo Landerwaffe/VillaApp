@@ -140,62 +140,48 @@ const DATA = [
 
 let CARDS: JSX.Element[] = [];
 
-CARDS.push(
-  <Card id="1" style={{ margin: "auto" }}>
-    <Card.Title
-      title="Villa"
-      subtitle="Bahamas"
-      //left={LeftContent}
-    />
-    <Card.Cover
-      source={{ uri: "https://picsum.photos/700" }}
-      style={{ margin: "auto", width: "80%" }}
-    />
-    <Card.Content>
-      <Title>Details</Title>
-      <Paragraph>
-        A villa was originally a style of house built for the upper classes in
-        ancient Rome. This style of architecture has been kept and adapted upon.
-        The villas in Italy have gradually evolved into luxurious houses. Today,
-        the word villa can refer to many types and sizes of houses around the
-        world. A villa is a type of house that was originally an ancient Roman
-        upper-class country house. Since its origins in the Roman villa, the
-        idea and function of a villa has evolved considerably.
-      </Paragraph>
-    </Card.Content>
-  </Card>
+export function createCard(
+  title: string,
+  subtitle: string,
+  image: string,
+  description: string
+) {
+  return CARDS.push(
+    <Card id="1" style={{ margin: "auto", width: "100%" }}>
+      <Card.Title
+        title={title}
+        subtitle={subtitle}
+        //left={LeftContent}
+      />
+      <Card.Cover
+        source={{ uri: image }}
+        style={{ margin: "auto", width: "80%" }}
+      />
+      <Card.Content>
+        <Title>Details</Title>
+        <Paragraph>{description}</Paragraph>
+      </Card.Content>
+    </Card>
+  );
+}
+
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard(
+  "House",
+  "Suburban",
+  "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
+  "It's a house"
 );
-
-CARDS.push(
-  <Card id="2" style={{ margin: "auto" }}>
-    <Card.Title
-      title="Villa"
-      subtitle="Bahamas"
-      //left={LeftContent}
-    />
-    <Card.Cover
-      source={{ uri: "https://picsum.photos/700" }}
-      style={{ margin: "auto", width: "80%" }}
-    />
-    <Card.Content>
-      <Title>Details</Title>
-      <Paragraph>
-        A villa was originally a style of house built for the upper classes in
-        ancient Rome. This style of architecture has been kept and adapted upon.
-        The villas in Italy have gradually evolved into luxurious houses. Today,
-        the word villa can refer to many types and sizes of houses around the
-        world. A villa is a type of house that was originally an ancient Roman
-        upper-class country house. Since its origins in the Roman villa, the
-        idea and function of a villa has evolved considerably.
-      </Paragraph>
-    </Card.Content>
-  </Card>
-);
-
-let HEADER: JSX.Element[] = [];
-
-HEADER.push(<h1>A</h1>);
-HEADER.push(<h1>B</h1>);
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
+createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
 
 type ItemProps = { title: string };
 
@@ -243,7 +229,7 @@ function HomeScreen() {
           paddingLeft: "8.4%",
         }}
       >
-        Content is in safe area.
+        This is a list of items.
       </ThemedText>
       <ThemedText
         style={{
@@ -252,7 +238,7 @@ function HomeScreen() {
           paddingLeft: "8.4%",
         }}
       >
-        Regular Text
+        Infinitely scrollable
       </ThemedText>
       <FlatList
         data={CARDS}
