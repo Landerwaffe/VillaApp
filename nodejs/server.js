@@ -13,11 +13,16 @@ const client = new Client({
 
 client.connect();
 
+var cors = require("cors");
+
+app.use(cors());
+
 app.get("/", (req, res) => {
   client.query(`SELECT * FROM properties`, (err, result) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
+      //res.send("Hello World!");
       res.json(result.rows);
     }
   });

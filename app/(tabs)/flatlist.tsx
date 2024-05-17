@@ -81,8 +81,14 @@ const styles = StyleSheet.create({
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
-  console.log(theme);
-  const result = fetch("/api/users");
+  //console.log(theme);
+  const result = fetch("http://localhost:8080")
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+    });
+  //const result = response.json;
+
   return (
     <View
       style={{
