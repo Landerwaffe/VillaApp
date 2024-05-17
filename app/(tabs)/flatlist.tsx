@@ -15,8 +15,6 @@ import { useTheme } from "react-native-paper";
 import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 
-//queryDB(`Select * from properties`);
-
 let CARDS: JSX.Element[] = [];
 
 export function createCard(
