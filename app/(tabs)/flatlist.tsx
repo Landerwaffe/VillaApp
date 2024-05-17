@@ -78,16 +78,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ title }: ItemProps) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   console.log(theme);
+  const result = fetch("/api/users");
   return (
     <View
       style={{
