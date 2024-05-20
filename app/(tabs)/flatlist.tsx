@@ -66,22 +66,27 @@ function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = React.useState("");
-  //console.log(theme);
+  if (searchQuery != "") {
+    console.log("Search Query is: " + searchQuery);
+  }
+
   const result = fetch("http://192.168.1.15:8080")
     .then((response) => response.json())
     .then((response) => {
-      // console.log("The response returns: ");
-      // console.log(response[0]);
-      if (once == 0) {
-        for (let i = 0; i < response.length; i++) {
-          createCard(
-            response[i].name,
-            response[i].subtitle,
-            response[i].image,
-            response[i].description
-          );
-          once = 1;
+      if (searchQuery == "") {
+        if (once == 0) {
+          for (let i = 0; i < response.length; i++) {
+            createCard(
+              response[i].name,
+              response[i].subtitle,
+              response[i].image,
+              response[i].description
+            );
+            once = 1;
+          }
         }
+      } else {
+        CARDS.length = 0;
       }
     })
     .catch((error) => {
