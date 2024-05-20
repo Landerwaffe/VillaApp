@@ -42,24 +42,6 @@ export function createCard(
   );
 }
 
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard(
-  "House",
-  "Suburban",
-  "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
-  "It's a house"
-);
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -76,6 +58,8 @@ const styles = StyleSheet.create({
   },
 });
 
+let once = 0;
+
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
@@ -83,15 +67,18 @@ function HomeScreen() {
   const result = fetch("http://192.168.1.15:8080")
     .then((response) => response.json())
     .then((response) => {
-      console.log("The response returns: ");
-      console.log(response[0]);
-      for (let i = 0; i < response.length; i++) {
-        createCard(
-          response[i].name,
-          response[i].subtitle,
-          response[i].image,
-          response[i].description
-        );
+      // console.log("The response returns: ");
+      // console.log(response[0]);
+      if (once == 0) {
+        for (let i = 0; i < response.length; i++) {
+          createCard(
+            response[i].name,
+            response[i].subtitle,
+            response[i].image,
+            response[i].description
+          );
+          once = 1;
+        }
       }
     })
     .catch((error) => {
