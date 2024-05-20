@@ -15,6 +15,7 @@ import { useTheme } from "react-native-paper";
 import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 import { Searchbar } from "react-native-paper";
+import * as React from "react";
 
 let CARDS: JSX.Element[] = [];
 
@@ -64,6 +65,7 @@ let once = 0;
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const [searchQuery, setSearchQuery] = React.useState("");
   //console.log(theme);
   const result = fetch("http://192.168.1.15:8080")
     .then((response) => response.json())
@@ -116,6 +118,11 @@ function HomeScreen() {
       >
         Infinitely scrollable
       </ThemedText>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={setSearchQuery}
+        value={searchQuery}
+      />
       <FlatList
         data={CARDS}
         renderItem={({ item }) => <Card>{item}</Card>}
