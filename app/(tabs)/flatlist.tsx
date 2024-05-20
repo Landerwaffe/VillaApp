@@ -14,6 +14,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { useTheme } from "react-native-paper";
 import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
+import { Searchbar } from "react-native-paper";
 
 let CARDS: JSX.Element[] = [];
 
