@@ -74,19 +74,27 @@ function HomeScreen() {
     .then((response) => response.json())
     .then((response) => {
       if (searchQuery == "") {
-        if (once == 0) {
-          for (let i = 0; i < response.length; i++) {
+        CARDS.length = 0;
+        for (let i = 0; i < response.length; i++) {
+          createCard(
+            response[i].name,
+            response[i].subtitle,
+            response[i].image,
+            response[i].description
+          );
+        }
+      } else {
+        CARDS.length = 0;
+        for (let i = 0; i < response.length; i++) {
+          if (response[i].name.includes(searchQuery)) {
             createCard(
               response[i].name,
               response[i].subtitle,
               response[i].image,
               response[i].description
             );
-            once = 1;
           }
         }
-      } else {
-        CARDS.length = 0;
       }
     })
     .catch((error) => {
