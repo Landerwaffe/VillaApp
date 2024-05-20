@@ -60,8 +60,6 @@ createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
 createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
 createCard("Apartment", "District", "https://picsum.photos/700", "It's a box");
 
-type ItemProps = { title: string };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -82,12 +80,24 @@ function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   //console.log(theme);
-  const result = fetch("http://localhost:8080")
+  const result = fetch("http://192.168.1.15:8080")
     .then((response) => response.json())
     .then((response) => {
-      console.log(response);
+      console.log("The response returns: ");
+      console.log(response[0]);
+      for (let i = 0; i < response.length; i++) {
+        createCard(
+          response[i].name,
+          response[i].subtitle,
+          response[i].image,
+          response[i].description
+        );
+      }
+    })
+    .catch((error) => {
+      // Handle any errors that occur
+      console.error(error);
     });
-  //const result = response.json;
 
   return (
     <View
