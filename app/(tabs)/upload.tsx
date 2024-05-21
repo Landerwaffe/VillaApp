@@ -42,6 +42,8 @@ function HomeScreen() {
   console.log("Text is: " + text);
   console.log(setText);
 
+  const result = fetch("http://192.168.1.15:8080", { method: "POST" });
+
   return (
     <View
       style={{

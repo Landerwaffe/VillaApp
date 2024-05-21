@@ -28,6 +28,10 @@ app.get("/", (req, res) => {
   });
 });
 
+app.post("/", (req, res) => {
+  res.send("POST Request Called");
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
