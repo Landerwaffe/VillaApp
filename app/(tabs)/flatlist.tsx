@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
 let once = 0;
 
-function HomeScreen() {
+function UploadScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -149,7 +149,7 @@ export default function App() {
   const theme = useTheme();
   return (
     <SafeAreaProvider>
-      <HomeScreen />
+      <UploadScreen />
     </SafeAreaProvider>
   );
 }

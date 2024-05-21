@@ -17,33 +17,6 @@ import { JSX } from "react";
 import { Searchbar } from "react-native-paper";
 import * as React from "react";
 
-let CARDS: JSX.Element[] = [];
-
-export function createCard(
-  title: string,
-  subtitle: string,
-  image: string,
-  description: string
-) {
-  return CARDS.push(
-    <Card id="1" style={{ margin: "auto", width: "100%" }}>
-      <Card.Title
-        title={title}
-        subtitle={subtitle}
-        //left={LeftContent}
-      />
-      <Card.Cover
-        source={{ uri: image }}
-        style={{ margin: "auto", width: "80%" }}
-      />
-      <Card.Content>
-        <Title>Details</Title>
-        <Paragraph>{description}</Paragraph>
-      </Card.Content>
-    </Card>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,42 +38,6 @@ let once = 0;
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
-  const [searchQuery, setSearchQuery] = React.useState("");
-  if (searchQuery != "") {
-    console.log("Search Query is: " + searchQuery);
-  }
-
-  const result = fetch("http://192.168.1.15:8080")
-    .then((response) => response.json())
-    .then((response) => {
-      if (searchQuery == "") {
-        CARDS.length = 0;
-        for (let i = 0; i < response.length; i++) {
-          createCard(
-            response[i].name,
-            response[i].subtitle,
-            response[i].image,
-            response[i].description
-          );
-        }
-      } else {
-        CARDS.length = 0;
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].name.includes(searchQuery)) {
-            createCard(
-              response[i].name,
-              response[i].subtitle,
-              response[i].image,
-              response[i].description
-            );
-          }
-        }
-      }
-    })
-    .catch((error) => {
-      // Handle any errors that occur
-      console.error(error);
-    });
 
   return (
     <View
@@ -120,7 +57,7 @@ function HomeScreen() {
           paddingLeft: "8.4%",
         }}
       >
-        This is a list of items.
+        Uploading a listing.
       </ThemedText>
       <ThemedText
         style={{
@@ -129,18 +66,8 @@ function HomeScreen() {
           paddingLeft: "8.4%",
         }}
       >
-        Infinitely scrollable
+        Taking user input
       </ThemedText>
-      <Searchbar
-        placeholder="Search"
-        onChangeText={setSearchQuery}
-        value={searchQuery}
-      />
-      <FlatList
-        data={CARDS}
-        renderItem={({ item }) => <Card>{item}</Card>}
-        //keyExtractor={(item) => item}
-      />
     </View>
   );
 }
