@@ -43,9 +43,9 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="test"
+          name="flatlist"
           options={{
-            title: "Testing",
+            title: "Listings",
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
                 name={focused ? "search" : "search-outline"}
@@ -87,9 +87,9 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="test"
+          name="flatlist"
           options={{
-            title: "Testing",
+            title: "Listings",
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
                 name={focused ? "search" : "search-outline"}
