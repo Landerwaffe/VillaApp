@@ -12,10 +12,8 @@ import {
 } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
 import { useTheme } from "react-native-paper";
-import { Card, Title, Paragraph } from "react-native-paper";
-import { JSX } from "react";
-import { Searchbar } from "react-native-paper";
 import * as React from "react";
+import { TextInput } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +36,7 @@ let once = 0;
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const [text, setText] = React.useState("");
 
   return (
     <View
@@ -68,6 +67,29 @@ function HomeScreen() {
       >
         Taking user input
       </ThemedText>
+      <TextInput
+        label="Name"
+        value={text}
+        onChangeText={(text) => setText(text)}
+        style={{
+          marginTop: "8.4%",
+        }}
+      />
+      <TextInput
+        label="Subtitle"
+        value={text}
+        onChangeText={(text) => setText(text)}
+      />
+      <TextInput
+        label="Image"
+        value={text}
+        onChangeText={(text) => setText(text)}
+      />
+      <TextInput
+        label="Description"
+        value={text}
+        onChangeText={(text) => setText(text)}
+      />
     </View>
   );
 }
