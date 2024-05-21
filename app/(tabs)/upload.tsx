@@ -31,12 +31,16 @@ const styles = StyleSheet.create({
   },
 });
 
-let once = 0;
-
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   const [text, setText] = React.useState("");
+  const [text1, setText1] = React.useState("");
+  const [text2, setText2] = React.useState("");
+  const [text3, setText3] = React.useState("");
+
+  console.log("Text is: " + text);
+  console.log(setText);
 
   return (
     <View
@@ -77,18 +81,18 @@ function HomeScreen() {
       />
       <TextInput
         label="Subtitle"
-        value={text}
-        onChangeText={(text) => setText(text)}
+        value={text1}
+        onChangeText={(text1) => setText1(text1)}
       />
       <TextInput
         label="Image"
-        value={text}
-        onChangeText={(text) => setText(text)}
+        value={text2}
+        onChangeText={(text2) => setText2(text2)}
       />
       <TextInput
         label="Description"
-        value={text}
-        onChangeText={(text) => setText(text)}
+        value={text3}
+        onChangeText={(text3) => setText3(text3)}
       />
     </View>
   );
