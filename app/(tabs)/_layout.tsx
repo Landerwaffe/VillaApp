@@ -43,12 +43,12 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="explore"
+          name="upload"
           options={{
-            title: "Explore",
+            title: "Upload",
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
-                name={focused ? "code-slash" : "code-slash-outline"}
+                name={focused ? "image" : "image-outline"}
                 color={color}
               />
             ),
@@ -87,12 +87,12 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="explore"
+          name="upload"
           options={{
-            title: "Explore",
+            title: "Upload",
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
-                name={focused ? "code-slash" : "code-slash-outline"}
+                name={focused ? "image" : "image-outline"}
                 color={color}
               />
             ),
