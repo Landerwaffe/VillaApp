@@ -27,8 +27,10 @@ function UploadScreen() {
   });
   const { control, setFocus, handleSubmit } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      name: "",
+      subtitle: "",
+      image: "",
+      description: "",
     },
     mode: "onChange",
   });
@@ -61,30 +63,56 @@ function UploadScreen() {
           setFocus={setFocus}
           formConfigArray={[
             {
-              type: "email",
-              name: "email",
+              type: "text",
+              name: "name",
 
               rules: {
                 required: {
                   value: true,
-                  message: "Email is required",
+                  message: "Name is required",
                 },
               },
               textInputProps: {
-                label: "Email",
+                label: "Name",
               },
             },
             {
-              type: "password",
-              name: "password",
+              type: "text",
+              name: "subtitle",
               rules: {
                 required: {
                   value: true,
-                  message: "Password is required",
+                  message: "Subtitle is required",
                 },
               },
               textInputProps: {
-                label: "Password",
+                label: "Subtitle",
+              },
+            },
+            {
+              type: "text",
+              name: "image",
+              rules: {
+                required: {
+                  value: true,
+                  message: "Image is required",
+                },
+              },
+              textInputProps: {
+                label: "Image",
+              },
+            },
+            {
+              type: "text",
+              name: "description",
+              rules: {
+                required: {
+                  value: true,
+                  message: "Description is required",
+                },
+              },
+              textInputProps: {
+                label: "Description",
               },
             },
           ]}
