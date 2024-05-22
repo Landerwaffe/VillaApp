@@ -29,7 +29,20 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  res.send("POST Request Called");
+  //res.send("POSTMAN Request Called");
+  client.query(
+    `INSERT INTO public.users(
+      username, password)
+      VALUES ( 'Jonathan', 'admin')`,
+    (err, result) => {
+      if (err) {
+        res.status(500).send(err.message);
+      } else {
+        //res.send("Hello World!");
+        res.send("DONE");
+      }
+    }
+  );
 });
 
 app.listen(port, () => {

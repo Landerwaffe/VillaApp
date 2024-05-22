@@ -99,7 +99,11 @@ function UploadScreen() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(data),
-            });
+            }) // Converting to JSON
+              .then((response) => console.log(response));
+
+            // Displaying results to console
+            //   .then((json) => console.log(json));
           })}
           style={{ backgroundColor: darktheme.colors.secondary }}
         >
