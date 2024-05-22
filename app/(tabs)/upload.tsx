@@ -121,6 +121,13 @@ function UploadScreen() {
           mode={"contained"}
           onPress={handleSubmit((data: any) => {
             console.log("form data", data);
+            const response = fetch("http://192.168.1.15:8080", {
+              method: "post",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
           })}
           style={{ backgroundColor: darktheme.colors.secondary }}
         >
