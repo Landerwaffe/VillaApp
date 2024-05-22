@@ -100,7 +100,7 @@ function UploadScreen() {
               },
               body: JSON.stringify(data),
             }) // Converting to JSON
-              .then((response) => console.log(response));
+              .then((response) => console.log(JSON.stringify(data)));
 
             // Displaying results to console
             //   .then((json) => console.log(json));

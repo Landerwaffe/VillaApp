@@ -14,6 +14,8 @@ const client = new Client({
 client.connect();
 
 var cors = require("cors");
+var bodyParser = require("body-parser");
+var jsonParser = bodyParser.json();
 
 app.use(cors());
 
@@ -28,8 +30,10 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/", (req, res) => {
+app.post("/", jsonParser, (req, res) => {
   //res.send("POSTMAN Request Called");
+  console.log("Request object is: ");
+  console.log(req.body);
   client.query(
     `INSERT INTO public.users(
       username, password)
@@ -40,6 +44,7 @@ app.post("/", (req, res) => {
       } else {
         //res.send("Hello World!");
         res.send("DONE");
+        //console.log(req.params);
       }
     }
   );
