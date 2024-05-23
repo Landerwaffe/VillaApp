@@ -33,11 +33,12 @@ app.get("/", (req, res) => {
 app.post("/", jsonParser, (req, res) => {
   //res.send("POSTMAN Request Called");
   console.log("Request object is: ");
-  console.log(req.body);
+  console.log(req.body.email);
   client.query(
     `INSERT INTO public.users(
       username, password)
-      VALUES ( 'Jonathan', 'admin')`,
+      VALUES ( 'C' , 'C')`,
+    //["B", "B"],
     (err, result) => {
       if (err) {
         res.status(500).send(err.message);
