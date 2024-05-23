@@ -127,7 +127,12 @@ function UploadScreen() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(data),
-            });
+            })
+              .then((response) => console.log(JSON.stringify(data)))
+              .catch((error) => {
+                // Handle any errors that occur
+                console.error(error);
+              });
           })}
           style={{ backgroundColor: darktheme.colors.secondary }}
         >

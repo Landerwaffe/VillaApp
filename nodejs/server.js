@@ -31,24 +31,50 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", jsonParser, (req, res) => {
-  //res.send("POSTMAN Request Called");
-  console.log("Request object is: ");
-  console.log(req.body.email);
-  client.query(
-    `INSERT INTO public.users(
+  //console.log(req.body.subtitle);
+  if (req.body.email && req.body.password != null) {
+    //res.send("POSTMAN Request Called");
+    console.log("Request object is: ");
+    console.log(req.body.email);
+    client.query(
+      `INSERT INTO public.users(
       username, password)
       VALUES ( $1 , $2)`,
-    [req.body.email, req.body.password],
-    (err, result) => {
-      if (err) {
-        res.status(500).send(err.message);
-      } else {
-        //res.send("Hello World!");
-        res.send("DONE");
-        //console.log(req.params);
+      [req.body.email, req.body.password],
+      (err, result) => {
+        if (err) {
+          res.status(500).send(err.message);
+        } else {
+          //res.send("Hello World!");
+          res.send("DONE");
+          //console.log(req.params);
+        }
       }
-    }
-  );
+    );
+  }
+  if (
+    req.body.name &&
+    req.body.subtitle &&
+    req.body.image &&
+    req.body.description != null
+  ) {
+    //res.send("POSTMAN Request Called");
+    client.query(
+      `INSERT INTO public.properties(
+      name, subtitle, image, description)
+      VALUES ( $1 , $2, $3, $4)`,
+      [req.body.name, req.body.subtitle, req.body.image, req.body.description],
+      (err, result) => {
+        if (err) {
+          res.status(500).send(err.message);
+        } else {
+          //res.send("Hello World!");
+          res.send("DONE");
+          //console.log(req.params);
+        }
+      }
+    );
+  }
 });
 
 app.listen(port, () => {
