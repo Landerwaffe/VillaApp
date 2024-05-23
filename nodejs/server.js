@@ -37,8 +37,8 @@ app.post("/", jsonParser, (req, res) => {
   client.query(
     `INSERT INTO public.users(
       username, password)
-      VALUES ( 'C' , 'C')`,
-    //["B", "B"],
+      VALUES ( $1 , $2)`,
+    [req.body.email, req.body.password],
     (err, result) => {
       if (err) {
         res.status(500).send(err.message);
