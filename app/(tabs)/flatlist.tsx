@@ -29,7 +29,7 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
-    <Link href="/details">
+    <Link href="./details">
       <Card id="1" style={{ margin: "auto", width: "100%" }}>
         <Card.Title
           title={title}

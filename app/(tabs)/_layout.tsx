@@ -66,6 +66,19 @@ export default function TabLayout() {
             ),
           }}
         />
+        <Tabs.Screen
+          name="details"
+          options={{
+            title: "You can't see me",
+            href: null,
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "star" : "star-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
       </Tabs>
     ) : (
       <Tabs
@@ -105,6 +118,18 @@ export default function TabLayout() {
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
                 name={focused ? "image" : "image-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "person" : "person-outline"}
                 color={color}
               />
             ),
