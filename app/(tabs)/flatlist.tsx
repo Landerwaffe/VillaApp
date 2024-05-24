@@ -16,7 +16,9 @@ import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 import { Searchbar } from "react-native-paper";
 import * as React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Link } from "expo-router";
+//import details.tsx
 
 let CARDS: JSX.Element[] = [];
 
@@ -27,23 +29,23 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
-    //<Link to={"../details"}>
-    <Card id="1" style={{ margin: "auto", width: "100%" }}>
-      <Card.Title
-        title={title}
-        subtitle={subtitle}
-        //left={LeftContent}
-      />
-      <Card.Cover
-        source={{ uri: image }}
-        style={{ margin: "auto", width: "80%" }}
-      />
-      <Card.Content>
-        <Title>Details</Title>
-        <Paragraph>{description}</Paragraph>
-      </Card.Content>
-    </Card>
-    //</Link>
+    <Link href="/details">
+      <Card id="1" style={{ margin: "auto", width: "100%" }}>
+        <Card.Title
+          title={title}
+          subtitle={subtitle}
+          //left={LeftContent}
+        />
+        <Card.Cover
+          source={{ uri: image }}
+          style={{ margin: "auto", width: "80%" }}
+        />
+        <Card.Content>
+          <Title>Details</Title>
+          <Paragraph>{description}</Paragraph>
+        </Card.Content>
+      </Card>
+    </Link>
   );
 }
 
