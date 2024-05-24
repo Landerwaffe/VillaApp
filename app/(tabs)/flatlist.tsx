@@ -22,7 +22,7 @@ import { Link } from "expo-router";
 
 let CARDS: JSX.Element[] = [];
 
-const stringa = "Word";
+let detailId = "404";
 
 export function createCard(
   title: string,
@@ -31,7 +31,7 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
-    <Link href={"details/" + stringa}>
+    <Link href={{ pathname: "details/[id]", params: { id: detailId } }}>
       <Card id="1" style={{ margin: "auto", width: "100%" }}>
         <Card.Title
           title={title}
@@ -83,6 +83,7 @@ function UploadScreen() {
       if (searchQuery == "") {
         CARDS.length = 0;
         for (let i = 0; i < response.length; i++) {
+          detailId = response[i].id;
           createCard(
             response[i].name,
             response[i].subtitle,
