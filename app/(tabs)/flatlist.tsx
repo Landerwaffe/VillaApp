@@ -16,6 +16,7 @@ import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 import { Searchbar } from "react-native-paper";
 import * as React from "react";
+import { BrowserRouter, Link } from "react-router-dom";
 
 let CARDS: JSX.Element[] = [];
 
@@ -26,6 +27,7 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
+    //<Link to={"../details"}>
     <Card id="1" style={{ margin: "auto", width: "100%" }}>
       <Card.Title
         title={title}
@@ -41,6 +43,7 @@ export function createCard(
         <Paragraph>{description}</Paragraph>
       </Card.Content>
     </Card>
+    //</Link>
   );
 }
 
@@ -148,8 +151,10 @@ function UploadScreen() {
 export default function App() {
   const theme = useTheme();
   return (
-    <SafeAreaProvider>
-      <UploadScreen />
-    </SafeAreaProvider>
+    <BrowserRouter>
+      <SafeAreaProvider>
+        <UploadScreen />
+      </SafeAreaProvider>
+    </BrowserRouter>
   );
 }
