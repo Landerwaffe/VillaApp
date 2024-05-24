@@ -22,6 +22,8 @@ import { Link } from "expo-router";
 
 let CARDS: JSX.Element[] = [];
 
+const stringa = "Word";
+
 export function createCard(
   title: string,
   subtitle: string,
@@ -29,7 +31,7 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
-    <Link href="./details">
+    <Link href={"details/" + stringa}>
       <Card id="1" style={{ margin: "auto", width: "100%" }}>
         <Card.Title
           title={title}
