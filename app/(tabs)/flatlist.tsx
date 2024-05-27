@@ -18,7 +18,7 @@ import { Searchbar } from "react-native-paper";
 import * as React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Link } from "expo-router";
-//import details.tsx
+import * as Linking from "expo-linking";
 
 let CARDS: JSX.Element[] = [];
 
@@ -31,23 +31,25 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
-    <Link href={{ pathname: "details/[id]", params: { id: detailId } }}>
-      <Card id="1" style={{ margin: "auto", width: "100%" }}>
-        <Card.Title
-          title={title}
-          subtitle={subtitle}
-          //left={LeftContent}
-        />
-        <Card.Cover
-          source={{ uri: image }}
-          style={{ margin: "auto", width: "80%" }}
-        />
-        <Card.Content>
-          <Title>Details</Title>
-          <Paragraph>{description}</Paragraph>
-        </Card.Content>
-      </Card>
-    </Link>
+    // <Link href={{ pathname: "details/[id]", params: { id: detailId } }}>
+    <Card id="1" style={{ margin: "auto", width: "100%" }}>
+      <Card.Title
+        title={title}
+        subtitle={subtitle}
+        //left={LeftContent}
+      />
+      <Card.Cover
+        source={{ uri: image }}
+        style={{ margin: "auto", width: "80%" }}
+      />
+      <Card.Content>
+        <Title onPress={() => Linking.openURL("villa://details/1")}>
+          Details
+        </Title>
+        <Paragraph>{description}</Paragraph>
+      </Card.Content>
+    </Card>
+    // </Link>
   );
 }
 
