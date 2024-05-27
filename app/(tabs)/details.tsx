@@ -1,21 +1,8 @@
 import { View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
-import * as Linking from "expo-linking";
-import { NavigationContainer } from "@react-navigation/native";
 
-// const linking = {
-//   prefixes: ["villa://"],
-//   config: {
-//     screens: {
-//       Home: "",
-//       Details: "details/:itemId",
-//     },
-//   },
-// };
-
-export default function App() {
+export default function App({}) {
   return (
-    //<NavigationContainer linking={linking}>
     <View style={{ backgroundColor: "tomato", flex: 1 }}>
       <ThemedText
         style={{
@@ -38,6 +25,5 @@ export default function App() {
         Nitty gritty
       </ThemedText>
     </View>
-    //</NavigationContainer>
   );
 }
