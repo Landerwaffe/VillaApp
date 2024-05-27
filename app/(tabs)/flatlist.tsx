@@ -30,23 +30,27 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
-    <Link href={{ pathname: "details/[id]", params: { id: detailId } }}>
-      <Card id="1" style={{ margin: "auto", width: "100%" }}>
-        <Card.Title
-          title={title}
-          subtitle={subtitle}
-          //left={LeftContent}
-        />
-        <Card.Cover
-          source={{ uri: image }}
-          style={{ margin: "auto", width: "80%" }}
-        />
-        <Card.Content>
-          <Title>Details</Title>
-          <Paragraph>{description}</Paragraph>
-        </Card.Content>
-      </Card>
-    </Link>
+    <Card id="1" style={{ margin: "auto", width: "100%" }}>
+      <Card.Title
+        title={title}
+        subtitle={subtitle}
+        //left={LeftContent}
+      />
+      <Card.Cover
+        source={{ uri: image }}
+        style={{ margin: "auto", width: "80%" }}
+      />
+      <Card.Content>
+        <Title
+          onPress={() => {
+            console.log("You tapped the button!");
+          }}
+        >
+          Details
+        </Title>
+        <Paragraph>{description}</Paragraph>
+      </Card.Content>
+    </Card>
   );
 }
 
