@@ -19,6 +19,7 @@ import * as React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Link } from "expo-router";
 import * as Linking from "expo-linking";
+import { NavigationContainer } from "@react-navigation/native";
 
 let CARDS: JSX.Element[] = [];
 
@@ -158,10 +159,8 @@ function UploadScreen() {
 export default function App() {
   const theme = useTheme();
   return (
-    <BrowserRouter>
-      <SafeAreaProvider>
-        <UploadScreen />
-      </SafeAreaProvider>
-    </BrowserRouter>
+    <SafeAreaProvider>
+      <UploadScreen />
+    </SafeAreaProvider>
   );
 }

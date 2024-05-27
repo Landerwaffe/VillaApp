@@ -15,6 +15,7 @@ import {
   PaperProvider,
   useTheme,
 } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
 
 //import { useColorScheme } from "@/hooks/useColorScheme";
 import { StyleSheet, View, useColorScheme } from "react-native";
@@ -29,6 +30,16 @@ export default function RootLayout() {
     "Inter-Black": require("../assets/fonts/Inter-Black.otf"),
     "Inter-Regular": require("../assets/fonts/Inter-Regular.otf"),
   });
+
+  const linking = {
+    prefixes: ["villa://"],
+    config: {
+      screens: {
+        Home: "",
+        Details: "details/:itemId",
+      },
+    },
+  };
 
   const colorScheme = useColorScheme();
   // const paperTheme =
@@ -47,9 +58,11 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
-    </Stack>
+    <NavigationContainer linking={linking} independent={true}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </NavigationContainer>
   );
 }
