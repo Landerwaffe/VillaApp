@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 
-export default function App({}) {
+export default function Details() {
   return (
     <View style={{ backgroundColor: "tomato", flex: 1 }}>
       <ThemedText

@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { StyleSheet, View, useColorScheme } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
 import { ThemedText } from "@/components/ThemedText";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -32,19 +31,9 @@ export default function RootLayout() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </NavigationContainer>
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="+not-found" />
+    </Stack>
   );
 }
-
-const DetailsScreen = () => {
-  return (
-    <View>
-      <ThemedText>Details Screen</ThemedText>
-    </View>
-  );
-};

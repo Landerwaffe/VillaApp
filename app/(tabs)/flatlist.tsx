@@ -16,12 +16,11 @@ import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 import { Searchbar } from "react-native-paper";
 import * as React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { Link } from "expo-router";
+import Details from "./details";
 
 let CARDS: JSX.Element[] = [];
 
-let detailId = "404";
+let detailClick = false;
 
 export function createCard(
   title: string,
@@ -30,27 +29,29 @@ export function createCard(
   description: string
 ) {
   return CARDS.push(
-    <Card id="1" style={{ margin: "auto", width: "100%" }}>
-      <Card.Title
-        title={title}
-        subtitle={subtitle}
-        //left={LeftContent}
-      />
-      <Card.Cover
-        source={{ uri: image }}
-        style={{ margin: "auto", width: "80%" }}
-      />
-      <Card.Content>
-        <Title
-          onPress={() => {
-            console.log("You tapped the button!");
-          }}
-        >
-          Details
-        </Title>
-        <Paragraph>{description}</Paragraph>
-      </Card.Content>
-    </Card>
+    <Title
+      onPress={() => {
+        console.log("You tapped the button!");
+        detailClick = true;
+        console.log("DetailClick is: " + detailClick);
+      }}
+    >
+      <Card id="1" style={{ margin: "auto", width: "100%" }}>
+        <Card.Title
+          title={title}
+          subtitle={subtitle}
+          //left={LeftContent}
+        />
+        <Card.Cover
+          source={{ uri: image }}
+          style={{ margin: "auto", width: "80%" }}
+        />
+        <Card.Content>
+          <Title>Details</Title>
+          <Paragraph>{description}</Paragraph>
+        </Card.Content>
+      </Card>
+    </Title>
   );
 }
 
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
 
 let once = 0;
 
-function UploadScreen() {
+function ListScreen() {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -86,7 +87,6 @@ function UploadScreen() {
       if (searchQuery == "") {
         CARDS.length = 0;
         for (let i = 0; i < response.length; i++) {
-          detailId = response[i].id;
           createCard(
             response[i].name,
             response[i].subtitle,
@@ -160,7 +160,7 @@ export default function App() {
   const theme = useTheme();
   return (
     <SafeAreaProvider>
-      <UploadScreen />
+      <ListScreen />
     </SafeAreaProvider>
   );
 }
