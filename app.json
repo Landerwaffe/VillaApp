@@ -14,13 +14,13 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yourcompany.yourapp"
+      "bundleIdentifier": "com.yourcompany.villa"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff",
-        "package": "com.yourcompany.yourapp"
+        "package": "com.yourcompany.villa"
       }
     },
     "web": {
