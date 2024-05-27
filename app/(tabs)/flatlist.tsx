@@ -113,47 +113,51 @@ function ListScreen() {
       console.error(error);
     });
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: insets.top,
-        margin: "auto",
-        backgroundColor: theme.colors.primary,
-        width: "100%",
-      }}
-    >
-      <ThemedText
+  if (detailClick == false) {
+    return (
+      <View
         style={{
-          fontFamily: "Inter-Black",
-          fontSize: 30,
-          paddingTop: "3%",
-          paddingLeft: "8.4%",
+          flex: 1,
+          paddingTop: insets.top,
+          margin: "auto",
+          backgroundColor: theme.colors.primary,
+          width: "100%",
         }}
       >
-        This is a list of items.
-      </ThemedText>
-      <ThemedText
-        style={{
-          fontFamily: "Inter-Regular",
-          fontSize: 25,
-          paddingLeft: "8.4%",
-        }}
-      >
-        Infinitely scrollable
-      </ThemedText>
-      <Searchbar
-        placeholder="Search"
-        onChangeText={setSearchQuery}
-        value={searchQuery}
-      />
-      <FlatList
-        data={CARDS}
-        renderItem={({ item }) => <Card>{item}</Card>}
-        //keyExtractor={(item) => item}
-      />
-    </View>
-  );
+        <ThemedText
+          style={{
+            fontFamily: "Inter-Black",
+            fontSize: 30,
+            paddingTop: "3%",
+            paddingLeft: "8.4%",
+          }}
+        >
+          This is a list of items.
+        </ThemedText>
+        <ThemedText
+          style={{
+            fontFamily: "Inter-Regular",
+            fontSize: 25,
+            paddingLeft: "8.4%",
+          }}
+        >
+          Infinitely scrollable
+        </ThemedText>
+        <Searchbar
+          placeholder="Search"
+          onChangeText={setSearchQuery}
+          value={searchQuery}
+        />
+        <FlatList
+          data={CARDS}
+          renderItem={({ item }) => <Card>{item}</Card>}
+          //keyExtractor={(item) => item}
+        />
+      </View>
+    );
+  } else {
+    return <Details />;
+  }
 }
 
 export default function App() {
