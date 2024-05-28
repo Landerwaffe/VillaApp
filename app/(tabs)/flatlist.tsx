@@ -127,13 +127,17 @@ function ListScreen() {
         }}
       >
         <ThemedText
+          id="TitleText"
           style={{
             fontFamily: "Inter-Black",
             fontSize: 30,
             paddingTop: "3%",
             paddingLeft: "8.4%",
           }}
-          onPress={handleDetailClick}
+          onPress={() => {
+            handleDetailClick;
+            console.log("Title clicked!");
+          }}
         >
           This is a list of items.
         </ThemedText>
