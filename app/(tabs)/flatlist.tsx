@@ -72,11 +72,13 @@ function ListScreen() {
     console.log("Search Query is: " + searchQuery);
   }
 
+  let a = "Return Value";
+
   const [detailClick, setDetailClick] = React.useState(false);
 
   const handleDetailClick = () => {
     setDetailClick(true);
-    return "Return Value";
+    return a;
   };
 
   console.log("After handle detail, state becomes: " + detailClick);
@@ -179,7 +181,7 @@ function ListScreen() {
             textAlign: "center",
           }}
         >
-          Nitty gritty
+          {a}
         </ThemedText>
       </View>
     );
