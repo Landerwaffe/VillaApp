@@ -144,7 +144,6 @@ function ListScreen() {
         >
           Infinitely scrollable
         </ThemedText>
-        {/* <Button onPress={() => handleDetailClick}>A</Button> */}
         <Searchbar
           placeholder="Search"
           onChangeText={setSearchQuery}
@@ -152,7 +151,9 @@ function ListScreen() {
         />
         <FlatList
           data={CARDS}
-          renderItem={({ item }) => <Card>{item}</Card>}
+          renderItem={({ item }) => (
+            <Card onPress={handleDetailClick}>{item}</Card>
+          )}
           //keyExtractor={(item) => item}
         />
       </View>
