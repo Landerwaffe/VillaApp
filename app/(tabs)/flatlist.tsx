@@ -72,13 +72,19 @@ function ListScreen() {
     console.log("Search Query is: " + searchQuery);
   }
 
-  let a = "Return Value";
+  //let a = "Return Value";
 
   const [detailClick, setDetailClick] = React.useState(false);
+  const [a, setA] = React.useState("Return Value");
+
+  const setRender = (value: string) => {
+    setA(value);
+  };
 
   const handleDetailClick = () => {
+    setRender("Altered Value");
+    console.log(a);
     setDetailClick(true);
-    return a;
   };
 
   console.log("After handle detail, state becomes: " + detailClick);
@@ -134,10 +140,7 @@ function ListScreen() {
             paddingTop: "3%",
             paddingLeft: "8.4%",
           }}
-          onPress={() => {
-            handleDetailClick;
-            console.log("Title clicked!");
-          }}
+          onPress={handleDetailClick}
         >
           This is a list of items.
         </ThemedText>
