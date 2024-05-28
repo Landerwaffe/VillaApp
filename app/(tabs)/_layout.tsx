@@ -6,7 +6,9 @@ import { useColorScheme } from "react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  console.log("It's: " + colorScheme);
+
+  //For detecting dark or light mode
+  //console.log("It's: " + colorScheme);
 
   const example = colorScheme === "dark" ? "DARK" : "LIGHT";
 
