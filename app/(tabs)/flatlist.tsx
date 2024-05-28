@@ -16,7 +16,6 @@ import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 import { Searchbar } from "react-native-paper";
 import * as React from "react";
-import Details from "../details";
 
 let CARDS: JSX.Element[] = [];
 
@@ -77,6 +76,7 @@ function ListScreen() {
 
   const handleDetailClick = () => {
     setDetailClick(true);
+    return "Return Value";
   };
 
   console.log("After handle detail, state becomes: " + detailClick);
@@ -159,7 +159,30 @@ function ListScreen() {
       </View>
     );
   } else {
-    return <Details />;
+    return (
+      <View style={{ backgroundColor: "tomato", flex: 1 }}>
+        <ThemedText
+          style={{
+            fontFamily: "Inter-Black",
+            fontSize: 30,
+            paddingTop: "3%",
+            textAlign: "center",
+          }}
+        >
+          This is details.
+        </ThemedText>
+        <ThemedText
+          style={{
+            fontFamily: "Inter-Regular",
+            fontSize: 25,
+            paddingTop: "0.5%",
+            textAlign: "center",
+          }}
+        >
+          Nitty gritty
+        </ThemedText>
+      </View>
+    );
   }
 }
 
