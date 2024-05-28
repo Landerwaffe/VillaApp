@@ -68,7 +68,7 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="details"
           options={{
             title: "You can't see me",
@@ -80,7 +80,7 @@ export default function TabLayout() {
               />
             ),
           }}
-        />
+        /> */}
       </Tabs>
     ) : (
       <Tabs

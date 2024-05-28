@@ -16,7 +16,7 @@ import { Card, Title, Paragraph } from "react-native-paper";
 import { JSX } from "react";
 import { Searchbar } from "react-native-paper";
 import * as React from "react";
-import Details from "./details";
+import Details from "../details";
 
 let CARDS: JSX.Element[] = [];
 
