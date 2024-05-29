@@ -80,16 +80,12 @@ function ListScreen() {
   //let a = "Return Value";
 
   const [detailClick, setDetailClick] = React.useState(false);
-  const [detailRender, setDetailRender] = React.useState("Return Value");
+  const [detailRender, setDetailRender] = React.useState<Number>(13);
 
-  const setRender = (value: string) => {
-    setDetailRender(value);
-  };
-
-  const handleDetailClick = (id: string) => {
-    setRender(id);
-    console.log(detailRender);
-    alert(id);
+  const handleDetailClick = (id: Number) => {
+    setDetailRender(id);
+    //console.log(detailRender);
+    // alert(id);
     setDetailClick(true);
   };
 
@@ -130,6 +126,7 @@ function ListScreen() {
       console.error(error);
     });
 
+  // for (let i = 0; i < CardID.length; i++) {
   if (detailClick == false) {
     return (
       <View
@@ -149,7 +146,7 @@ function ListScreen() {
             paddingTop: "3%",
             paddingLeft: "8.4%",
           }}
-          onPress={(id) => handleDetailClick("TitleText")}
+          onPress={(id) => handleDetailClick(1)}
         >
           This is a list of items.
         </ThemedText>
@@ -170,7 +167,7 @@ function ListScreen() {
         <FlatList
           data={CARDS}
           renderItem={({ item }) => (
-            <Card onPress={(id) => handleDetailClick("Card ID")}>{item}</Card>
+            <Card onPress={(id) => handleDetailClick(1)}>{item}</Card>
           )}
           //keyExtractor={(item) => item}
         />
@@ -197,12 +194,14 @@ function ListScreen() {
             textAlign: "center",
           }}
         >
-          {detailRender}
+          {detailRender.toString()}
         </ThemedText>
+        <Button>Back</Button>
       </View>
     );
   }
 }
+// }
 
 export default function App() {
   const theme = useTheme();
