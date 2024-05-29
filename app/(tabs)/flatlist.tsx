@@ -19,6 +19,7 @@ import { Searchbar } from "react-native-paper";
 import * as React from "react";
 
 let CARDS: JSX.Element[] = [];
+let CardID: Number[] = [];
 
 let click = false;
 
@@ -28,7 +29,6 @@ export function createCard(
   image: string,
   description: string
 ) {
-  console.log("Card printing");
   CARDS.push(
     <Card id="1" style={{ margin: "auto", width: "100%" }}>
       <Card.Title
@@ -46,6 +46,11 @@ export function createCard(
       </Card.Content>
     </Card>
   );
+  console.log("Card printing");
+}
+
+export function identifyCard(id: Number) {
+  CardID.push(id);
 }
 
 const styles = StyleSheet.create({
