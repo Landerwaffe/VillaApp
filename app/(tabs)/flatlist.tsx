@@ -28,7 +28,8 @@ export function createCard(
   image: string,
   description: string
 ) {
-  return CARDS.push(
+  console.log("Card printing");
+  CARDS.push(
     <Card id="1" style={{ margin: "auto", width: "100%" }}>
       <Card.Title
         title={title}
