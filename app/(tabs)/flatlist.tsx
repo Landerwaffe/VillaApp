@@ -57,6 +57,10 @@ function ListScreen() {
     setDetailClick(true);
   };
 
+  const handleDetailBack = () => {
+    setDetailClick(false);
+  };
+
   function createCard(
     title: string,
     subtitle: string,
@@ -176,6 +180,7 @@ function ListScreen() {
       </View>
     );
   } else {
+    console.log("Detail Click is currently: " + detailClick);
     return (
       <View style={{ backgroundColor: "tomato", flex: 1 }}>
         <ThemedText
@@ -198,7 +203,7 @@ function ListScreen() {
         >
           {detailRender.toString()}
         </ThemedText>
-        <Button>Back</Button>
+        <Button onPress={handleDetailBack}>Back</Button>
       </View>
     );
   }
