@@ -21,16 +21,6 @@ import * as React from "react";
 let CARDS: JSX.Element[] = [];
 let CardID: Number[] = [];
 
-// const [detailClick, setDetailClick] = React.useState(false);
-// const [detailRender, setDetailRender] = React.useState<Number>(13);
-
-// const handleDetailClick = (id: Number) => {
-//   setDetailRender(id);
-//   //console.log(detailRender);
-//   // alert(id);
-//   setDetailClick(true);
-// };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
