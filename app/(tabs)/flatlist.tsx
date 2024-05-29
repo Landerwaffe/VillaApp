@@ -21,8 +21,6 @@ import * as React from "react";
 let CARDS: JSX.Element[] = [];
 let CardID: Number[] = [];
 
-let click = false;
-
 export function createCard(
   title: string,
   subtitle: string,
@@ -46,7 +44,7 @@ export function createCard(
       </Card.Content>
     </Card>
   );
-  console.log("Card printing");
+  //console.log("Card printing");
 }
 
 export function identifyCard(id: Number) {
@@ -109,6 +107,8 @@ function ListScreen() {
             response[i].image,
             response[i].description
           );
+          identifyCard(response[i].id);
+          // console.log(CardID[i]);
         }
       } else {
         CARDS.length = 0;
@@ -120,6 +120,7 @@ function ListScreen() {
               response[i].image,
               response[i].description
             );
+            identifyCard(response[i].id);
           }
         }
       }
