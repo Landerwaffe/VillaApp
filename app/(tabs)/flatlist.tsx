@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  GestureResponderEvent,
 } from "react-native";
 import {
   SafeAreaProvider,
@@ -81,9 +82,10 @@ function ListScreen() {
     setDetailRender(value);
   };
 
-  const handleDetailClick = () => {
+  const handleDetailClick = (e: GestureResponderEvent) => {
     setRender("Altered Value");
     console.log(detailRender);
+    alert(e.target);
     setDetailClick(true);
   };
 
@@ -140,7 +142,7 @@ function ListScreen() {
             paddingTop: "3%",
             paddingLeft: "8.4%",
           }}
-          onPress={handleDetailClick}
+          onPress={(e) => handleDetailClick(e)}
         >
           This is a list of items.
         </ThemedText>
@@ -158,6 +160,7 @@ function ListScreen() {
           onChangeText={setSearchQuery}
           value={searchQuery}
         />
+        <Button onPress={(e) => handleDetailClick(e)}>a</Button>
         <FlatList
           data={CARDS}
           renderItem={({ item }) => (
