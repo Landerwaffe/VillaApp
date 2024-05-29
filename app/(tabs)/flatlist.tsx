@@ -21,35 +21,15 @@ import * as React from "react";
 let CARDS: JSX.Element[] = [];
 let CardID: Number[] = [];
 
-export function createCard(
-  title: string,
-  subtitle: string,
-  image: string,
-  description: string
-) {
-  CARDS.push(
-    <Card id="1" style={{ margin: "auto", width: "100%" }}>
-      <Card.Title
-        title={title}
-        subtitle={subtitle}
-        //left={LeftContent}
-      />
-      <Card.Cover
-        source={{ uri: image }}
-        style={{ margin: "auto", width: "80%" }}
-      />
-      <Card.Content>
-        <Title>Details</Title>
-        <Paragraph>{description}</Paragraph>
-      </Card.Content>
-    </Card>
-  );
-  //console.log("Card printing");
-}
+// const [detailClick, setDetailClick] = React.useState(false);
+// const [detailRender, setDetailRender] = React.useState<Number>(13);
 
-export function identifyCard(id: Number) {
-  CardID.push(id);
-}
+// const handleDetailClick = (id: Number) => {
+//   setDetailRender(id);
+//   //console.log(detailRender);
+//   // alert(id);
+//   setDetailClick(true);
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -77,8 +57,6 @@ function ListScreen() {
     console.log("Search Query is: " + searchQuery);
   }
 
-  //let a = "Return Value";
-
   const [detailClick, setDetailClick] = React.useState(false);
   const [detailRender, setDetailRender] = React.useState<Number>(13);
 
@@ -88,6 +66,40 @@ function ListScreen() {
     // alert(id);
     setDetailClick(true);
   };
+
+  function createCard(
+    title: string,
+    subtitle: string,
+    image: string,
+    description: string,
+    clickID: Number
+  ) {
+    CARDS.push(
+      <Card
+        onPress={(id) => handleDetailClick(clickID)}
+        style={{ margin: "auto", width: "100%" }}
+      >
+        <Card.Title
+          title={title}
+          subtitle={subtitle}
+          //left={LeftContent}
+        />
+        <Card.Cover
+          source={{ uri: image }}
+          style={{ margin: "auto", width: "80%" }}
+        />
+        <Card.Content>
+          <Title>Details</Title>
+          <Paragraph>{description}</Paragraph>
+        </Card.Content>
+      </Card>
+    );
+    //console.log("Card printing");
+  }
+
+  function identifyCard(id: Number) {
+    CardID.push(id);
+  }
 
   console.log("After handle detail, state becomes: " + detailClick);
 
@@ -101,7 +113,8 @@ function ListScreen() {
             response[i].name,
             response[i].subtitle,
             response[i].image,
-            response[i].description
+            response[i].description,
+            response[i].id
           );
           identifyCard(response[i].id);
           // console.log(CardID[i]);
@@ -114,7 +127,8 @@ function ListScreen() {
               response[i].name,
               response[i].subtitle,
               response[i].image,
-              response[i].description
+              response[i].description,
+              response[i].id
             );
             identifyCard(response[i].id);
           }
@@ -166,9 +180,7 @@ function ListScreen() {
         />
         <FlatList
           data={CARDS}
-          renderItem={({ item }) => (
-            <Card onPress={(id) => handleDetailClick(1)}>{item}</Card>
-          )}
+          renderItem={({ item }) => <Card>{item}</Card>}
           //keyExtractor={(item) => item}
         />
       </View>
