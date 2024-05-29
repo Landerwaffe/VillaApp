@@ -182,7 +182,9 @@ function ListScreen() {
   } else {
     console.log("Detail Click is currently: " + detailClick);
     return (
-      <View style={{ backgroundColor: "tomato", flex: 1 }}>
+      <View
+        style={{ backgroundColor: "tomato", flex: 1, justifyContent: "center" }}
+      >
         <ThemedText
           style={{
             fontFamily: "Inter-Black",
