@@ -82,10 +82,10 @@ function ListScreen() {
     setDetailRender(value);
   };
 
-  const handleDetailClick = (e: GestureResponderEvent) => {
-    setRender("Altered Value");
+  const handleDetailClick = (id: string) => {
+    setRender(id);
     console.log(detailRender);
-    alert(e.target);
+    alert(id);
     setDetailClick(true);
   };
 
@@ -142,7 +142,7 @@ function ListScreen() {
             paddingTop: "3%",
             paddingLeft: "8.4%",
           }}
-          onPress={(e) => handleDetailClick(e)}
+          onPress={(id) => handleDetailClick("TitleText")}
         >
           This is a list of items.
         </ThemedText>
@@ -160,11 +160,10 @@ function ListScreen() {
           onChangeText={setSearchQuery}
           value={searchQuery}
         />
-        <Button onPress={(e) => handleDetailClick(e)}>a</Button>
         <FlatList
           data={CARDS}
           renderItem={({ item }) => (
-            <Card onPress={handleDetailClick}>{item}</Card>
+            <Card onPress={(id) => handleDetailClick("Card ID")}>{item}</Card>
           )}
           //keyExtractor={(item) => item}
         />
