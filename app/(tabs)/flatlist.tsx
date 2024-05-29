@@ -75,15 +75,15 @@ function ListScreen() {
   //let a = "Return Value";
 
   const [detailClick, setDetailClick] = React.useState(false);
-  const [a, setA] = React.useState("Return Value");
+  const [detailRender, setDetailRender] = React.useState("Return Value");
 
   const setRender = (value: string) => {
-    setA(value);
+    setDetailRender(value);
   };
 
   const handleDetailClick = () => {
     setRender("Altered Value");
-    console.log(a);
+    console.log(detailRender);
     setDetailClick(true);
   };
 
@@ -188,7 +188,7 @@ function ListScreen() {
             textAlign: "center",
           }}
         >
-          {a}
+          {detailRender}
         </ThemedText>
       </View>
     );
