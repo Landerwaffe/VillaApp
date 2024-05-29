@@ -17,7 +17,8 @@ function UploadScreen() {
       flex: 1,
       padding: 15,
       backgroundColor: theme.colors.primary,
-      //justifyContent: "center",
+      justifyContent: "center",
+      paddingBottom: "10%",
     },
     headingStyle: {
       fontSize: 30,
