@@ -23,6 +23,10 @@ let CardID: Number[] = [];
 let DETAILS: JSX.Element[] = [];
 
 const url = new URL("http://192.168.1.15:8080");
+url.searchParams.append("type", "Flatlist");
+url.searchParams.append("category", "Details");
+url.searchParams.append("id", "1");
+//callDetails();
 
 const styles = StyleSheet.create({
   container: {
@@ -121,7 +125,7 @@ function ListScreen() {
 
   console.log("After handle detail, state becomes: " + detailClick);
 
-  url.searchParams.append("type", "Flatlist");
+  //url.searchParams.delete("type", "Flatlist");
 
   async function call() {
     const result = await fetch(url)
@@ -234,6 +238,7 @@ function ListScreen() {
     );
   } else {
     console.log("Detail Click is currently: " + detailClick);
+    callDetails();
     return (
       <View
         style={{ backgroundColor: "tomato", flex: 1, justifyContent: "center" }}
