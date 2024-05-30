@@ -23,7 +23,7 @@ let CardID: Number[] = [];
 let DETAILS: JSX.Element[] = [];
 
 const url = new URL("http://192.168.1.15:8080");
-url.searchParams.set("type", "Flatlist");
+// url.searchParams.set("type", "Flatlist");
 //callDetails();
 
 const styles = StyleSheet.create({
@@ -126,6 +126,7 @@ function ListScreen() {
   //url.searchParams.delete("type", "Flatlist");
 
   async function call() {
+    url.searchParams.set("type", "Flatlist");
     const result = await fetch(url)
       .then((response) => response.json())
       .then((response) => {
@@ -167,31 +168,30 @@ function ListScreen() {
       });
   }
 
-  // async function callDetails() {
-  //   url.searchParams.set("type", "Details");
-  //   url.searchParams.set("id", "1");
-  //   const detailResult = await fetch(url)
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       for (let i = 0; i < response.length; i++) {
-  //         createDetails(
-  //           response[i].detailimage,
-  //           response[i].detaildescription
-  //           //response[i].propertyid
-  //         );
-  //         // console.log(CardID[i]);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
-
-  call();
+  async function callDetails() {
+    url.searchParams.set("type", "Details");
+    url.searchParams.set("id", "1");
+    const detailResult = await fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        for (let i = 0; i < response.length; i++) {
+          createDetails(
+            response[i].detailimage,
+            response[i].detaildescription
+            //response[i].propertyid
+          );
+          // console.log(CardID[i]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   //url.searchParams.delete("type");
 
   if (detailClick == false) {
+    call();
     return (
       <View
         style={{
@@ -236,9 +236,8 @@ function ListScreen() {
       </View>
     );
   } else {
-    //setDetailClick(false);
-    // callDetails();
-    // console.log(DETAILS[0]);
+    callDetails();
+    console.log(DETAILS[0]);
     console.log("Detail Click is currently: " + detailClick);
     return (
       <View
