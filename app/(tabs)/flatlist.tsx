@@ -123,26 +123,13 @@ function ListScreen() {
 
   url.searchParams.append("type", "Flatlist");
 
-  const result = fetch(url)
-    .then((response) => response.json())
-    .then((response) => {
-      if (searchQuery == "") {
-        CARDS.length = 0;
-        for (let i = 0; i < response.length; i++) {
-          createCard(
-            response[i].name,
-            response[i].subtitle,
-            response[i].image,
-            response[i].description,
-            response[i].id
-          );
-          identifyCard(response[i].id);
-          // console.log(CardID[i]);
-        }
-      } else {
-        CARDS.length = 0;
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].name.includes(searchQuery)) {
+  async function call() {
+    const result = await fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        if (searchQuery == "") {
+          CARDS.length = 0;
+          for (let i = 0; i < response.length; i++) {
             createCard(
               response[i].name,
               response[i].subtitle,
@@ -151,35 +138,55 @@ function ListScreen() {
               response[i].id
             );
             identifyCard(response[i].id);
+            // console.log(CardID[i]);
+            // url.searchParams.append("category", "Details");
+            // url.searchParams.append("id", "1");
+            //callDetails();
+          }
+        } else {
+          CARDS.length = 0;
+          for (let i = 0; i < response.length; i++) {
+            if (response[i].name.includes(searchQuery)) {
+              createCard(
+                response[i].name,
+                response[i].subtitle,
+                response[i].image,
+                response[i].description,
+                response[i].id
+              );
+              identifyCard(response[i].id);
+            }
           }
         }
-      }
-    })
-    .catch((error) => {
-      // Handle any errors that occur
-      console.error(error);
-    });
+      })
+      .catch((error) => {
+        // Handle any errors that occur
+        console.error(error);
+      });
+  }
 
-  // url.searchParams.delete("type");
-  // url.searchParams.append("type", "Details");
-  // url.searchParams.append("id", "1");
+  async function callDetails() {
+    const detailResult = await fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        CARDS.length = 0;
+        for (let i = 0; i < response.length; i++) {
+          createDetails(
+            response[i].detailimage,
+            response[i].detaildescription
+            //response[i].propertyid
+          );
+          // console.log(CardID[i]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
-  // const detailResult = fetch(url)
-  //   .then((response) => response.json())
-  //   .then((response) => {
-  //     CARDS.length = 0;
-  //     for (let i = 0; i < response.length; i++) {
-  //       createDetails(
-  //         response[i].detailimage,
-  //         response[i].detaildescription
-  //         //response[i].propertyid
-  //       );
-  //       // console.log(CardID[i]);
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
+  call();
+
+  //url.searchParams.delete("type");
 
   if (detailClick == false) {
     return (

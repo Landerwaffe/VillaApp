@@ -30,10 +30,11 @@ app.get("/", (req, res) => {
         res.status(500).send(err.message);
       } else {
         //res.send("Hello World!");
+        console.log("Sending Flatlist Rows");
         res.json(result.rows);
       }
     });
-  } else if (queryType == "Details") {
+  } else if (queryCategory == "Details") {
     client.query(
       `SELECT * FROM public.details WHERE ID =` + queryID,
       (err, result) => {
