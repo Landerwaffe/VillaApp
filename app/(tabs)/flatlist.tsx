@@ -139,26 +139,6 @@ function ListScreen() {
           identifyCard(response[i].id);
           // console.log(CardID[i]);
         }
-        url.searchParams.delete("type");
-        url.searchParams.append("type", "Details");
-        url.searchParams.append("id", "1");
-
-        const detailResult = fetch(url)
-          .then((response) => response.json())
-          .then((response) => {
-            CARDS.length = 0;
-            for (let i = 0; i < response.length; i++) {
-              createDetails(
-                response[i].detailimage,
-                response[i].detaildescription
-                //response[i].propertyid
-              );
-              // console.log(CardID[i]);
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
       } else {
         CARDS.length = 0;
         for (let i = 0; i < response.length; i++) {
