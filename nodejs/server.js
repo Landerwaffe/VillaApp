@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
         res.json(result.rows);
       }
     });
-  } else if (queryCategory == "Details") {
+  } else if (queryType == "Details") {
     client.query(
       `SELECT * FROM public.details WHERE ID =` + queryID,
       (err, result) => {
