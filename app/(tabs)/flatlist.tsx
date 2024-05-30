@@ -20,6 +20,9 @@ import * as React from "react";
 
 let CARDS: JSX.Element[] = [];
 let CardID: Number[] = [];
+let DETAILS: JSX.Element[] = [];
+
+const url = new URL("http://192.168.1.15:8080");
 
 const styles = StyleSheet.create({
   container: {
@@ -95,9 +98,29 @@ function ListScreen() {
     CardID.push(id);
   }
 
+  function createDetails(detailimage: string, detaildescription: string) {
+    DETAILS.push(
+      <Card style={{ margin: "auto", width: "100%" }}>
+        {/* <Card.Title
+          title={title}
+          subtitle={subtitle}
+          //left={LeftContent}
+        /> */}
+        <Card.Cover
+          source={{ uri: detailimage }}
+          style={{ margin: "auto", width: "80%" }}
+        />
+        <Card.Content>
+          <Title>Details</Title>
+          <Paragraph>{detaildescription}</Paragraph>
+        </Card.Content>
+      </Card>
+    );
+    //console.log("Card printing");
+  }
+
   console.log("After handle detail, state becomes: " + detailClick);
 
-  const url = new URL("http://192.168.1.15:8080");
   url.searchParams.append("type", "Flatlist");
 
   const result = fetch(url)
@@ -116,6 +139,26 @@ function ListScreen() {
           identifyCard(response[i].id);
           // console.log(CardID[i]);
         }
+        url.searchParams.delete("type");
+        url.searchParams.append("type", "Details");
+        url.searchParams.append("id", "1");
+
+        const detailResult = fetch(url)
+          .then((response) => response.json())
+          .then((response) => {
+            CARDS.length = 0;
+            for (let i = 0; i < response.length; i++) {
+              createDetails(
+                response[i].detailimage,
+                response[i].detaildescription
+                //response[i].propertyid
+              );
+              // console.log(CardID[i]);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else {
         CARDS.length = 0;
         for (let i = 0; i < response.length; i++) {
@@ -137,46 +180,26 @@ function ListScreen() {
       console.error(error);
     });
 
-  url.searchParams.delete("Flatlist");
-  url.searchParams.append("type", "Details");
-  url.searchParams.append("id", "1");
+  // url.searchParams.delete("type");
+  // url.searchParams.append("type", "Details");
+  // url.searchParams.append("id", "1");
 
-  const detailResult = fetch(url)
-    .then((response) => response.json())
-    .then((response) => {
-      if (searchQuery == "") {
-        CARDS.length = 0;
-        for (let i = 0; i < response.length; i++) {
-          createCard(
-            response[i].name,
-            response[i].subtitle,
-            response[i].image,
-            response[i].description,
-            response[i].id
-          );
-          identifyCard(response[i].id);
-          // console.log(CardID[i]);
-        }
-      } else {
-        CARDS.length = 0;
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].name.includes(searchQuery)) {
-            createCard(
-              response[i].name,
-              response[i].subtitle,
-              response[i].image,
-              response[i].description,
-              response[i].id
-            );
-            identifyCard(response[i].id);
-          }
-        }
-      }
-    })
-    .catch((error) => {
-      // Handle any errors that occur
-      console.error(error);
-    });
+  // const detailResult = fetch(url)
+  //   .then((response) => response.json())
+  //   .then((response) => {
+  //     CARDS.length = 0;
+  //     for (let i = 0; i < response.length; i++) {
+  //       createDetails(
+  //         response[i].detailimage,
+  //         response[i].detaildescription
+  //         //response[i].propertyid
+  //       );
+  //       // console.log(CardID[i]);
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
 
   if (detailClick == false) {
     return (
@@ -248,6 +271,11 @@ function ListScreen() {
         >
           {detailRender.toString()}
         </ThemedText>
+        <FlatList
+          data={DETAILS}
+          renderItem={({ item }) => <Card>{item}</Card>}
+          //keyExtractor={(item) => item}
+        />
         <Button onPress={handleDetailBack}>Back</Button>
       </View>
     );

@@ -22,7 +22,8 @@ app.use(cors());
 app.get("/", (req, res) => {
   const queryType = req.query.type;
   const queryID = parseInt(req.query.id);
-  //console.log("Query Type is: " + queryType);
+  const queryCategory = req.query.category;
+  console.log("Query Type is: " + queryType);
   if (queryType == "Flatlist") {
     client.query(`SELECT * FROM properties`, (err, result) => {
       if (err) {
@@ -32,8 +33,7 @@ app.get("/", (req, res) => {
         res.json(result.rows);
       }
     });
-  }
-  if (queryType == "Details") {
+  } else if (queryType == "Details") {
     client.query(
       `SELECT * FROM public.details WHERE ID =` + queryID,
       (err, result) => {
