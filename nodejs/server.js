@@ -20,14 +20,32 @@ var jsonParser = bodyParser.json();
 app.use(cors());
 
 app.get("/", (req, res) => {
-  client.query(`SELECT * FROM properties`, (err, result) => {
-    if (err) {
-      res.status(500).send(err.message);
-    } else {
-      //res.send("Hello World!");
-      res.json(result.rows);
-    }
-  });
+  const queryType = req.query.type;
+  const queryID = parseInt(req.query.id);
+  //console.log("Query Type is: " + queryType);
+  if (queryType == "Flatlist") {
+    client.query(`SELECT * FROM properties`, (err, result) => {
+      if (err) {
+        res.status(500).send(err.message);
+      } else {
+        //res.send("Hello World!");
+        res.json(result.rows);
+      }
+    });
+  }
+  if (queryType == "Details") {
+    client.query(
+      `SELECT * FROM public.details WHERE ID =` + queryID,
+      (err, result) => {
+        if (err) {
+          res.status(500).send(err.message);
+        } else {
+          //res.send("Hello World!");
+          res.json(result.rows);
+        }
+      }
+    );
+  }
 });
 
 app.post("/", jsonParser, (req, res) => {

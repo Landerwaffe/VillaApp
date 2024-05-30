@@ -97,7 +97,10 @@ function ListScreen() {
 
   console.log("After handle detail, state becomes: " + detailClick);
 
-  const result = fetch("http://192.168.1.15:8080")
+  const url = new URL("http://192.168.1.15:8080");
+  url.searchParams.append("type", "Flatlist");
+
+  const result = fetch(url)
     .then((response) => response.json())
     .then((response) => {
       if (searchQuery == "") {
@@ -134,7 +137,47 @@ function ListScreen() {
       console.error(error);
     });
 
-  // for (let i = 0; i < CardID.length; i++) {
+  url.searchParams.delete("Flatlist");
+  url.searchParams.append("type", "Details");
+  url.searchParams.append("id", "1");
+
+  const detailResult = fetch(url)
+    .then((response) => response.json())
+    .then((response) => {
+      if (searchQuery == "") {
+        CARDS.length = 0;
+        for (let i = 0; i < response.length; i++) {
+          createCard(
+            response[i].name,
+            response[i].subtitle,
+            response[i].image,
+            response[i].description,
+            response[i].id
+          );
+          identifyCard(response[i].id);
+          // console.log(CardID[i]);
+        }
+      } else {
+        CARDS.length = 0;
+        for (let i = 0; i < response.length; i++) {
+          if (response[i].name.includes(searchQuery)) {
+            createCard(
+              response[i].name,
+              response[i].subtitle,
+              response[i].image,
+              response[i].description,
+              response[i].id
+            );
+            identifyCard(response[i].id);
+          }
+        }
+      }
+    })
+    .catch((error) => {
+      // Handle any errors that occur
+      console.error(error);
+    });
+
   if (detailClick == false) {
     return (
       <View
