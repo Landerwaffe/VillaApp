@@ -35,17 +35,14 @@ app.get("/", (req, res) => {
       }
     });
   } else if (queryType == "Details") {
-    client.query(
-      `SELECT * FROM public.details WHERE ID =` + queryID,
-      (err, result) => {
-        if (err) {
-          res.status(500).send(err.message);
-        } else {
-          //res.send("Hello World!");
-          res.json(result.rows);
-        }
+    client.query(`SELECT * FROM public.details`, (err, result) => {
+      if (err) {
+        res.status(500).send(err.message);
+      } else {
+        //res.send("Hello World!");
+        res.json(result.rows);
       }
-    );
+    });
   }
 });
 

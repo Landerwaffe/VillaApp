@@ -93,7 +93,6 @@ function ListScreen() {
         </Card.Content>
       </Card>
     );
-    //console.log("Card printing");
   }
 
   function identifyCard(id: Number) {
@@ -123,10 +122,9 @@ function ListScreen() {
         </Card.Content>
       </Card>
     );
-    //console.log("Card printing");
   }
 
-  console.log("After handle detail, state becomes: " + detailClick);
+  // console.log("After handle detail, state becomes: " + detailClick);
 
   //url.searchParams.delete("type", "Flatlist");
 
@@ -138,6 +136,7 @@ function ListScreen() {
         if (searchQuery == "") {
           CARDS.length = 0;
           for (let i = 0; i < response.length; i++) {
+            console.log("Flatlist Length is: " + response.length);
             createCard(
               response[i].name,
               response[i].subtitle,
@@ -146,10 +145,6 @@ function ListScreen() {
               response[i].id
             );
             identifyCard(response[i].id);
-            // console.log(CardID[i]);
-            // url.searchParams.append("category", "Details");
-            // url.searchParams.append("id", "1");
-            //callDetails();
           }
         } else {
           CARDS.length = 0;
@@ -173,33 +168,29 @@ function ListScreen() {
       });
   }
 
-  async function callDetails() {
+  async function callDetails(queryID: Number) {
     url.searchParams.set("type", "Details");
-    url.searchParams.set("id", "1");
+    url.searchParams.set("id", queryID.toString());
     const detailResult = await fetch(url)
       .then((response) => response.json())
       .then((response) => {
         for (let i = 0; i < response.length; i++) {
-          console.log("Current ID is: " + response[i].id.toString());
-          console.log("Detail Array Value is: " + DETAILS[i]);
-          if (url.searchParams.get("id") == "1") {
+          console.log("Starting Loop with length: " + response.length);
+          if (response[i].propertyid == queryID.toString()) {
+            console.log("Condition Matched!");
             createDetails(
-              response[i].id,
+              response[i].propertyid,
               response[i].detailimage,
               response[i].detaildescription
-              //response[i].propertyid
             );
             DETAILS = [];
           }
-          // console.log(CardID[i]);
         }
       })
       .catch((error) => {
         console.error(error);
       });
   }
-
-  //url.searchParams.delete("type");
 
   if (detailClick == false) {
     call();
@@ -247,9 +238,9 @@ function ListScreen() {
       </View>
     );
   } else {
-    callDetails();
-    console.log("Details array is: " + DETAILS[0]);
-    console.log("Detail Click is currently: " + detailClick);
+    callDetails(2);
+    // console.log("Details array is: " + DETAILS[0]);
+    // console.log("Detail Click is currently: " + detailClick);
     return (
       <View
         style={{ backgroundColor: "tomato", flex: 1, justifyContent: "center" }}
