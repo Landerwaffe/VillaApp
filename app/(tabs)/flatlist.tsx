@@ -107,17 +107,17 @@ function ListScreen() {
   ) {
     DETAILS.push(
       <Card style={{ margin: "auto", width: "100%" }}>
-        {/* <Card.Title
-          title={title}
-          subtitle={subtitle}
+        <Card.Title
+          title="Detailed View"
+          //subtitle={subtitle}
           //left={LeftContent}
-        /> */}
+        />
         <Card.Cover
           source={{ uri: detailimage }}
           style={{ margin: "auto", width: "80%" }}
         />
         <Card.Content>
-          <Title>Details</Title>
+          <Title>Description</Title>
           <Paragraph>{detaildescription}</Paragraph>
           <Paragraph>{id.toString()}</Paragraph>
         </Card.Content>
@@ -221,7 +221,7 @@ function ListScreen() {
             paddingTop: "3%",
             paddingLeft: "8.4%",
           }}
-          onPress={(id) => handleDetailClick(1)}
+          // onPress={(id) => handleDetailClick(1)}
         >
           This is a list of items.
         </ThemedText>
@@ -258,7 +258,7 @@ function ListScreen() {
           style={{
             fontFamily: "Inter-Black",
             fontSize: 30,
-            paddingTop: "3%",
+            paddingTop: "20%",
             textAlign: "center",
           }}
         >
@@ -272,7 +272,8 @@ function ListScreen() {
             textAlign: "center",
           }}
         >
-          {detailRender.toString()}
+          {/* {detailRender.toString()} */}
+          Nuts and Bolts
         </ThemedText>
         <FlatList
           data={DETAILS}
