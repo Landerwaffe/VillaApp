@@ -100,7 +100,11 @@ function ListScreen() {
     CardID.push(id);
   }
 
-  function createDetails(detailimage: string, detaildescription: string) {
+  function createDetails(
+    id: Number,
+    detailimage: string,
+    detaildescription: string
+  ) {
     DETAILS.push(
       <Card style={{ margin: "auto", width: "100%" }}>
         {/* <Card.Title
@@ -115,6 +119,7 @@ function ListScreen() {
         <Card.Content>
           <Title>Details</Title>
           <Paragraph>{detaildescription}</Paragraph>
+          <Paragraph>{id.toString()}</Paragraph>
         </Card.Content>
       </Card>
     );
@@ -175,11 +180,17 @@ function ListScreen() {
       .then((response) => response.json())
       .then((response) => {
         for (let i = 0; i < response.length; i++) {
-          createDetails(
-            response[i].detailimage,
-            response[i].detaildescription
-            //response[i].propertyid
-          );
+          console.log("Current ID is: " + response[i].id.toString());
+          console.log("Detail Array Value is: " + DETAILS[i]);
+          if (url.searchParams.get("id") == "1") {
+            createDetails(
+              response[i].id,
+              response[i].detailimage,
+              response[i].detaildescription
+              //response[i].propertyid
+            );
+            DETAILS = [];
+          }
           // console.log(CardID[i]);
         }
       })
