@@ -238,7 +238,7 @@ function ListScreen() {
       </View>
     );
   } else {
-    callDetails(2);
+    callDetails(detailRender);
     // console.log("Details array is: " + DETAILS[0]);
     // console.log("Detail Click is currently: " + detailClick);
     return (
