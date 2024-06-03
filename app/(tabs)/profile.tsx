@@ -15,6 +15,10 @@ function UploadScreen() {
     setAccess("Login");
   };
 
+  const handleLogin = () => {
+    console.log("Function?");
+  };
+
   const styles = StyleSheet.create({
     containerStyle: {
       flex: 1,
@@ -195,27 +199,10 @@ function UploadScreen() {
           />
           <Button
             mode={"contained"}
-            onPress={handleSubmit((data: any) => {
-              console.log("form data", data);
-              const response = fetch("http://192.168.1.15:8080", {
-                method: "post",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-              }) // Converting to JSON
-                .then((response) => console.log(JSON.stringify(data)))
-                .catch((error) => {
-                  // Handle any errors that occur
-                  console.error(error);
-                });
-
-              // Displaying results to console
-              //   .then((json) => console.log(json));
-            })}
+            onPress={handleLogin}
             style={{ backgroundColor: darktheme.colors.secondary }}
           >
-            Submit
+            Login
           </Button>
         </ScrollView>
       </View>
