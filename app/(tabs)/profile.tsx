@@ -8,6 +8,7 @@ import { ThemedText } from "@/components/ThemedText";
 
 function UploadScreen() {
   const theme = useTheme();
+  let verifyData: String[] = [];
 
   const url = new URL("http://192.168.1.15:8080");
 
@@ -26,14 +27,23 @@ function UploadScreen() {
   const handleLogin = () => {
     console.log("Function?");
     url.searchParams.set("type", "Login");
-    fetch(url)
-      .then((response) => response.json())
-      .then((response) => {
-        for (let i = 0; i < response.length; i++) {
-          console.log("User Data Length is: " + response.length);
-        }
-      });
   };
+
+  console.log("Main Line Execute");
+
+  const userdata = fetch(url)
+    .then((response) => response.json())
+    .then((response) => {
+      console.log("Beginning response handle");
+      for (let i = 0; i < response.length; i++) {
+        console.log("User Data Length is: " + response.length);
+        verifyData.push(response[i].username, response[i].password);
+      }
+    });
+
+  if (verifyData != null) {
+    console.log(verifyData[0]);
+  }
 
   const styles = StyleSheet.create({
     containerStyle: {

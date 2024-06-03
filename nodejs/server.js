@@ -45,6 +45,15 @@ app.get("/", (req, res) => {
     });
   } else if (queryType == "Login") {
     console.log("New Login Backend Handling");
+    client.query(`SELECT * from public.users`),
+      (err, result) => {
+        if (err) {
+          res.status(500).send(err.message);
+        } else {
+          console.log("Went to Else row");
+          res.json(result.rows);
+        }
+      };
   }
 });
 
