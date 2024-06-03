@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
     });
   } else if (queryType == "Login") {
     console.log("New Login Backend Handling");
-    client.query(`SELECT * from public.users`),
+    client.query(`SELECT * FROM public.users`),
       (err, result) => {
         if (err) {
           res.status(500).send(err.message);

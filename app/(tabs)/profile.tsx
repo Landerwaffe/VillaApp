@@ -11,6 +11,7 @@ function UploadScreen() {
   let verifyData: String[] = [];
 
   const url = new URL("http://192.168.1.15:8080");
+  //url.searchParams.set("type", "Login");
 
   const [access, setAccess] = React.useState<string>("Register");
 
@@ -24,25 +25,25 @@ function UploadScreen() {
     setAccess("Register");
   };
 
-  const handleLogin = () => {
-    console.log("Function?");
+  async function handleLogin() {
     url.searchParams.set("type", "Login");
-  };
+    console.log("Function?");
+    const userdata = fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("Beginning response handle");
+        for (let i = 0; i < response.length; i++) {
+          console.log("User Data Length is: " + response.length);
+          verifyData.push(response[i].username, response[i].password);
+          console.log(verifyData[0]);
+        }
+      });
+  }
 
   console.log("Main Line Execute");
 
-  const userdata = fetch(url)
-    .then((response) => response.json())
-    .then((response) => {
-      console.log("Beginning response handle");
-      for (let i = 0; i < response.length; i++) {
-        console.log("User Data Length is: " + response.length);
-        verifyData.push(response[i].username, response[i].password);
-      }
-    });
-
   if (verifyData != null) {
-    console.log(verifyData[0]);
+    console.log("Inside the table is: " + verifyData[0]);
   }
 
   const styles = StyleSheet.create({
