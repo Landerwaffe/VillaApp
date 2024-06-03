@@ -9,7 +9,11 @@ import { ThemedText } from "@/components/ThemedText";
 function UploadScreen() {
   const theme = useTheme();
 
-  const [access, setAccess] = React.useState("Register");
+  const [access, setAccess] = React.useState<String>("Register");
+
+  const passRegister = () => {
+    setAccess("Login");
+  };
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -142,7 +146,7 @@ function UploadScreen() {
               marginTop: "0.5%",
             }}
           >
-            Submit
+            Register
           </Button>
         </ScrollView>
       </View>
