@@ -11,7 +11,9 @@ function UploadScreen() {
 
   const url = new URL("http://192.168.1.15:8080");
 
-  const [access, setAccess] = React.useState<String>("Register");
+  const [access, setAccess] = React.useState<string>("Register");
+
+  function validateLogin(username: string, password: string) {}
 
   const passLogin = () => {
     setAccess("Login");
@@ -23,6 +25,13 @@ function UploadScreen() {
 
   const handleLogin = () => {
     console.log("Function?");
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        for (let i = 0; i < response.length; i++) {
+          console.log("User Data Length is: " + response.length);
+        }
+      });
   };
 
   const styles = StyleSheet.create({
