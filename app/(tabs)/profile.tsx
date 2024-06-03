@@ -123,6 +123,78 @@ function UploadScreen() {
           </Button>
           <Button
             mode={"contained"}
+            onPress={passRegister}
+            // Displaying results to console
+            //   .then((json) => console.log(json));
+            style={{
+              backgroundColor: darktheme.colors.secondary,
+              marginTop: "0.5%",
+            }}
+          >
+            Register
+          </Button>
+        </ScrollView>
+      </View>
+    );
+  } else if (access == "Login") {
+    return (
+      <View style={styles.containerStyle}>
+        <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+          <ThemedText
+            style={{
+              fontFamily: "Inter-Black",
+              fontSize: 30,
+              paddingTop: "3%",
+              textAlign: "center",
+            }}
+          >
+            Logging in existing user.
+          </ThemedText>
+          <ThemedText
+            style={{
+              fontFamily: "Inter-Regular",
+              fontSize: 25,
+              paddingTop: "0.5%",
+              textAlign: "center",
+            }}
+          >
+            User authentication
+          </ThemedText>
+          <FormBuilder
+            control={control}
+            setFocus={setFocus}
+            formConfigArray={[
+              {
+                type: "email",
+                name: "email",
+
+                rules: {
+                  required: {
+                    value: true,
+                    message: "Email is required",
+                  },
+                },
+                textInputProps: {
+                  label: "Email",
+                },
+              },
+              {
+                type: "password",
+                name: "password",
+                rules: {
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                },
+                textInputProps: {
+                  label: "Password",
+                },
+              },
+            ]}
+          />
+          <Button
+            mode={"contained"}
             onPress={handleSubmit((data: any) => {
               console.log("form data", data);
               const response = fetch("http://192.168.1.15:8080", {
@@ -141,98 +213,13 @@ function UploadScreen() {
               // Displaying results to console
               //   .then((json) => console.log(json));
             })}
-            style={{
-              backgroundColor: darktheme.colors.secondary,
-              marginTop: "0.5%",
-            }}
+            style={{ backgroundColor: darktheme.colors.secondary }}
           >
-            Register
+            Submit
           </Button>
         </ScrollView>
       </View>
     );
-  } else if (access == "Login") {
-    <View style={styles.containerStyle}>
-      <ScrollView contentContainerStyle={styles.scrollViewStyle}>
-        <ThemedText
-          style={{
-            fontFamily: "Inter-Black",
-            fontSize: 30,
-            paddingTop: "3%",
-            textAlign: "center",
-          }}
-        >
-          Logging in existing user.
-        </ThemedText>
-        <ThemedText
-          style={{
-            fontFamily: "Inter-Regular",
-            fontSize: 25,
-            paddingTop: "0.5%",
-            textAlign: "center",
-          }}
-        >
-          User authentication
-        </ThemedText>
-        <FormBuilder
-          control={control}
-          setFocus={setFocus}
-          formConfigArray={[
-            {
-              type: "email",
-              name: "email",
-
-              rules: {
-                required: {
-                  value: true,
-                  message: "Email is required",
-                },
-              },
-              textInputProps: {
-                label: "Email",
-              },
-            },
-            {
-              type: "password",
-              name: "password",
-              rules: {
-                required: {
-                  value: true,
-                  message: "Password is required",
-                },
-              },
-              textInputProps: {
-                label: "Password",
-              },
-            },
-          ]}
-        />
-        <Button
-          mode={"contained"}
-          onPress={handleSubmit((data: any) => {
-            console.log("form data", data);
-            const response = fetch("http://192.168.1.15:8080", {
-              method: "post",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data),
-            }) // Converting to JSON
-              .then((response) => console.log(JSON.stringify(data)))
-              .catch((error) => {
-                // Handle any errors that occur
-                console.error(error);
-              });
-
-            // Displaying results to console
-            //   .then((json) => console.log(json));
-          })}
-          style={{ backgroundColor: darktheme.colors.secondary }}
-        >
-          Submit
-        </Button>
-      </ScrollView>
-    </View>;
   }
 }
 
