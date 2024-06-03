@@ -8,7 +8,8 @@ import { ThemedText } from "@/components/ThemedText";
 
 function UploadScreen() {
   const theme = useTheme();
-  let access = "Register";
+
+  const [access, setAccess] = React.useState("Register");
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -35,7 +36,118 @@ function UploadScreen() {
     mode: "onChange",
   });
 
-  return (
+  if (access == "Register") {
+    return (
+      <View style={styles.containerStyle}>
+        <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+          <ThemedText
+            style={{
+              fontFamily: "Inter-Black",
+              fontSize: 30,
+              paddingTop: "3%",
+              textAlign: "center",
+            }}
+          >
+            Registering a new user.
+          </ThemedText>
+          <ThemedText
+            style={{
+              fontFamily: "Inter-Regular",
+              fontSize: 25,
+              paddingTop: "0.5%",
+              textAlign: "center",
+            }}
+          >
+            User authentication
+          </ThemedText>
+          <FormBuilder
+            control={control}
+            setFocus={setFocus}
+            formConfigArray={[
+              {
+                type: "email",
+                name: "email",
+
+                rules: {
+                  required: {
+                    value: true,
+                    message: "Email is required",
+                  },
+                },
+                textInputProps: {
+                  label: "Email",
+                },
+              },
+              {
+                type: "password",
+                name: "password",
+                rules: {
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                },
+                textInputProps: {
+                  label: "Password",
+                },
+              },
+            ]}
+          />
+          <Button
+            mode={"contained"}
+            onPress={handleSubmit((data: any) => {
+              console.log("form data", data);
+              const response = fetch("http://192.168.1.15:8080", {
+                method: "post",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              }) // Converting to JSON
+                .then((response) => console.log(JSON.stringify(data)))
+                .catch((error) => {
+                  // Handle any errors that occur
+                  console.error(error);
+                });
+
+              // Displaying results to console
+              //   .then((json) => console.log(json));
+            })}
+            style={{ backgroundColor: darktheme.colors.secondary }}
+          >
+            Submit
+          </Button>
+          <Button
+            mode={"contained"}
+            onPress={handleSubmit((data: any) => {
+              console.log("form data", data);
+              const response = fetch("http://192.168.1.15:8080", {
+                method: "post",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              }) // Converting to JSON
+                .then((response) => console.log(JSON.stringify(data)))
+                .catch((error) => {
+                  // Handle any errors that occur
+                  console.error(error);
+                });
+
+              // Displaying results to console
+              //   .then((json) => console.log(json));
+            })}
+            style={{
+              backgroundColor: darktheme.colors.secondary,
+              marginTop: "0.5%",
+            }}
+          >
+            Submit
+          </Button>
+        </ScrollView>
+      </View>
+    );
+  } else if (access == "Login") {
     <View style={styles.containerStyle}>
       <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <ThemedText
@@ -46,7 +158,7 @@ function UploadScreen() {
             textAlign: "center",
           }}
         >
-          Registering a new user.
+          Logging in existing user.
         </ThemedText>
         <ThemedText
           style={{
@@ -116,8 +228,8 @@ function UploadScreen() {
           Submit
         </Button>
       </ScrollView>
-    </View>
-  );
+    </View>;
+  }
 }
 
 export default function App() {
