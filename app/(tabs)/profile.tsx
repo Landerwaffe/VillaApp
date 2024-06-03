@@ -25,7 +25,7 @@ function UploadScreen() {
     setAccess("Register");
   };
 
-  let handleLogin = () => {
+  const handleLogin = () => {
     url.searchParams.set("type", "Login");
     console.log("Function?");
     const userdata = fetch(url)
