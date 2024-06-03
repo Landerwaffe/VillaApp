@@ -25,6 +25,7 @@ function UploadScreen() {
 
   const handleLogin = () => {
     console.log("Function?");
+    url.searchParams.set("type", "Login");
     fetch(url)
       .then((response) => response.json())
       .then((response) => {

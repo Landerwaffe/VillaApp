@@ -43,6 +43,8 @@ app.get("/", (req, res) => {
         res.json(result.rows);
       }
     });
+  } else if (queryType == "Login") {
+    console.log("New Login Backend Handling");
   }
 });
 
