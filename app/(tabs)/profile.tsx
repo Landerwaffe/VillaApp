@@ -9,10 +9,16 @@ import { ThemedText } from "@/components/ThemedText";
 function UploadScreen() {
   const theme = useTheme();
 
+  const url = new URL("http://192.168.1.15:8080");
+
   const [access, setAccess] = React.useState<String>("Register");
 
-  const passRegister = () => {
+  const passLogin = () => {
     setAccess("Login");
+  };
+
+  const passRegister = () => {
+    setAccess("Register");
   };
 
   const handleLogin = () => {
@@ -105,7 +111,7 @@ function UploadScreen() {
             mode={"contained"}
             onPress={handleSubmit((data: any) => {
               console.log("form data", data);
-              const response = fetch("http://192.168.1.15:8080", {
+              const response = fetch(url, {
                 method: "post",
                 headers: {
                   "Content-Type": "application/json",
@@ -127,7 +133,7 @@ function UploadScreen() {
           </Button>
           <Button
             mode={"contained"}
-            onPress={passRegister}
+            onPress={passLogin}
             // Displaying results to console
             //   .then((json) => console.log(json));
             style={{
@@ -135,7 +141,7 @@ function UploadScreen() {
               marginTop: "0.5%",
             }}
           >
-            Register
+            Already registered? Login here
           </Button>
         </ScrollView>
       </View>
@@ -203,6 +209,18 @@ function UploadScreen() {
             style={{ backgroundColor: darktheme.colors.secondary }}
           >
             Login
+          </Button>
+          <Button
+            mode={"contained"}
+            onPress={passRegister}
+            // Displaying results to console
+            //   .then((json) => console.log(json));
+            style={{
+              backgroundColor: darktheme.colors.secondary,
+              marginTop: "0.5%",
+            }}
+          >
+            Need to register?
           </Button>
         </ScrollView>
       </View>
