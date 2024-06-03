@@ -25,7 +25,7 @@ function UploadScreen() {
     setAccess("Register");
   };
 
-  async function handleLogin() {
+  let handleLogin = () => {
     url.searchParams.set("type", "Login");
     console.log("Function?");
     const userdata = fetch(url)
@@ -38,7 +38,7 @@ function UploadScreen() {
           console.log(verifyData[0]);
         }
       });
-  }
+  };
 
   console.log("Main Line Execute");
 
