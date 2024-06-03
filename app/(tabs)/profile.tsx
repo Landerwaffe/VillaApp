@@ -8,6 +8,7 @@ import { ThemedText } from "@/components/ThemedText";
 
 function UploadScreen() {
   const theme = useTheme();
+  let access = "Register";
 
   const styles = StyleSheet.create({
     containerStyle: {
