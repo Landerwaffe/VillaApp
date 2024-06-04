@@ -35,7 +35,7 @@ function UploadScreen() {
         for (let i = 0; i < response.length; i++) {
           console.log("User Data Length is: " + response.length);
           verifyData.push(response[i].username, response[i].password);
-          console.log(verifyData[0]);
+          console.log(verifyData[i]);
         }
       });
   };
