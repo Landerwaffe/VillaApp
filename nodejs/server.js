@@ -72,11 +72,26 @@ app.post("/", jsonParser, (req, res) => {
     }
   } else if (queryType == "Login") {
     //console.log("New Login Backend Handling");
-    client.query(`SELECT * FROM public.users`, (err, result) => {
-      if (req.body.email && req.body.password != null) {
-        console.log("Went to Login Backend");
+    client.query(
+      `SELECT * FROM public.users WHERE username = 'register'`,
+      (err, result) => {
+        if (req.body.email && req.body.password != null) {
+          console.log("Went to Login Backend");
+          console.log("Result is: " + result);
+          console.log(
+            "Username and passsword are: " +
+              req.body.email +
+              " and " +
+              req.body.password
+          );
+          if (req.body.password == result) {
+            console.log("Password Correct!");
+          }
+        } else {
+          console.log("Password Wrong!");
+        }
       }
-    });
+    );
   }
   if (
     req.body.name &&
