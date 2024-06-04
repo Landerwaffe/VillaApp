@@ -51,6 +51,7 @@ app.post("/", jsonParser, (req, res) => {
   if (queryType == "Register") {
     if (req.body.email && req.body.password != null) {
       //res.send("POSTMAN Request Called");
+      console.log("Went to Registration Backend");
       console.log("Request object is: ");
       console.log(req.body.email);
       client.query(
@@ -70,13 +71,10 @@ app.post("/", jsonParser, (req, res) => {
       );
     }
   } else if (queryType == "Login") {
-    console.log("New Login Backend Handling");
+    //console.log("New Login Backend Handling");
     client.query(`SELECT * FROM public.users`, (err, result) => {
-      if (err) {
-        res.status(500).send(err.message);
-      } else {
-        console.log("Went to Else row");
-        res.json(result.rows);
+      if (req.body.email && req.body.password != null) {
+        console.log("Went to Login Backend");
       }
     });
   }
