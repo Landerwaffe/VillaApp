@@ -131,6 +131,7 @@ function UploadScreen() {
           <Button
             mode={"contained"}
             onPress={handleSubmit((data: any) => {
+              url.searchParams.set("type", "Register");
               console.log("form data", data);
               const response = fetch(url, {
                 method: "post",
@@ -138,15 +139,11 @@ function UploadScreen() {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data),
-              }) // Converting to JSON
+              })
                 .then((response) => console.log(JSON.stringify(data)))
                 .catch((error) => {
-                  // Handle any errors that occur
                   console.error(error);
                 });
-
-              // Displaying results to console
-              //   .then((json) => console.log(json));
             })}
             style={{ backgroundColor: darktheme.colors.secondary }}
           >
@@ -155,8 +152,6 @@ function UploadScreen() {
           <Button
             mode={"contained"}
             onPress={passLogin}
-            // Displaying results to console
-            //   .then((json) => console.log(json));
             style={{
               backgroundColor: darktheme.colors.secondary,
               marginTop: "0.5%",
@@ -226,7 +221,20 @@ function UploadScreen() {
           />
           <Button
             mode={"contained"}
-            onPress={handleLogin}
+            onPress={handleSubmit((data: any) => {
+              url.searchParams.set("type", "Login");
+              console.log("Form data: " + data);
+              const userdata = fetch(url)
+                .then((response) => response.json())
+                .then((response) => {
+                  console.log("Beginning response handle");
+                  for (let i = 0; i < response.length; i++) {
+                    console.log("User Data Length is: " + response.length);
+                    verifyData.push(response[i].username, response[i].password);
+                    console.log(verifyData[i]);
+                  }
+                });
+            })}
             style={{ backgroundColor: darktheme.colors.secondary }}
           >
             Login
@@ -234,8 +242,6 @@ function UploadScreen() {
           <Button
             mode={"contained"}
             onPress={passRegister}
-            // Displaying results to console
-            //   .then((json) => console.log(json));
             style={{
               backgroundColor: darktheme.colors.secondary,
               marginTop: "0.5%",

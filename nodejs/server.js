@@ -21,8 +21,7 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   const queryType = req.query.type;
-  const queryID = parseInt(req.query.id);
-  const queryCategory = req.query.category;
+
   console.log("Query Type is: " + queryType);
   if (queryType == "Flatlist") {
     client.query(`SELECT * FROM properties`, (err, result) => {
@@ -57,26 +56,29 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", jsonParser, (req, res) => {
-  //console.log(req.body.subtitle);
-  if (req.body.email && req.body.password != null) {
-    //res.send("POSTMAN Request Called");
-    console.log("Request object is: ");
-    console.log(req.body.email);
-    client.query(
-      `INSERT INTO public.users(
+  const queryType = req.query.type;
+
+  if (queryType == "Register") {
+    if (req.body.email && req.body.password != null) {
+      //res.send("POSTMAN Request Called");
+      console.log("Request object is: ");
+      console.log(req.body.email);
+      client.query(
+        `INSERT INTO public.users(
       username, password)
       VALUES ( $1 , $2)`,
-      [req.body.email, req.body.password],
-      (err, result) => {
-        if (err) {
-          res.status(500).send(err.message);
-        } else {
-          //res.send("Hello World!");
-          res.send("DONE");
-          //console.log(req.params);
+        [req.body.email, req.body.password],
+        (err, result) => {
+          if (err) {
+            res.status(500).send(err.message);
+          } else {
+            //res.send("Hello World!");
+            res.send("DONE");
+            //console.log(req.params);
+          }
         }
-      }
-    );
+      );
+    }
   }
   if (
     req.body.name &&
