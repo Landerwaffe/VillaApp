@@ -73,22 +73,29 @@ app.post("/", jsonParser, (req, res) => {
   } else if (queryType == "Login") {
     //console.log("New Login Backend Handling");
     client.query(
-      `SELECT * FROM public.users WHERE username = 'register'`,
+      `SELECT * FROM public.users WHERE username =` +
+        "'" +
+        req.body.email +
+        "'",
       (err, result) => {
         if (req.body.email && req.body.password != null) {
           console.log("Went to Login Backend");
-          console.log("Result is: " + result);
+          console.log("Result is: " + JSON.stringify(result.rows[0].password));
+          //console.log("Result from row: " + JSON.stringify(result.rows[0]));
           console.log(
             "Username and passsword are: " +
               req.body.email +
               " and " +
-              req.body.password
+              JSON.stringify(req.body.password)
           );
-          if (req.body.password == result) {
+          if (
+            JSON.stringify(req.body.password) ==
+            JSON.stringify(result.rows[0].password)
+          ) {
             console.log("Password Correct!");
+          } else {
+            console.log("Password Wrong!");
           }
-        } else {
-          console.log("Password Wrong!");
         }
       }
     );
