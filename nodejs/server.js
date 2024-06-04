@@ -42,16 +42,6 @@ app.get("/", (req, res) => {
         res.json(result.rows);
       }
     });
-  } else if (queryType == "Login") {
-    console.log("New Login Backend Handling");
-    client.query(`SELECT * FROM public.users`, (err, result) => {
-      if (err) {
-        res.status(500).send(err.message);
-      } else {
-        console.log("Went to Else row");
-        res.json(result.rows);
-      }
-    });
   }
 });
 
@@ -79,6 +69,16 @@ app.post("/", jsonParser, (req, res) => {
         }
       );
     }
+  } else if (queryType == "Login") {
+    console.log("New Login Backend Handling");
+    client.query(`SELECT * FROM public.users`, (err, result) => {
+      if (err) {
+        res.status(500).send(err.message);
+      } else {
+        console.log("Went to Else row");
+        res.json(result.rows);
+      }
+    });
   }
   if (
     req.body.name &&

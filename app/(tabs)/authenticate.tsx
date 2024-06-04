@@ -8,7 +8,7 @@ import { ThemedText } from "@/components/ThemedText";
 
 function UploadScreen() {
   const theme = useTheme();
-  let verifyData: String[] = [];
+  //let verifyData: String[] = [];
 
   const url = new URL("http://192.168.1.15:8080");
   //url.searchParams.set("type", "Login");
@@ -25,26 +25,26 @@ function UploadScreen() {
     setAccess("Register");
   };
 
-  const handleLogin = () => {
-    url.searchParams.set("type", "Login");
-    console.log("Function?");
-    const userdata = fetch(url)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log("Beginning response handle");
-        for (let i = 0; i < response.length; i++) {
-          console.log("User Data Length is: " + response.length);
-          verifyData.push(response[i].username, response[i].password);
-          console.log(verifyData[i]);
-        }
-      });
-  };
+  // const handleLogin = () => {
+  //   url.searchParams.set("type", "Login");
+  //   console.log("Function?");
+  //   const userdata = fetch(url)
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       console.log("Beginning response handle");
+  //       for (let i = 0; i < response.length; i++) {
+  //         console.log("User Data Length is: " + response.length);
+  //         verifyData.push(response[i].username, response[i].password);
+  //         console.log(verifyData[i]);
+  //       }
+  //     });
+  // };
 
   console.log("Main Line Execute");
 
-  if (verifyData != null) {
-    console.log("Inside the table is: " + verifyData[0]);
-  }
+  // if (verifyData != null) {
+  //   console.log("Inside the table is: " + verifyData[0]);
+  // }
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -224,15 +224,16 @@ function UploadScreen() {
             onPress={handleSubmit((data: any) => {
               url.searchParams.set("type", "Login");
               console.log("Form data: " + data);
-              const userdata = fetch(url)
-                .then((response) => response.json())
-                .then((response) => {
-                  console.log("Beginning response handle");
-                  for (let i = 0; i < response.length; i++) {
-                    console.log("User Data Length is: " + response.length);
-                    verifyData.push(response[i].username, response[i].password);
-                    console.log(verifyData[i]);
-                  }
+              const userdata = fetch(url, {
+                method: "post",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              })
+                .then((response) => console.log(JSON.stringify(data)))
+                .catch((error) => {
+                  console.error(error);
                 });
             })}
             style={{ backgroundColor: darktheme.colors.secondary }}
