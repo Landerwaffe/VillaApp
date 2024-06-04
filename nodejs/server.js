@@ -83,7 +83,7 @@ app.post("/", jsonParser, (req, res) => {
           console.log("Result is: " + JSON.stringify(result.rows[0].password));
           //console.log("Result from row: " + JSON.stringify(result.rows[0]));
           console.log(
-            "Username and passsword are: " +
+            "Username and password are: " +
               req.body.email +
               " and " +
               JSON.stringify(req.body.password)
