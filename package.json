@@ -33,6 +33,7 @@
     "expo-system-ui": "~3.0.4",
     "expo-web-browser": "~13.0.3",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "formik": "^2.4.6",
     "mysql": "^2.18.1",
     "pg": "^8.11.5",
