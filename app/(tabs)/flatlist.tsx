@@ -23,8 +23,6 @@ let CardID: Number[] = [];
 let DETAILS: JSX.Element[] = [];
 
 const url = new URL("http://192.168.1.15:8080");
-// url.searchParams.set("type", "Flatlist");
-//callDetails();
 
 const styles = StyleSheet.create({
   container: {
@@ -57,8 +55,6 @@ function ListScreen() {
 
   const handleDetailClick = (id: Number) => {
     setDetailRender(id);
-    //console.log(detailRender);
-    // alert(id);
     setDetailClick(true);
   };
 
@@ -123,10 +119,6 @@ function ListScreen() {
       </Card>
     );
   }
-
-  // console.log("After handle detail, state becomes: " + detailClick);
-
-  //url.searchParams.delete("type", "Flatlist");
 
   async function call() {
     url.searchParams.set("type", "Flatlist");
@@ -212,7 +204,6 @@ function ListScreen() {
             paddingTop: "3%",
             paddingLeft: "8.4%",
           }}
-          // onPress={(id) => handleDetailClick(1)}
         >
           This is a list of items.
         </ThemedText>
@@ -239,8 +230,6 @@ function ListScreen() {
     );
   } else {
     callDetails(detailRender);
-    // console.log("Details array is: " + DETAILS[0]);
-    // console.log("Detail Click is currently: " + detailClick);
     return (
       <View
         style={{ backgroundColor: "tomato", flex: 1, justifyContent: "center" }}
@@ -263,7 +252,6 @@ function ListScreen() {
             textAlign: "center",
           }}
         >
-          {/* {detailRender.toString()} */}
           Nuts and Bolts
         </ThemedText>
         <FlatList
@@ -276,7 +264,6 @@ function ListScreen() {
     );
   }
 }
-// }
 
 export default function App() {
   const theme = useTheme();
