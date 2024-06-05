@@ -25,26 +25,11 @@ function UploadScreen() {
     setAccess("Register");
   };
 
-  // const handleLogin = () => {
-  //   url.searchParams.set("type", "Login");
-  //   console.log("Function?");
-  //   const userdata = fetch(url)
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       console.log("Beginning response handle");
-  //       for (let i = 0; i < response.length; i++) {
-  //         console.log("User Data Length is: " + response.length);
-  //         verifyData.push(response[i].username, response[i].password);
-  //         console.log(verifyData[i]);
-  //       }
-  //     });
-  // };
+  const passLoggedIn = () => {
+    setAccess("loggedIn");
+  };
 
   console.log("Main Line Execute");
-
-  // if (verifyData != null) {
-  //   console.log("Inside the table is: " + verifyData[0]);
-  // }
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -235,6 +220,7 @@ function UploadScreen() {
                 .then((JSONResponse) => {
                   console.log(JSON.stringify(data));
                   console.log("Response data:", JSON.stringify(JSONResponse)); // Print the response data
+                  passLoggedIn();
                 })
 
                 .catch((error) => {
@@ -258,6 +244,8 @@ function UploadScreen() {
         </ScrollView>
       </View>
     );
+  } else if (access == "loggedIn") {
+    return <h1>LOGGED IN</h1>;
   }
 }
 

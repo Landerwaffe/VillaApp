@@ -17,17 +17,6 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
 
-// const cacheManager = require("cache-manager");
-
-// function loginUser(userId, sessionData) {
-//   memoryCache.set(userId, sessionData, { ttl: 604800 }); // Set TTL to 7 days
-// }
-
-// async function isUserLoggedIn(userId) {
-//   const sessionData = await memoryCache.get(userId);
-//   return sessionData !== null;
-// }
-
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -39,7 +28,6 @@ app.get("/", (req, res) => {
       if (err) {
         res.status(500).send(err.message);
       } else {
-        //res.send("Hello World!");
         console.log("Sending Flatlist Rows");
         res.json(result.rows);
       }
@@ -49,7 +37,6 @@ app.get("/", (req, res) => {
       if (err) {
         res.status(500).send(err.message);
       } else {
-        //res.send("Hello World!");
         res.json(result.rows);
       }
     });
@@ -61,7 +48,6 @@ app.post("/", jsonParser, (req, res) => {
 
   if (queryType == "Register") {
     if (req.body.email && req.body.password != null) {
-      //res.send("POSTMAN Request Called");
       console.log("Went to Registration Backend");
       console.log("Request object is: ");
       console.log(req.body.email);
@@ -74,15 +60,12 @@ app.post("/", jsonParser, (req, res) => {
           if (err) {
             res.status(500).send(err.message);
           } else {
-            //res.send("Hello World!");
             res.send("DONE");
-            //console.log(req.params);
           }
         }
       );
     }
   } else if (queryType == "Login") {
-    //console.log("New Login Backend Handling");
     client.query(
       `SELECT * FROM public.users WHERE username =` +
         "'" +
@@ -92,7 +75,7 @@ app.post("/", jsonParser, (req, res) => {
         if (req.body.email && req.body.password != null) {
           console.log("Went to Login Backend");
           console.log("Result is: " + JSON.stringify(result.rows[0].password));
-          //console.log("Result from row: " + JSON.stringify(result.rows[0]));
+
           console.log(
             "Username and password are: " +
               req.body.email +
@@ -104,10 +87,8 @@ app.post("/", jsonParser, (req, res) => {
             JSON.stringify(result.rows[0].password)
           ) {
             console.log("Password Correct!");
-            // const userId = req.body.email;
-            // const sessionData = { Disease: "Ligma" };
-            // loginUser(userId, sessionData);
-            res.send("Nodejs Validated");
+
+            res.send("loggedIn");
           } else {
             console.log("Password Wrong!");
           }
