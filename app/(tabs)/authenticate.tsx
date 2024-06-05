@@ -245,7 +245,34 @@ function UploadScreen() {
       </View>
     );
   } else if (access == "loggedIn") {
-    return <h1>LOGGED IN</h1>;
+    return (
+      <View style={styles.containerStyle}>
+        <ScrollView contentContainerStyle={styles.scrollViewStyle}>
+          <ThemedText
+            id="TitleText"
+            style={{
+              fontFamily: "Inter-Black",
+              fontSize: 30,
+              paddingTop: "3%",
+              paddingLeft: "8.4%",
+            }}
+            // onPress={(id) => handleDetailClick(1)}
+          >
+            This is a list of items.
+          </ThemedText>
+          <ThemedText
+            style={{
+              fontFamily: "Inter-Regular",
+              fontSize: 25,
+              paddingTop: "0.5%",
+              paddingLeft: "8.4%",
+            }}
+          >
+            User authentication
+          </ThemedText>
+        </ScrollView>
+      </View>
+    );
   }
 }
 
