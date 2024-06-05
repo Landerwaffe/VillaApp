@@ -16,7 +16,27 @@ client.connect();
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
-var session = require("express-session");
+
+const cacheManager = require("cache-manager");
+const memoryCache = cacheManager.caching({
+  store: "memory",
+  max: 100,
+  ttl: 60 /* seconds */,
+});
+
+// Example: Caching API responses
+async function fetchDataFromAPI(url) {
+  const cachedData = await memoryCache.get(url);
+
+  if (cachedData) {
+    return cachedData;
+  }
+
+  const data = await fetchData(url);
+  await memoryCache.set(url, data);
+
+  return data;
+}
 
 app.use(cors());
 
