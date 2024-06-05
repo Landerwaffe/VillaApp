@@ -231,7 +231,10 @@ function UploadScreen() {
                 },
                 body: JSON.stringify(data),
               })
-                .then((response) => response.json())
+                .then((response) => response.text())
+                .then((JSONResponse) => {
+                  console.log("Response data:", JSON.stringify(JSONResponse)); // Print the response data
+                })
 
                 .catch((error) => {
                   console.error(error);
