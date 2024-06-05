@@ -24,6 +24,10 @@ const memoryCache = cacheManager.caching({
   ttl: 60 /* seconds */,
 });
 
+function loginUser(userId, sessionData) {
+  memoryCache.set(userId, sessionData, { ttl: 604800 }); // Set TTL to 7 days
+}
+
 // Example: Caching API responses
 async function fetchDataFromAPI(url) {
   const cachedData = await memoryCache.get(url);
