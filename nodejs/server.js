@@ -18,14 +18,14 @@ var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
 
 const cacheManager = require("cache-manager");
-const memoryCache = cacheManager.caching({
-  store: "memory",
-  max: 100,
-  ttl: 60 /* seconds */,
-});
 
 function loginUser(userId, sessionData) {
   memoryCache.set(userId, sessionData, { ttl: 604800 }); // Set TTL to 7 days
+}
+
+async function isUserLoggedIn(userId) {
+  const sessionData = await memoryCache.get(userId);
+  return sessionData !== null;
 }
 
 // Example: Caching API responses
