@@ -21,8 +21,9 @@ function UploadScreen() {
 
   //const [access, setAccess] = React.useState<string>("Register");
 
-  const access = useContext(AuthContext);
-  const { passLogin, passRegister, passLoggedin } = useContext(AuthContext);
+  //const access = useContext(AuthContext);
+  const { passLogin, passRegister, passLoggedIn, access } =
+    useContext(AuthContext);
 
   // const passLogin = () => {
   //   setAccess("Login");
@@ -308,9 +309,9 @@ export default function App() {
   const theme = useTheme();
   return (
     <SafeAreaProvider>
-      <UserProvider>
+      <AuthContext.Provider>
         <UploadScreen />
-      </UserProvider>
+      </AuthContext.Provider>
     </SafeAreaProvider>
   );
 }
