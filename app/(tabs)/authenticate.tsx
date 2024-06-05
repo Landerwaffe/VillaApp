@@ -15,7 +15,6 @@ import { ThemedText } from "@/components/ThemedText";
 
 function UploadScreen() {
   const theme = useTheme();
-  let USERDATA: JSX.Element[] = [];
 
   const url = new URL("http://192.168.1.15:8080");
 
@@ -34,35 +33,6 @@ function UploadScreen() {
   const passLoggedIn = () => {
     setAccess("loggedIn");
   };
-
-  function createCard(
-    title: string,
-    subtitle: string,
-    image: string,
-    description: string,
-    clickID: Number
-  ) {
-    USERDATA.push(
-      <Card
-        // onPress={(id) => handleDetailClick(clickID)}
-        style={{ margin: "auto", width: "100%" }}
-      >
-        <Card.Title
-          title={title}
-          subtitle={subtitle}
-          //left={LeftContent}
-        />
-        <Card.Cover
-          source={{ uri: image }}
-          style={{ margin: "auto", width: "80%" }}
-        />
-        <Card.Content>
-          <Title>Details</Title>
-          <Paragraph>{description}</Paragraph>
-        </Card.Content>
-      </Card>
-    );
-  }
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -286,12 +256,12 @@ function UploadScreen() {
             style={{
               fontFamily: "Inter-Black",
               fontSize: 30,
-              paddingTop: "3%",
+              paddingTop: "10%",
               paddingLeft: "8.4%",
             }}
             // onPress={(id) => handleDetailClick(1)}
           >
-            This is a list of items.
+            User Profile.
           </ThemedText>
           <ThemedText
             style={{
@@ -299,15 +269,33 @@ function UploadScreen() {
               fontSize: 25,
               paddingTop: "0.5%",
               paddingLeft: "8.4%",
+              paddingBottom: "4%",
             }}
           >
-            User authentication
+            Personalized Content
           </ThemedText>
-          <FlatList
-            data={USERDATA}
-            renderItem={({ item }) => <Card>{item}</Card>}
-            //keyExtractor={(item) => item}
-          />
+          <Card
+            // onPress={(id) => handleDetailClick(clickID)}
+            style={{
+              margin: "auto",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Card.Title
+              title="User Profile"
+              subtitle="Personalized Content"
+              //left={LeftContent}
+            />
+            <Card.Cover
+              //source={{ uri: image }}
+              style={{ margin: "auto", width: "80%" }}
+            />
+            <Card.Content>
+              <Title>Details</Title>
+              <Paragraph>Description</Paragraph>
+            </Card.Content>
+          </Card>
         </ScrollView>
       </View>
     );
