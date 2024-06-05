@@ -1,17 +1,23 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, FlatList } from "react-native";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
-import { Button, DefaultTheme, useTheme } from "react-native-paper";
+import {
+  Button,
+  Card,
+  DefaultTheme,
+  Paragraph,
+  Title,
+  useTheme,
+} from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
 
 function UploadScreen() {
   const theme = useTheme();
-  //let verifyData: String[] = [];
+  let USERDATA: JSX.Element[] = [];
 
   const url = new URL("http://192.168.1.15:8080");
-  //url.searchParams.set("type", "Login");
 
   const [access, setAccess] = React.useState<string>("Register");
 
@@ -29,7 +35,34 @@ function UploadScreen() {
     setAccess("loggedIn");
   };
 
-  console.log("Main Line Execute");
+  function createCard(
+    title: string,
+    subtitle: string,
+    image: string,
+    description: string,
+    clickID: Number
+  ) {
+    USERDATA.push(
+      <Card
+        // onPress={(id) => handleDetailClick(clickID)}
+        style={{ margin: "auto", width: "100%" }}
+      >
+        <Card.Title
+          title={title}
+          subtitle={subtitle}
+          //left={LeftContent}
+        />
+        <Card.Cover
+          source={{ uri: image }}
+          style={{ margin: "auto", width: "80%" }}
+        />
+        <Card.Content>
+          <Title>Details</Title>
+          <Paragraph>{description}</Paragraph>
+        </Card.Content>
+      </Card>
+    );
+  }
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -270,6 +303,11 @@ function UploadScreen() {
           >
             User authentication
           </ThemedText>
+          <FlatList
+            data={USERDATA}
+            renderItem={({ item }) => <Card>{item}</Card>}
+            //keyExtractor={(item) => item}
+          />
         </ScrollView>
       </View>
     );
