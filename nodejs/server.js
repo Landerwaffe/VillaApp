@@ -17,30 +17,16 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
 
-const cacheManager = require("cache-manager");
+// const cacheManager = require("cache-manager");
 
-function loginUser(userId, sessionData) {
-  memoryCache.set(userId, sessionData, { ttl: 604800 }); // Set TTL to 7 days
-}
+// function loginUser(userId, sessionData) {
+//   memoryCache.set(userId, sessionData, { ttl: 604800 }); // Set TTL to 7 days
+// }
 
-async function isUserLoggedIn(userId) {
-  const sessionData = await memoryCache.get(userId);
-  return sessionData !== null;
-}
-
-// Example: Caching API responses
-async function fetchDataFromAPI(url) {
-  const cachedData = await memoryCache.get(url);
-
-  if (cachedData) {
-    return cachedData;
-  }
-
-  const data = await fetchData(url);
-  await memoryCache.set(url, data);
-
-  return data;
-}
+// async function isUserLoggedIn(userId) {
+//   const sessionData = await memoryCache.get(userId);
+//   return sessionData !== null;
+// }
 
 app.use(cors());
 
@@ -118,6 +104,10 @@ app.post("/", jsonParser, (req, res) => {
             JSON.stringify(result.rows[0].password)
           ) {
             console.log("Password Correct!");
+            // const userId = req.body.email;
+            // const sessionData = { Disease: "Ligma" };
+            // loginUser(userId, sessionData);
+            res.send("Logged in response");
           } else {
             console.log("Password Wrong!");
           }
