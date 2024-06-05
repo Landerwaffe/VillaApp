@@ -13,7 +13,17 @@ SplashScreen.preventAutoHideAsync();
 
 const Stacks = createNativeStackNavigator();
 
-export const AuthContext = createContext("Register");
+type AuthContextType = {
+  passLogin: () => void;
+  passRegister: () => void;
+  passLoggedIn: () => void;
+  access: string;
+  // ... other values and functions
+};
+
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
 interface Props {
   // other props
@@ -36,7 +46,11 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={"Register"}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{ passLogin, passRegister, passLoggedIn, access }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, ScrollView, Text, FlatList } from "react-native";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
@@ -12,27 +12,29 @@ import {
 } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
+import { AuthContext } from "../_layout";
 
 function UploadScreen() {
   const theme = useTheme();
 
   const url = new URL("http://192.168.1.15:8080");
 
-  const [access, setAccess] = React.useState<string>("Register");
+  //const [access, setAccess] = React.useState<string>("Register");
 
-  function validateLogin(username: string, password: string) {}
+  const access = useContext(AuthContext);
+  const { passLogin, passRegister, passLoggedin } = useContext(AuthContext);
 
-  const passLogin = () => {
-    setAccess("Login");
-  };
+  // const passLogin = () => {
+  //   setAccess("Login");
+  // };
 
-  const passRegister = () => {
-    setAccess("Register");
-  };
+  // const passRegister = () => {
+  //   setAccess("Register");
+  // };
 
-  const passLoggedIn = () => {
-    setAccess("loggedIn");
-  };
+  // const passLoggedIn = () => {
+  //   setAccess("loggedIn");
+  // };
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -306,7 +308,9 @@ export default function App() {
   const theme = useTheme();
   return (
     <SafeAreaProvider>
-      <UploadScreen />
+      <UserProvider>
+        <UploadScreen />
+      </UserProvider>
     </SafeAreaProvider>
   );
 }
