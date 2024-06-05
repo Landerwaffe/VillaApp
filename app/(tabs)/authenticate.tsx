@@ -19,23 +19,23 @@ function UploadScreen() {
 
   const url = new URL("http://192.168.1.15:8080");
 
-  //const [access, setAccess] = React.useState<string>("Register");
+  const [access, setAccess] = React.useState<string>("Register");
 
-  //const access = useContext(AuthContext);
-  const { passLogin, passRegister, passLoggedIn, access } =
-    useContext(AuthContext);
+  //Takes default context value from _layout
+  const auth = useContext(AuthContext);
 
-  // const passLogin = () => {
-  //   setAccess("Login");
-  // };
+  const passLogin = () => {
+    setAccess("Login");
+  };
 
-  // const passRegister = () => {
-  //   setAccess("Register");
-  // };
+  const passRegister = () => {
+    setAccess("Register");
+    //setAccess(auth);
+  };
 
-  // const passLoggedIn = () => {
-  //   setAccess("loggedIn");
-  // };
+  const passLoggedIn = () => {
+    setAccess("loggedIn");
+  };
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -307,11 +307,10 @@ function UploadScreen() {
 
 export default function App() {
   const theme = useTheme();
+  const auth = useContext(AuthContext);
   return (
     <SafeAreaProvider>
-      <AuthContext.Provider>
-        <UploadScreen />
-      </AuthContext.Provider>
+      <UploadScreen />
     </SafeAreaProvider>
   );
 }
