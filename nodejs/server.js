@@ -107,7 +107,7 @@ app.post("/", jsonParser, (req, res) => {
             // const userId = req.body.email;
             // const sessionData = { Disease: "Ligma" };
             // loginUser(userId, sessionData);
-            res.send("Logged in response");
+            res.send("Nodejs Validated");
           } else {
             console.log("Password Wrong!");
           }
