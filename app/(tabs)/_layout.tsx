@@ -118,6 +118,7 @@ export default function TabLayout() {
           name="upload"
           options={{
             title: "Upload",
+            href: null,
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
                 name={focused ? "image" : "image-outline"}
