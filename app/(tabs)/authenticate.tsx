@@ -281,17 +281,22 @@ function UploadScreen() {
             }}
           >
             <Card.Title
-              title="User Profile"
-              subtitle="Personalized Content"
+              title="User Data"
+              subtitle="Email"
               //left={LeftContent}
-            />
-            <Card.Cover
-              //source={{ uri: image }}
-              style={{ margin: "auto", width: "80%" }}
             />
             <Card.Content>
               <Title>Details</Title>
               <Paragraph>Description</Paragraph>
+              <Button
+                onPress={passLogin}
+                style={{
+                  backgroundColor: darktheme.colors.secondary,
+                  marginTop: "0.5%",
+                }}
+              >
+                Log out
+              </Button>
             </Card.Content>
           </Card>
         </ScrollView>
