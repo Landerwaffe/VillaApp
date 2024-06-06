@@ -13,6 +13,9 @@ import {
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+import { router } from "expo-router";
+
 function UploadScreen() {
   const theme = useTheme();
 
@@ -30,6 +33,10 @@ function UploadScreen() {
 
   const passLoggedIn = () => {
     setAccess("loggedIn");
+  };
+
+  const passUpload = () => {
+    router.push("/upload");
   };
 
   const styles = StyleSheet.create({
@@ -296,6 +303,15 @@ function UploadScreen() {
                 }}
               >
                 Log out
+              </Button>
+              <Button
+                onPress={passUpload}
+                style={{
+                  backgroundColor: darktheme.colors.secondary,
+                  marginTop: "0.5%",
+                }}
+              >
+                Random Button
               </Button>
             </Card.Content>
           </Card>
