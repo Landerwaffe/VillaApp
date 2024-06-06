@@ -23,9 +23,18 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType>({
   access: "Register", // Default value for access
-  passLogin: () => {}, // Default noop function for passLogin
-  passRegister: () => {}, // Default noop function for passRegister
-  passLoggedIn: () => {}, // Default noop function for passLoggedIn});
+  passLogin: function () {
+    // Correct function to update access to "Login"
+    this.access = "Login";
+  },
+  passRegister: function () {
+    // Correct function to update access to "Register"
+    this.access = "Register";
+  },
+  passLoggedIn: function () {
+    // Correct function to update access to "loggedIn"
+    this.access = "loggedIn";
+  },
 });
 
 interface Props {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, ScrollView, Text, FlatList } from "react-native";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
@@ -19,7 +19,7 @@ function UploadScreen() {
 
   const url = new URL("http://192.168.1.15:8080");
 
-  //const [access, setAccess] = React.useState<string>("Register");
+  // const [access, setAccess] = React.useState<string>("Register");
 
   //Takes default context value from _layout
   const { access, passLogin, passRegister, passLoggedIn } =
@@ -33,18 +33,23 @@ function UploadScreen() {
     // ... other values and functions
   };
 
+  //passLogin;
+
   // const passLogin = () => {
   //   setAccess("Login");
   // };
 
   // const passRegister = () => {
   //   setAccess("Register");
-  //   //setAccess(auth);
   // };
 
   // const passLoggedIn = () => {
   //   setAccess("loggedIn");
   // };
+
+  passLoggedIn();
+
+  // console.log("Access value is: " + access);
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -316,26 +321,21 @@ function UploadScreen() {
 
 export default function App() {
   const theme = useTheme();
-  const auth = useContext(AuthContext);
 
   const { access, passLogin, passRegister, passLoggedIn } =
     useContext(AuthContext);
 
-  console.log(access);
-
-  const contextValue = {
-    access,
-    passLogin,
-    passRegister,
-    passLoggedIn,
-  };
+  // console.log(access);
+  // console.log(passLogin);
 
   return (
-    <SafeAreaProvider>
-      <AuthContext.Provider value={contextValue}>
+    <AuthContext.Provider
+      value={{ access, passLogin, passRegister, passLoggedIn }}
+    >
+      <SafeAreaProvider>
         <UploadScreen />
-      </AuthContext.Provider>
-    </SafeAreaProvider>
+      </SafeAreaProvider>
+    </AuthContext.Provider>
   );
 }
 
