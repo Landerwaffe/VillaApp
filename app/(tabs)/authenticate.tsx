@@ -12,44 +12,25 @@ import {
 } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
-import { AuthContext } from "../_layout";
 
 function UploadScreen() {
   const theme = useTheme();
 
   const url = new URL("http://192.168.1.15:8080");
 
-  // const [access, setAccess] = React.useState<string>("Register");
+  const [access, setAccess] = React.useState<string>("Register");
 
-  //Takes default context value from _layout
-  const { access, passLogin, passRegister, passLoggedIn } =
-    useContext(AuthContext);
-
-  const contextValue = {
-    access,
-    passLogin,
-    passRegister,
-    passLoggedIn,
-    // ... other values and functions
+  const passLogin = () => {
+    setAccess("Login");
   };
 
-  //passLogin;
+  const passRegister = () => {
+    setAccess("Register");
+  };
 
-  // const passLogin = () => {
-  //   setAccess("Login");
-  // };
-
-  // const passRegister = () => {
-  //   setAccess("Register");
-  // };
-
-  // const passLoggedIn = () => {
-  //   setAccess("loggedIn");
-  // };
-
-  passLoggedIn();
-
-  // console.log("Access value is: " + access);
+  const passLoggedIn = () => {
+    setAccess("loggedIn");
+  };
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -322,20 +303,12 @@ function UploadScreen() {
 export default function App() {
   const theme = useTheme();
 
-  const { access, passLogin, passRegister, passLoggedIn } =
-    useContext(AuthContext);
-
   // console.log(access);
-  // console.log(passLogin);
 
   return (
-    <AuthContext.Provider
-      value={{ access, passLogin, passRegister, passLoggedIn }}
-    >
-      <SafeAreaProvider>
-        <UploadScreen />
-      </SafeAreaProvider>
-    </AuthContext.Provider>
+    <SafeAreaProvider>
+      <UploadScreen />
+    </SafeAreaProvider>
   );
 }
 

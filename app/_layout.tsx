@@ -13,59 +13,6 @@ SplashScreen.preventAutoHideAsync();
 
 const Stacks = createNativeStackNavigator();
 
-type AuthContextType = {
-  access: string;
-  passLogin: () => void;
-  passRegister: () => void;
-  passLoggedIn: () => void;
-  // ... other values and functions
-};
-
-export const AuthContext = createContext<AuthContextType>({
-  access: "Register", // Default value for access
-  passLogin: function () {
-    // Correct function to update access to "Login"
-    this.access = "Login";
-  },
-  passRegister: function () {
-    // Correct function to update access to "Register"
-    this.access = "Register";
-  },
-  passLoggedIn: function () {
-    // Correct function to update access to "loggedIn"
-    this.access = "loggedIn";
-  },
-});
-
-interface Props {
-  // other props
-  children?: React.ReactNode;
-}
-
-export const UserProvider: React.FC<Props> = ({ children }) => {
-  const [access, setAccess] = React.useState<string>("Register");
-
-  const passLogin = () => {
-    setAccess("Login");
-  };
-
-  const passRegister = () => {
-    setAccess("Register");
-  };
-
-  const passLoggedIn = () => {
-    setAccess("loggedIn");
-  };
-
-  return (
-    <AuthContext.Provider
-      value={{ access, passLogin, passRegister, passLoggedIn }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
 export default function RootLayout() {
   const [loaded] = useFonts({
     "Inter-Black": require("../assets/fonts/Inter-Black.otf"),
