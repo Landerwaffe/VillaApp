@@ -321,6 +321,8 @@ export default function App() {
   const { access, passLogin, passRegister, passLoggedIn } =
     useContext(AuthContext);
 
+  console.log(access);
+
   const contextValue = {
     access,
     passLogin,
