@@ -19,23 +19,32 @@ function UploadScreen() {
 
   const url = new URL("http://192.168.1.15:8080");
 
-  const [access, setAccess] = React.useState<string>("Register");
+  //const [access, setAccess] = React.useState<string>("Register");
 
   //Takes default context value from _layout
-  const auth = useContext(AuthContext);
+  const { access, passLogin, passRegister, passLoggedIn } =
+    useContext(AuthContext);
 
-  const passLogin = () => {
-    setAccess("Login");
+  const contextValue = {
+    access,
+    passLogin,
+    passRegister,
+    passLoggedIn,
+    // ... other values and functions
   };
 
-  const passRegister = () => {
-    setAccess("Register");
-    //setAccess(auth);
-  };
+  // const passLogin = () => {
+  //   setAccess("Login");
+  // };
 
-  const passLoggedIn = () => {
-    setAccess("loggedIn");
-  };
+  // const passRegister = () => {
+  //   setAccess("Register");
+  //   //setAccess(auth);
+  // };
+
+  // const passLoggedIn = () => {
+  //   setAccess("loggedIn");
+  // };
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -308,9 +317,22 @@ function UploadScreen() {
 export default function App() {
   const theme = useTheme();
   const auth = useContext(AuthContext);
+
+  const { access, passLogin, passRegister, passLoggedIn } =
+    useContext(AuthContext);
+
+  const contextValue = {
+    access,
+    passLogin,
+    passRegister,
+    passLoggedIn,
+  };
+
   return (
     <SafeAreaProvider>
-      <UploadScreen />
+      <AuthContext.Provider value={contextValue}>
+        <UploadScreen />
+      </AuthContext.Provider>
     </SafeAreaProvider>
   );
 }
