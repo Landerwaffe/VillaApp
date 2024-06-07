@@ -274,7 +274,7 @@ function UploadScreen() {
               fontSize: 25,
               paddingTop: "0.5%",
               paddingLeft: "8.4%",
-              paddingBottom: "4%",
+              paddingBottom: "1%",
             }}
           >
             Personalized Content
@@ -311,7 +311,7 @@ function UploadScreen() {
                   marginTop: "0.5%",
                 }}
               >
-                Random Button
+                Add new listing
               </Button>
             </Card.Content>
           </Card>
